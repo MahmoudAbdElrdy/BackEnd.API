@@ -1,4 +1,6 @@
 ﻿using AutoMapper;
+using BackEnd.DAL.Entities;
+using BackEnd.Service.Models;
 using DAL.Entities;
 using Microsoft.AspNetCore.Identity;
 using System;
@@ -13,9 +15,10 @@ namespace BackEnd.Service.Mapper
         {
             #region Secrity
             CreateMap<ApplicationUser, IdentityUser>().ReverseMap();
-            //CreateMap<ApplicationUser, UserDetailsDto>().ReverseMap();
-            #endregion
 
+            #endregion
+            CreateMap<Department, DepartmentModel>().ReverseMap();
+            CreateMap<Employee, EmployeeModel>().ReverseMap();
 
             //CreateMap<ReportSetting, ReportSettingModel>();
             //CreateMap<ReportSettingModel, ReportSetting>()

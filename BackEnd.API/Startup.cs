@@ -108,6 +108,8 @@ namespace BackEnd.API
             services.AddAutoMapper(x => x.AddProfile(new DomainProfile()));
             services.AddScoped<IApplicationUserServices,ApplicationUserServices>().Reverse();
             services.AddScoped<IResponseDTO,ResponseDTO>().Reverse();
+            //
+            services.AddScoped<IDepartmentServices,DepartmentServices>().Reverse();
 
             // Add service and create Policy with options
             services.AddCors(options =>

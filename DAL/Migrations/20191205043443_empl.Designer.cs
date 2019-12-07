@@ -4,58 +4,22 @@ using DAL;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace DAL.Migrations
 {
     [DbContext(typeof(DatabaseContext))]
-    partial class DatabaseContextModelSnapshot : ModelSnapshot
+    [Migration("20191205043443_empl")]
+    partial class empl
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
                 .HasAnnotation("ProductVersion", "2.2.2-servicing-10034")
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-            modelBuilder.Entity("BackEnd.DAL.Entities.Department", b =>
-                {
-                    b.Property<int>("DepartmentID")
-                        .ValueGeneratedOnAdd()
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<string>("DepartmentCode");
-
-                    b.Property<string>("DepartmentName");
-
-                    b.HasKey("DepartmentID");
-
-                    b.ToTable("Departments");
-                });
-
-            modelBuilder.Entity("BackEnd.DAL.Entities.Employee", b =>
-                {
-                    b.Property<int>("EmployeeID")
-                        .ValueGeneratedOnAdd()
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<int?>("DepartmentID");
-
-                    b.Property<DateTime>("EmployeeBirthDate");
-
-                    b.Property<bool>("EmployeeGender");
-
-                    b.Property<string>("EmployeeName");
-
-                    b.Property<decimal>("EmployeeSalary");
-
-                    b.HasKey("EmployeeID");
-
-                    b.HasIndex("DepartmentID");
-
-                    b.ToTable("Employees");
-                });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>
                 {
@@ -233,13 +197,6 @@ namespace DAL.Migrations
                         .HasColumnType("nvarchar(250)");
 
                     b.HasDiscriminator().HasValue("ApplicationUser");
-                });
-
-            modelBuilder.Entity("BackEnd.DAL.Entities.Employee", b =>
-                {
-                    b.HasOne("BackEnd.DAL.Entities.Department", "department")
-                        .WithMany("Employees")
-                        .HasForeignKey("DepartmentID");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
