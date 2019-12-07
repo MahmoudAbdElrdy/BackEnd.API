@@ -10,7 +10,7 @@ namespace BackEnd.Service.IServices
    public interface IDepartmentServices
     {
         IResponseDTO PostDepartment(DepartmentModel model);
-        IResponseDTO GetDepartment();
+        IResponseDTO GetAllDepartment();
         IResponseDTO EditDepartment(DepartmentModel model);
         IResponseDTO DeleteDepartment(DepartmentModel model);
     }

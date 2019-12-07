@@ -41,10 +41,18 @@ namespace BackEnd.Service.Services
         {
             throw new NotImplementedException();
         }
-
-        public IResponseDTO GetDepartment()
+       
+        public IResponseDTO GetAllDepartment()
         {
-            throw new NotImplementedException();
+            var departments = _departmentRepositroy.GetAll();
+                               
+
+            var departmentsList = _mapper.Map<List<DepartmentModel>>(departments);
+            _response.Data = departmentsList;
+            _response.IsPassed = true;
+            _response.Message = "Done";
+            return _response;
+          
         }
 
         public IResponseDTO PostDepartment(DepartmentModel model)

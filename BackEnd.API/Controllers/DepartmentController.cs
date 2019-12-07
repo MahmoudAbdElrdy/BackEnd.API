@@ -26,5 +26,12 @@ namespace BackEnd.API.Controllers
             var depart = _departmentServices.PostDepartment(departmentModel);
             return depart;
         }
+        [HttpGet]
+        [Route("GetAllDepartment")]
+        public IResponseDTO GetAllDepartment()
+        {
+            var depart = _departmentServices.GetAllDepartment();
+            return depart;
+        }
     }
 }
