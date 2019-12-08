@@ -26,11 +26,25 @@ namespace BackEnd.API.Controllers
             var depart = _departmentServices.PostDepartment(departmentModel);
             return depart;
         }
+        [HttpPut]
+        [Route("UpdateDepartment")]
+        public IResponseDTO UpdateDepartment(DepartmentModel departmentModel)
+        {
+            var depart = _departmentServices.EditDepartment(departmentModel);
+            return depart;
+        }
         [HttpGet]
         [Route("GetAllDepartment")]
         public IResponseDTO GetAllDepartment()
         {
             var depart = _departmentServices.GetAllDepartment();
+            return depart;
+        }
+        [HttpDelete]
+        [Route("RemoveDepartment")]
+        public IResponseDTO RemoveDepartment(DepartmentModel departmentModel)
+        {
+            var depart = _departmentServices.DeleteDepartment(departmentModel);
             return depart;
         }
     }

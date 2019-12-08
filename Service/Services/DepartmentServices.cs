@@ -32,14 +32,70 @@ namespace BackEnd.Service.Services
         }
         public IResponseDTO DeleteDepartment(DepartmentModel model)
         {
-           // _unitOfWork.
+            try
+            {
+             
+                var DbDepartment = _mapper.Map<Department>(model);
+                var entityEntry = _departmentRepositroy.Remove(DbDepartment);
 
-            throw new NotImplementedException();
+
+                int save = _unitOfWork.Commit();
+
+                if (save ==200)
+                {
+                    _response.Data =null;
+                    _response.IsPassed = true;
+                    _response.Message = "Ok";
+                }
+                else
+                {
+                    _response.Data = null;
+                    _response.IsPassed = false;
+                    _response.Message = "Not saved";
+                }
+            }
+            catch (Exception ex)
+            {
+                _response.Data = null;
+                _response.IsPassed = false;
+                _response.Message = "Error " + ex.Message;
+            }
+
+            return _response;
         }
 
         public IResponseDTO EditDepartment(DepartmentModel model)
         {
-            throw new NotImplementedException();
+            try
+            {
+                var DbDepartment = _mapper.Map<Department>(model);
+                var entityEntry = _departmentRepositroy.Update(DbDepartment);
+
+
+                int save = _unitOfWork.Commit();
+
+                if (save == 200)
+                {
+                    _response.Data = model;
+                    _response.IsPassed = true;
+                    _response.Message = "Ok";
+                }
+                else
+                {
+                    _response.Data = null;
+                    _response.IsPassed = false;
+                    _response.Message = "Not saved";
+                }
+            }
+            catch (Exception ex)
+            {
+                _response.Data = null;
+                _response.IsPassed = false;
+                _response.Message = "Error " + ex.Message;
+            }
+
+            return _response;
+          
         }
        
         public IResponseDTO GetAllDepartment()
@@ -54,7 +110,18 @@ namespace BackEnd.Service.Services
             return _response;
           
         }
+        public IResponseDTO GetByIDDepartment(int ?id)
+        {
+            var departments = _departmentRepositroy.Find(id);
 
+
+            var departmentsList = _mapper.Map<List<DepartmentModel>>(departments);
+            _response.Data = departmentsList;
+            _response.IsPassed = true;
+            _response.Message = "Done";
+            return _response;
+
+        }
         public IResponseDTO PostDepartment(DepartmentModel model)
         {
            

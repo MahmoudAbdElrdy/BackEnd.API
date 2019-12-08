@@ -412,13 +412,7 @@ public class GRepository<T> : IGRepository<T>
             return await _dbContext.Set<T>().AsNoTracking().LastOrDefaultAsync(where);
         }
 
-
-
-
-
         #endregion
-
-
 
         #region Remove Methods
         /// <summary>
@@ -428,9 +422,12 @@ public class GRepository<T> : IGRepository<T>
         /// <returns></returns>
         public virtual EntityEntry<T> Remove(T entity)
         {
-            return _dbContext.Update(entity);
+            return _dbContext.Remove(entity);
         }
-
+        //public virtual EntityEntry<T> Remove(T entity)
+        //{
+        //    return _dbContext.Update(entity);
+        //}
         /// <summary>
         /// Logically or physically deleting list of records based on the entity type
         /// </summary>
