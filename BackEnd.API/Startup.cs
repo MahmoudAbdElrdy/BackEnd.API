@@ -9,8 +9,8 @@ using BackEnd.Service.IServices;
 using BackEnd.Service.Mapper;
 using BackEnd.Service.Models;
 using BackEnd.Service.Services;
-using DAL;
-using DAL.Entities;
+//using DAL;
+//using DAL.Entities;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -27,6 +27,7 @@ using Newtonsoft.Json.Serialization;
 using Swashbuckle.AspNetCore.Swagger;
 using System.Text;
 using Microsoft.IdentityModel.Tokens;
+using BackEnd.DAL.Models;
 
 namespace BackEnd.API
 {
@@ -42,7 +43,7 @@ namespace BackEnd.API
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.Configure<ApplicationSettings>(Configuration.GetSection("ApplicationSettings"));
+           // services.Configure<ApplicationSettings>(Configuration.GetSection("ApplicationSettings"));
 
             services.AddMvc(config => {
             }).SetCompatibilityVersion(CompatibilityVersion.Version_2_2)
@@ -56,41 +57,41 @@ namespace BackEnd.API
                  (resolver as DefaultContractResolver).NamingStrategy = null;
 
          });
-            services.AddDbContext<DatabaseContext>(options =>
+            services.AddDbContext<LoGooContext>(options =>
                     options.UseLazyLoadingProxies()
                     .UseSqlServer(Configuration.GetConnectionString("DatabaseConnection")));
        
-            services.AddIdentity<ApplicationUser, IdentityRole>(options =>
-                    {
-                        options.User.RequireUniqueEmail = false;
-                    })
-    .AddEntityFrameworkStores<DatabaseContext>()
-    .AddDefaultTokenProviders()
-    .AddDefaultUI();
-            services.Configure<IdentityOptions>(options =>
-            {
-                options.Password.RequireDigit = false;
-                options.Password.RequireNonAlphanumeric = false;
-                options.Password.RequireLowercase = false;
-                options.Password.RequireUppercase = false;
-                options.Password.RequiredLength = 4;
-            });
+    //        services.AddIdentity<ApplicationUser, IdentityRole>(options =>
+    //                {
+    //                    options.User.RequireUniqueEmail = false;
+    //                })
+    //.AddEntityFrameworkStores<LoGooContext>()
+    //.AddDefaultTokenProviders()
+    //.AddDefaultUI();
+    //        services.Configure<IdentityOptions>(options =>
+    //        {
+    //            options.Password.RequireDigit = false;
+    //            options.Password.RequireNonAlphanumeric = false;
+    //            options.Password.RequireLowercase = false;
+    //            options.Password.RequireUppercase = false;
+    //            options.Password.RequiredLength = 4;
+    //        });
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new Info { Title = "AspNetCoreApiStarter", Version = "v1" });
                 // Swagger 2.+ support
-                c.AddSecurityDefinition("Bearer", new ApiKeyScheme
-                {
-                    In = "header",
-                    Description = "Please insert JWT with Bearer into field",
-                    Name = "Authorization",
-                    Type = "apiKey"
-                });
+  //              c.AddSecurityDefinition("Bearer", new ApiKeyScheme
+  //              {
+  //                  In = "header",
+  //                  Description = "Please insert JWT with Bearer into field",
+  //                  Name = "Authorization",
+  //                  Type = "apiKey"
+  //              });
 
-                c.AddSecurityRequirement(new Dictionary<string, IEnumerable<string>>
-  {
-    { "Bearer", new string[] { } }
-  });
+  //              c.AddSecurityRequirement(new Dictionary<string, IEnumerable<string>>
+  //{
+  //  { "Bearer", new string[] { } }
+  //});
             });
             //services.AddSwaggerGen(c => {
             //    c.ResolveConflictingActions(x => x.First());
@@ -103,13 +104,13 @@ namespace BackEnd.API
             //});
             services.AddScoped(typeof(IGRepository<>), typeof(GRepository<>));
            services.AddScoped(typeof(IUnitOfWork<>), typeof(UnitOfWork<>));
-            services.AddScoped<UserManager<ApplicationUser>, UserManager<ApplicationUser>>();
-            services.AddScoped<RoleManager<IdentityRole>, RoleManager<IdentityRole>>();
+            //services.AddScoped<UserManager<ApplicationUser>, UserManager<ApplicationUser>>();
+            //services.AddScoped<RoleManager<IdentityRole>, RoleManager<IdentityRole>>();
             services.AddAutoMapper(x => x.AddProfile(new DomainProfile()));
-            services.AddScoped<IApplicationUserServices,ApplicationUserServices>().Reverse();
+            services.AddScoped<IServicesCountry,CountryServices>().Reverse();
             services.AddScoped<IResponseDTO,ResponseDTO>().Reverse();
             //
-            services.AddScoped<IDepartmentServices,DepartmentServices>().Reverse();
+           // services.AddScoped<IDepartmentServices,DepartmentServices>().Reverse();
 
             // Add service and create Policy with options
             services.AddCors(options =>

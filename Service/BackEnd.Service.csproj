@@ -5,6 +5,19 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="IServices\IApplicationUserServices.cs" />
+    <Compile Remove="IServices\IDepartmentServices.cs" />
+    <Compile Remove="Models\ApplicationSettings.cs" />
+    <Compile Remove="Models\DepartmentModel.cs" />
+    <Compile Remove="Models\EmployeeModel.cs" />
+    <Compile Remove="Models\LoginModel.cs" />
+    <Compile Remove="Models\RoleModel.cs" />
+    <Compile Remove="Models\UserModel.cs" />
+    <Compile Remove="Services\ApplicationUserServices.cs" />
+    <Compile Remove="Services\DepartmentServices.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="AutoMapper" Version="8.1.1" />
     <PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="6.1.1" />
     <PackageReference Include="Microsoft.AspNetCore.Identity" Version="2.2.0" />

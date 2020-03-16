@@ -40,6 +40,14 @@ namespace BackEnd.API.Controllers
             var depart = _departmentServices.GetAllDepartment();
             return depart;
         }
+        [HttpGet]
+        [Route("GetById")]
+        public IResponseDTO GetById(int ?id)
+        {
+            var depart = _departmentServices.GetByIDDepartment(id);
+            return depart;
+        }
+
         [HttpDelete]
         [Route("RemoveDepartment")]
         public IResponseDTO RemoveDepartment(DepartmentModel departmentModel)

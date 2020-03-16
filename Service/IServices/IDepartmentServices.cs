@@ -13,5 +13,6 @@ namespace BackEnd.Service.IServices
         IResponseDTO GetAllDepartment();
         IResponseDTO EditDepartment(DepartmentModel model);
         IResponseDTO DeleteDepartment(DepartmentModel model);
+        IResponseDTO GetByIDDepartment(int? id);
     }
 }
