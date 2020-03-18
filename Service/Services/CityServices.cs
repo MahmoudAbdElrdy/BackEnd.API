@@ -1,9 +1,11 @@
 ﻿using AutoMapper;
+//using BackEnd.DAL.Entities;
 using BackEnd.DAL.Models;
 using BackEnd.Repositories.Generics;
 using BackEnd.Repositories.UOW;
 using BackEnd.Service.IServices;
 using BackEnd.Service.Models;
+//using DAL;
 using Microsoft.EntityFrameworkCore.ChangeTracking;
 using System;
 using System.Collections.Generic;
@@ -14,35 +16,35 @@ using System.Threading.Tasks;
 
 namespace BackEnd.Service.Services
 {
-    public class CountryServices : IServicesCountry
+    public class CityServices : IServicesCity
     {
-        private readonly IGRepository<Country> _CountryRepositroy;
+        private readonly IGRepository<City> _CityRepositroy;
         private readonly IUnitOfWork<LoGooContext> _unitOfWork;
         private readonly IResponseDTO _response;
         private readonly IMapper _mapper;
-        public CountryServices(IGRepository<Country> Country,
-            IUnitOfWork<LoGooContext> unitOfWork, IResponseDTO responseDTO, IMapper mapper)
+        public CityServices(IGRepository<City> City,
+            IUnitOfWork<LoGooContext> unitOfWork,IResponseDTO responseDTO, IMapper mapper)
         {
-            _CountryRepositroy = Country;
+            _CityRepositroy = City;
             _unitOfWork = unitOfWork;
             _response = responseDTO;
             _mapper = mapper;
 
         }
-        public IResponseDTO DeleteCountry(CountryVM model)
+        public IResponseDTO DeleteCity(CityVM model)
         {
             try
             {
-
-                var DbCountry = _mapper.Map<Country>(model);
-                var entityEntry = _CountryRepositroy.Remove(DbCountry);
+             
+                var DbCity = _mapper.Map<City>(model);
+                var entityEntry = _CityRepositroy.Remove(DbCity);
 
 
                 int save = _unitOfWork.Commit();
 
-                if (save == 200)
+                if (save ==200)
                 {
-                    _response.Data = null;
+                    _response.Data =null;
                     _response.IsPassed = true;
                     _response.Message = "Ok";
                 }
@@ -62,88 +64,13 @@ namespace BackEnd.Service.Services
             return _response;
         }
 
-        public IResponseDTO EditCountry(CountryVM model)
+        public IResponseDTO EditCity(CityVM model)
         {
             try
             {
-                var DbCountry = _mapper.Map<Country>(model);
-                var entityEntry = _CountryRepositroy.Update(DbCountry);
+                var DbCity = _mapper.Map<City>(model);
+                var entityEntry = _CityRepositroy.Update(DbCity);
 
-
-                int save = _unitOfWork.Commit();
-
-                if (save == 200)
-                {
-                    _response.Data = model;
-                    _response.IsPassed = true;
-                    _response.Message = "Ok";
-                }
-                else
-                {
-                    _response.Data = null;
-                    _response.IsPassed = false;
-                    _response.Message = "Not saved";
-                }
-            }
-            catch (Exception ex)
-            {
-                _response.Data = null;
-                _response.IsPassed = false;
-                _response.Message = "Error " + ex.Message;
-            }
-
-            return _response;
-
-        }
-
-        public IResponseDTO GetAllCountry()
-        {
-            try
-            {
-                var Countrys = _CountryRepositroy.GetAll();
-
-
-                var CountrysList = _mapper.Map<List<CountryVM>>(Countrys);
-                _response.Data = CountrysList;
-                _response.IsPassed = true;
-                _response.Message = "Done";
-            }
-            catch (Exception ex)
-            {
-                _response.Data = null;
-                _response.IsPassed = false;
-                _response.Message = "Error " + ex.Message;
-            }
-            return _response;
-        }
-        public IResponseDTO GetByIDCountry(object id)
-        {
-            try
-            {
-                var Countrys = _CountryRepositroy.Find(id);
-
-
-                var CountrysList = _mapper.Map<CountryVM>(Countrys);
-                _response.Data = CountrysList;
-                _response.IsPassed = true;
-                _response.Message = "Done";
-            }
-            catch (Exception ex)
-            {
-                _response.Data = null;
-                _response.IsPassed = false;
-                _response.Message = "Error " + ex.Message;
-            }
-            return _response;
-        }
-        public IResponseDTO PostCountry(CountryVM model)
-        {
-
-            try
-            {
-                var DbCountry = _mapper.Map<Country>(model);
-
-                var Country = _mapper.Map<CountryVM>(_CountryRepositroy.Add(DbCountry));
 
                 int save = _unitOfWork.Commit();
 
@@ -159,6 +86,96 @@ namespace BackEnd.Service.Services
                     _response.IsPassed = false;
                     _response.Message = "Not saved";
                 }
+            }
+            catch (Exception ex)
+            {
+                _response.Data = null;
+                _response.IsPassed = false;
+                _response.Message = "Error " + ex.Message;
+            }
+
+            return _response;
+          
+        }
+        // Saudi id : 'fd3f74d2-f3ca-4f17-b3be-cdf6ef800f7a'
+        public IResponseDTO GetSaudiCity()
+        {
+            try
+            {
+                var Citys = _CityRepositroy.Get(x => x.Countryid == Guid.Parse("fd3f74d2-f3ca-4f17-b3be-cdf6ef800f7a"));
+                var CitysList = _mapper.Map<List<CityVM>>(Citys);
+                _response.Data = CitysList;
+                _response.IsPassed = true;
+                _response.Message = "Done";
+            }
+            catch (Exception ex)
+            {
+                _response.Data = null;
+                _response.IsPassed = false;
+                _response.Message = "Error " + ex.Message;
+            }
+            return _response;
+        }
+        public IResponseDTO GetAllCity()
+        {
+            try
+            {
+                var Citys = _CityRepositroy.GetAll();
+                var CitysList = _mapper.Map<List<CityVM>>(Citys);
+                _response.Data = CitysList;
+                _response.IsPassed = true;
+                _response.Message = "Done";
+            }
+            catch (Exception ex)
+            {
+                _response.Data = null;
+                _response.IsPassed = false;
+                _response.Message = "Error " + ex.Message;
+            }
+            return _response;
+        }
+        public IResponseDTO GetByIDCity(object id)
+        {
+            try
+            {
+                var Citys = _CityRepositroy.Find(id);
+
+                var CitysList = _mapper.Map<CityVM>(Citys);
+                _response.Data = CitysList;
+                _response.IsPassed = true;
+                _response.Message = "Done";
+            }
+            catch (Exception ex)
+            {
+                _response.Data = null;
+                _response.IsPassed = false;
+                _response.Message = "Error " + ex.Message;
+            }
+            return _response;
+
+        }
+        public IResponseDTO PostCity(CityVM model)
+        {
+            try
+            {
+                var DbCity = _mapper.Map<City>(model);
+              
+                var City = _mapper.Map<CityVM>(_CityRepositroy.Add(DbCity));
+
+                int save =  _unitOfWork.Commit();
+
+                if (save == 200)
+                {
+                    _response.Data = model;
+                    _response.IsPassed = true;
+                    _response.Message = "Ok";
+                }
+                else 
+                {
+                    _response.Data = null;
+                    _response.IsPassed = false;
+                    _response.Message = "Not saved";
+                }
 
             }
             catch (Exception ex)
@@ -170,7 +187,7 @@ namespace BackEnd.Service.Services
 
 
             return _response;
-
+           
         }
     }
 }

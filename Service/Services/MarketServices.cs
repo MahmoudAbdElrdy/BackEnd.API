@@ -1,9 +1,11 @@
 ﻿using AutoMapper;
+//using BackEnd.DAL.Entities;
 using BackEnd.DAL.Models;
 using BackEnd.Repositories.Generics;
 using BackEnd.Repositories.UOW;
 using BackEnd.Service.IServices;
 using BackEnd.Service.Models;
+//using DAL;
 using Microsoft.EntityFrameworkCore.ChangeTracking;
 using System;
 using System.Collections.Generic;
@@ -14,28 +16,28 @@ using System.Threading.Tasks;
 
 namespace BackEnd.Service.Services
 {
-    public class CountryServices : IServicesCountry
+    public class MarketServices : IServicesMarket
     {
-        private readonly IGRepository<Country> _CountryRepositroy;
+        private readonly IGRepository<Market> _MarketRepositroy;
         private readonly IUnitOfWork<LoGooContext> _unitOfWork;
         private readonly IResponseDTO _response;
         private readonly IMapper _mapper;
-        public CountryServices(IGRepository<Country> Country,
+        public MarketServices(IGRepository<Market> Market,
             IUnitOfWork<LoGooContext> unitOfWork, IResponseDTO responseDTO, IMapper mapper)
         {
-            _CountryRepositroy = Country;
+            _MarketRepositroy = Market;
             _unitOfWork = unitOfWork;
             _response = responseDTO;
             _mapper = mapper;
 
         }
-        public IResponseDTO DeleteCountry(CountryVM model)
+        public IResponseDTO DeleteMarket(MarketVM model)
         {
             try
             {
 
-                var DbCountry = _mapper.Map<Country>(model);
-                var entityEntry = _CountryRepositroy.Remove(DbCountry);
+                var DbMarket = _mapper.Map<Market>(model);
+                var entityEntry = _MarketRepositroy.Remove(DbMarket);
 
 
                 int save = _unitOfWork.Commit();
@@ -62,12 +64,12 @@ namespace BackEnd.Service.Services
             return _response;
         }
 
-        public IResponseDTO EditCountry(CountryVM model)
+        public IResponseDTO EditMarket(MarketVM model)
         {
             try
             {
-                var DbCountry = _mapper.Map<Country>(model);
-                var entityEntry = _CountryRepositroy.Update(DbCountry);
+                var DbMarket = _mapper.Map<Market>(model);
+                var entityEntry = _MarketRepositroy.Update(DbMarket);
 
 
                 int save = _unitOfWork.Commit();
@@ -96,15 +98,15 @@ namespace BackEnd.Service.Services
 
         }
 
-        public IResponseDTO GetAllCountry()
+        public IResponseDTO GetAllMarket()
         {
             try
             {
-                var Countrys = _CountryRepositroy.GetAll();
+                var Markets = _MarketRepositroy.GetAll();
 
 
-                var CountrysList = _mapper.Map<List<CountryVM>>(Countrys);
-                _response.Data = CountrysList;
+                var MarketsList = _mapper.Map<List<MarketVM>>(Markets);
+                _response.Data = MarketsList;
                 _response.IsPassed = true;
                 _response.Message = "Done";
             }
@@ -116,15 +118,15 @@ namespace BackEnd.Service.Services
             }
             return _response;
         }
-        public IResponseDTO GetByIDCountry(object id)
+        public IResponseDTO GetByIDMarket(object id)
         {
             try
             {
-                var Countrys = _CountryRepositroy.Find(id);
+                var Markets = _MarketRepositroy.Find(id);
 
 
-                var CountrysList = _mapper.Map<CountryVM>(Countrys);
-                _response.Data = CountrysList;
+                var MarketsList = _mapper.Map<MarketVM>(Markets);
+                _response.Data = MarketsList;
                 _response.IsPassed = true;
                 _response.Message = "Done";
             }
@@ -136,14 +138,14 @@ namespace BackEnd.Service.Services
             }
             return _response;
         }
-        public IResponseDTO PostCountry(CountryVM model)
+        public IResponseDTO PostMarket(MarketVM model)
         {
 
             try
             {
-                var DbCountry = _mapper.Map<Country>(model);
+                var DbMarket = _mapper.Map<Market>(model);
 
-                var Country = _mapper.Map<CountryVM>(_CountryRepositroy.Add(DbCountry));
+                var Market = _mapper.Map<MarketVM>(_MarketRepositroy.Add(DbMarket));
 
                 int save = _unitOfWork.Commit();
 

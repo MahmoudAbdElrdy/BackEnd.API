@@ -25,8 +25,20 @@ namespace BackEnd.Service.Mapper
             //CreateMap<ReportSettingModel, ReportSetting>()
             //     .ForMember(t => t.CurrentDate, opt => opt.MapFrom(s => DateTime.ParseExact(s.CurrentDate, "d/M/yyyy", CultureInfo.InvariantCulture)));
             //#endregion
+            #region ModelsAutoMapper
+
+            CreateMap<AdvertisementOpenVM, AdvertisementOpen>().ReverseMap();
+            CreateMap<AdvertisementUpdateVM, AdvertisementUpdate>().ReverseMap();
+            CreateMap<AdvertisementViewVM, AdvertisementView>().ReverseMap();
+            CreateMap<AdvertisementVM, Advertisement>().ReverseMap();
+            CreateMap<CityVM, City>().ReverseMap();
             CreateMap<CountryVM, Country>().ReverseMap();
-           // CreateMap<Employee, EmployeeModel>().ReverseMap();
+            CreateMap<CustomerLoginVM, CustomerLogin>().ReverseMap();
+            CreateMap<CustomerVM, Customer>().ReverseMap();
+            CreateMap<MarketFollowVM, MarketFollow>().ReverseMap();
+            CreateMap<MarketVM, Market>().ReverseMap();
+            
+            #endregion
 
 
         }

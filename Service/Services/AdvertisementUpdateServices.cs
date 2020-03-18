@@ -14,28 +14,28 @@ using System.Threading.Tasks;
 
 namespace BackEnd.Service.Services
 {
-    public class CountryServices : IServicesCountry
+    public class AdvertisementUpdateServices : IServicesAdvertisementUpdate
     {
-        private readonly IGRepository<Country> _CountryRepositroy;
+        private readonly IGRepository<AdvertisementUpdate> _AdvertisementUpdateRepositroy;
         private readonly IUnitOfWork<LoGooContext> _unitOfWork;
         private readonly IResponseDTO _response;
         private readonly IMapper _mapper;
-        public CountryServices(IGRepository<Country> Country,
+        public AdvertisementUpdateServices(IGRepository<AdvertisementUpdate> AdvertisementUpdate,
             IUnitOfWork<LoGooContext> unitOfWork, IResponseDTO responseDTO, IMapper mapper)
         {
-            _CountryRepositroy = Country;
+            _AdvertisementUpdateRepositroy = AdvertisementUpdate;
             _unitOfWork = unitOfWork;
             _response = responseDTO;
             _mapper = mapper;
 
         }
-        public IResponseDTO DeleteCountry(CountryVM model)
+        public IResponseDTO DeleteAdvertisementUpdate(AdvertisementUpdateVM model)
         {
             try
             {
 
-                var DbCountry = _mapper.Map<Country>(model);
-                var entityEntry = _CountryRepositroy.Remove(DbCountry);
+                var DbAdvertisementUpdate = _mapper.Map<AdvertisementUpdate>(model);
+                var entityEntry = _AdvertisementUpdateRepositroy.Remove(DbAdvertisementUpdate);
 
 
                 int save = _unitOfWork.Commit();
@@ -61,13 +61,12 @@ namespace BackEnd.Service.Services
             }
             return _response;
         }
-
-        public IResponseDTO EditCountry(CountryVM model)
+        public IResponseDTO EditAdvertisementUpdate(AdvertisementUpdateVM model)
         {
             try
             {
-                var DbCountry = _mapper.Map<Country>(model);
-                var entityEntry = _CountryRepositroy.Update(DbCountry);
+                var DbAdvertisementUpdate = _mapper.Map<AdvertisementUpdate>(model);
+                var entityEntry = _AdvertisementUpdateRepositroy.Update(DbAdvertisementUpdate);
 
 
                 int save = _unitOfWork.Commit();
@@ -95,16 +94,15 @@ namespace BackEnd.Service.Services
             return _response;
 
         }
-
-        public IResponseDTO GetAllCountry()
+        public IResponseDTO GetAllAdvertisementUpdate()
         {
             try
             {
-                var Countrys = _CountryRepositroy.GetAll();
+                var AdvertisementUpdates = _AdvertisementUpdateRepositroy.GetAll();
 
 
-                var CountrysList = _mapper.Map<List<CountryVM>>(Countrys);
-                _response.Data = CountrysList;
+                var AdvertisementUpdatesList = _mapper.Map<List<AdvertisementUpdateVM>>(AdvertisementUpdates);
+                _response.Data = AdvertisementUpdatesList;
                 _response.IsPassed = true;
                 _response.Message = "Done";
             }
@@ -116,15 +114,15 @@ namespace BackEnd.Service.Services
             }
             return _response;
         }
-        public IResponseDTO GetByIDCountry(object id)
+        public IResponseDTO GetByIDAdvertisementUpdate(object id)
         {
             try
             {
-                var Countrys = _CountryRepositroy.Find(id);
+                var AdvertisementUpdates = _AdvertisementUpdateRepositroy.Find(id);
 
 
-                var CountrysList = _mapper.Map<CountryVM>(Countrys);
-                _response.Data = CountrysList;
+                var AdvertisementUpdatesList = _mapper.Map<AdvertisementUpdateVM>(AdvertisementUpdates);
+                _response.Data = AdvertisementUpdatesList;
                 _response.IsPassed = true;
                 _response.Message = "Done";
             }
@@ -135,15 +133,16 @@ namespace BackEnd.Service.Services
                 _response.Message = "Error " + ex.Message;
             }
             return _response;
+
         }
-        public IResponseDTO PostCountry(CountryVM model)
+        public IResponseDTO PostAdvertisementUpdate(AdvertisementUpdateVM model)
         {
 
             try
             {
-                var DbCountry = _mapper.Map<Country>(model);
+                var DbAdvertisementUpdate = _mapper.Map<AdvertisementUpdate>(model);
 
-                var Country = _mapper.Map<CountryVM>(_CountryRepositroy.Add(DbCountry));
+                var AdvertisementUpdate = _mapper.Map<AdvertisementUpdateVM>(_AdvertisementUpdateRepositroy.Add(DbAdvertisementUpdate));
 
                 int save = _unitOfWork.Commit();
 

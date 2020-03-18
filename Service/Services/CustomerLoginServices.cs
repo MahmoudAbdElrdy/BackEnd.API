@@ -14,28 +14,28 @@ using System.Threading.Tasks;
 
 namespace BackEnd.Service.Services
 {
-    public class CountryServices : IServicesCountry
+    public class CustomerLoginServices : IServicesCustomerLogin
     {
-        private readonly IGRepository<Country> _CountryRepositroy;
+        private readonly IGRepository<CustomerLogin> _CustomerLoginRepositroy;
         private readonly IUnitOfWork<LoGooContext> _unitOfWork;
         private readonly IResponseDTO _response;
         private readonly IMapper _mapper;
-        public CountryServices(IGRepository<Country> Country,
+        public CustomerLoginServices(IGRepository<CustomerLogin> CustomerLogin,
             IUnitOfWork<LoGooContext> unitOfWork, IResponseDTO responseDTO, IMapper mapper)
         {
-            _CountryRepositroy = Country;
+            _CustomerLoginRepositroy = CustomerLogin;
             _unitOfWork = unitOfWork;
             _response = responseDTO;
             _mapper = mapper;
 
         }
-        public IResponseDTO DeleteCountry(CountryVM model)
+        public IResponseDTO DeleteCustomerLogin(CustomerLoginVM model)
         {
             try
             {
 
-                var DbCountry = _mapper.Map<Country>(model);
-                var entityEntry = _CountryRepositroy.Remove(DbCountry);
+                var DbCustomerLogin = _mapper.Map<CustomerLogin>(model);
+                var entityEntry = _CustomerLoginRepositroy.Remove(DbCustomerLogin);
 
 
                 int save = _unitOfWork.Commit();
@@ -62,12 +62,12 @@ namespace BackEnd.Service.Services
             return _response;
         }
 
-        public IResponseDTO EditCountry(CountryVM model)
+        public IResponseDTO EditCustomerLogin(CustomerLoginVM model)
         {
             try
             {
-                var DbCountry = _mapper.Map<Country>(model);
-                var entityEntry = _CountryRepositroy.Update(DbCountry);
+                var DbCustomerLogin = _mapper.Map<CustomerLogin>(model);
+                var entityEntry = _CustomerLoginRepositroy.Update(DbCustomerLogin);
 
 
                 int save = _unitOfWork.Commit();
@@ -96,15 +96,15 @@ namespace BackEnd.Service.Services
 
         }
 
-        public IResponseDTO GetAllCountry()
+        public IResponseDTO GetAllCustomerLogin()
         {
             try
             {
-                var Countrys = _CountryRepositroy.GetAll();
+                var CustomerLogins = _CustomerLoginRepositroy.GetAll();
 
 
-                var CountrysList = _mapper.Map<List<CountryVM>>(Countrys);
-                _response.Data = CountrysList;
+                var CustomerLoginsList = _mapper.Map<List<CustomerLoginVM>>(CustomerLogins);
+                _response.Data = CustomerLoginsList;
                 _response.IsPassed = true;
                 _response.Message = "Done";
             }
@@ -115,16 +115,17 @@ namespace BackEnd.Service.Services
                 _response.Message = "Error " + ex.Message;
             }
             return _response;
+
         }
-        public IResponseDTO GetByIDCountry(object id)
+        public IResponseDTO GetByIDCustomerLogin(object id)
         {
             try
             {
-                var Countrys = _CountryRepositroy.Find(id);
+                var CustomerLogins = _CustomerLoginRepositroy.Find(id);
 
 
-                var CountrysList = _mapper.Map<CountryVM>(Countrys);
-                _response.Data = CountrysList;
+                var CustomerLoginsList = _mapper.Map<CustomerLoginVM>(CustomerLogins);
+                _response.Data = CustomerLoginsList;
                 _response.IsPassed = true;
                 _response.Message = "Done";
             }
@@ -135,21 +136,64 @@ namespace BackEnd.Service.Services
                 _response.Message = "Error " + ex.Message;
             }
             return _response;
+
         }
-        public IResponseDTO PostCountry(CountryVM model)
+        public IResponseDTO PostCustomerLogin(CustomerLoginVM model)
         {
 
             try
             {
-                var DbCountry = _mapper.Map<Country>(model);
+                var DbCustomerLogin = _mapper.Map<CustomerLogin>(model);
 
-                var Country = _mapper.Map<CountryVM>(_CountryRepositroy.Add(DbCountry));
+                var CustomerLogin = _mapper.Map<CustomerLoginVM>(_CustomerLoginRepositroy.Add(DbCustomerLogin));
 
                 int save = _unitOfWork.Commit();
 
                 if (save == 200)
                 {
                     _response.Data = model;
+                    _response.IsPassed = true;
+                    _response.Message = "Ok";
+                }
+                else
+                {
+                    _response.Data = null;
+                    _response.IsPassed = false;
+                    _response.Message = "Not saved";
+                }
+
+            }
+            catch (Exception ex)
+            {
+                _response.Data = null;
+                _response.IsPassed = false;
+                _response.Message = "Error " + ex.Message;
+            }
+
+
+            return _response;
+
+        }
+        public IResponseDTO NewCustomerLogin(Guid customer_id)
+        {
+
+            try
+            {
+                var customerLogin = new CustomerLoginVM()
+                {
+                    LoginId = Guid.NewGuid(),
+                    Customerid = customer_id,
+                    LoginDate = DateTime.UtcNow.AddHours(3),                    
+                };
+                var DbCustomerLogin = _mapper.Map<CustomerLogin>(customerLogin);
+
+                var CustomerLogin = _mapper.Map<CustomerLoginVM>(_CustomerLoginRepositroy.Add(DbCustomerLogin));
+
+                int save = _unitOfWork.Commit();
+
+                if (save == 200)
+                {
+                    _response.Data = customerLogin;
                     _response.IsPassed = true;
                     _response.Message = "Ok";
                 }

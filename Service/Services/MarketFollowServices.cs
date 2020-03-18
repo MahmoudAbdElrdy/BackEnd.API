@@ -14,28 +14,28 @@ using System.Threading.Tasks;
 
 namespace BackEnd.Service.Services
 {
-    public class CountryServices : IServicesCountry
+    public class MarketFollowServices : IServicesMarketFollow
     {
-        private readonly IGRepository<Country> _CountryRepositroy;
+        private readonly IGRepository<MarketFollow> _MarketFollowRepositroy;
         private readonly IUnitOfWork<LoGooContext> _unitOfWork;
         private readonly IResponseDTO _response;
         private readonly IMapper _mapper;
-        public CountryServices(IGRepository<Country> Country,
+        public MarketFollowServices(IGRepository<MarketFollow> MarketFollow,
             IUnitOfWork<LoGooContext> unitOfWork, IResponseDTO responseDTO, IMapper mapper)
         {
-            _CountryRepositroy = Country;
+            _MarketFollowRepositroy = MarketFollow;
             _unitOfWork = unitOfWork;
             _response = responseDTO;
             _mapper = mapper;
 
         }
-        public IResponseDTO DeleteCountry(CountryVM model)
+        public IResponseDTO DeleteMarketFollow(MarketFollowVM model)
         {
             try
             {
 
-                var DbCountry = _mapper.Map<Country>(model);
-                var entityEntry = _CountryRepositroy.Remove(DbCountry);
+                var DbMarketFollow = _mapper.Map<MarketFollow>(model);
+                var entityEntry = _MarketFollowRepositroy.Remove(DbMarketFollow);
 
 
                 int save = _unitOfWork.Commit();
@@ -62,16 +62,143 @@ namespace BackEnd.Service.Services
             return _response;
         }
 
-        public IResponseDTO EditCountry(CountryVM model)
+        public IResponseDTO EditMarketFollow(MarketFollowVM model)
         {
             try
             {
-                var DbCountry = _mapper.Map<Country>(model);
-                var entityEntry = _CountryRepositroy.Update(DbCountry);
+                var DbMarketFollow = _mapper.Map<MarketFollow>(model);
+                var entityEntry = _MarketFollowRepositroy.Update(DbMarketFollow);
 
 
                 int save = _unitOfWork.Commit();
 
+                if (save == 200)
+                {
+                    _response.Data = model;
+                    _response.IsPassed = true;
+                    _response.Message = "Ok";
+                }
+                else
+                {
+                    _response.Data = null;
+                    _response.IsPassed = false;
+                    _response.Message = "Not saved";
+                }
+            }
+            catch (Exception ex)
+            {
+                _response.Data = null;
+                _response.IsPassed = false;
+                _response.Message = "Error " + ex.Message;
+            }
+
+            return _response;
+
+        }
+
+        public IResponseDTO GetAllMarketFollow()
+        {
+            try
+            {
+                var MarketFollows = _MarketFollowRepositroy.GetAll();
+
+
+                var MarketFollowsList = _mapper.Map<List<MarketFollowVM>>(MarketFollows);
+                _response.Data = MarketFollowsList;
+                _response.IsPassed = true;
+                _response.Message = "Done";
+            }
+            catch (Exception ex)
+            {
+                _response.Data = null;
+                _response.IsPassed = false;
+                _response.Message = "Error " + ex.Message;
+            }
+            return _response;
+
+        }
+        public IResponseDTO GetByIDMarketFollow(object id)
+        {
+            try
+            {
+                var MarketFollows = _MarketFollowRepositroy.Find(id);
+
+
+                var MarketFollowsList = _mapper.Map<MarketFollowVM>(MarketFollows);
+                _response.Data = MarketFollowsList;
+                _response.IsPassed = true;
+                _response.Message = "Done";
+            }
+            catch (Exception ex)
+            {
+                _response.Data = null;
+                _response.IsPassed = false;
+                _response.Message = "Error " + ex.Message;
+            }
+            return _response;
+
+        }
+        public IResponseDTO PostMarketFollow(MarketFollowVM model)
+        {
+
+            try
+            {
+                var DbMarketFollow = _mapper.Map<MarketFollow>(model);
+
+                var MarketFollow = _mapper.Map<MarketFollowVM>(_MarketFollowRepositroy.Add(DbMarketFollow));
+
+                int save = _unitOfWork.Commit();
+
+                if (save == 200)
+                {
+                    _response.Data = model;
+                    _response.IsPassed = true;
+                    _response.Message = "Ok";
+                }
+                else
+                {
+                    _response.Data = null;
+                    _response.IsPassed = false;
+                    _response.Message = "Not saved";
+                }
+
+            }
+            catch (Exception ex)
+            {
+                _response.Data = null;
+                _response.IsPassed = false;
+                _response.Message = "Error " + ex.Message;
+            }
+
+
+            return _response;
+
+        }
+        public IResponseDTO CustomerMarketFollow(DTO.MarketFollowDTO model)
+        {
+            try
+            {
+                var currentFollow = _MarketFollowRepositroy.GetFirst(x => x.Customerid == model.Customerid && x.Marketid == model.Marketid);
+                if (currentFollow != null) 
+                {
+                    currentFollow.Follow = model.Follow;
+                    var entityEntry = _MarketFollowRepositroy.Update(currentFollow);
+                }
+                else
+                {
+                    var Follow = new MarketFollowVM()
+                    {
+                        //MarketCustomerId = Guid.NewGuid(),
+                        CreationDate = DateTime.UtcNow.AddHours(3),
+                        Marketid = model.Marketid,
+                        Follow = model.Follow,
+                        Customerid = model.Customerid,
+                    };
+                    var DbMarketFollow = _mapper.Map<MarketFollow>(model);
+
+                    var MarketFollow = _mapper.Map<MarketFollowVM>(_MarketFollowRepositroy.Add(DbMarketFollow));
+                }
+                int save = _unitOfWork.Commit();
                 if (save == 200)
                 {
                     _response.Data = model;
@@ -91,86 +218,7 @@ namespace BackEnd.Service.Services
                 _response.IsPassed = false;
                 _response.Message = "Error " + ex.Message;
             }
-
             return _response;
-
-        }
-
-        public IResponseDTO GetAllCountry()
-        {
-            try
-            {
-                var Countrys = _CountryRepositroy.GetAll();
-
-
-                var CountrysList = _mapper.Map<List<CountryVM>>(Countrys);
-                _response.Data = CountrysList;
-                _response.IsPassed = true;
-                _response.Message = "Done";
-            }
-            catch (Exception ex)
-            {
-                _response.Data = null;
-                _response.IsPassed = false;
-                _response.Message = "Error " + ex.Message;
-            }
-            return _response;
-        }
-        public IResponseDTO GetByIDCountry(object id)
-        {
-            try
-            {
-                var Countrys = _CountryRepositroy.Find(id);
-
-
-                var CountrysList = _mapper.Map<CountryVM>(Countrys);
-                _response.Data = CountrysList;
-                _response.IsPassed = true;
-                _response.Message = "Done";
-            }
-            catch (Exception ex)
-            {
-                _response.Data = null;
-                _response.IsPassed = false;
-                _response.Message = "Error " + ex.Message;
-            }
-            return _response;
-        }
-        public IResponseDTO PostCountry(CountryVM model)
-        {
-
-            try
-            {
-                var DbCountry = _mapper.Map<Country>(model);
-
-                var Country = _mapper.Map<CountryVM>(_CountryRepositroy.Add(DbCountry));
-
-                int save = _unitOfWork.Commit();
-
-                if (save == 200)
-                {
-                    _response.Data = model;
-                    _response.IsPassed = true;
-                    _response.Message = "Ok";
-                }
-                else
-                {
-                    _response.Data = null;
-                    _response.IsPassed = false;
-                    _response.Message = "Not saved";
-                }
-
-            }
-            catch (Exception ex)
-            {
-                _response.Data = null;
-                _response.IsPassed = false;
-                _response.Message = "Error " + ex.Message;
-            }
-
-
-            return _response;
-
         }
     }
 }
