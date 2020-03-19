@@ -8,6 +8,7 @@ namespace BackEnd.DAL.Models
         public Customer()
         {
             AdvertisementView = new HashSet<AdvertisementView>();
+            ContactUs = new HashSet<ContactUs>();
             CustomerLogin = new HashSet<CustomerLogin>();
             MarketFollow = new HashSet<MarketFollow>();
         }
@@ -20,6 +21,7 @@ namespace BackEnd.DAL.Models
 
         public virtual City City { get; set; }
         public virtual ICollection<AdvertisementView> AdvertisementView { get; set; }
+        public virtual ICollection<ContactUs> ContactUs { get; set; }
         public virtual ICollection<CustomerLogin> CustomerLogin { get; set; }
         public virtual ICollection<MarketFollow> MarketFollow { get; set; }
     }

@@ -14,5 +14,7 @@ namespace BackEnd.Service.IServices
         IResponseDTO EditCustomer(CustomerVM model);
         IResponseDTO DeleteCustomer(CustomerVM model);
         IResponseDTO GetByIDCustomer(object id);
+        IResponseDTO SubscribeCustomer(DTO.CustomerSubscribeDTO model);
+        IResponseDTO RefreshCustomerToken(DTO.CustomerTokenDTO model);
     }
 }

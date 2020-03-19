@@ -14,5 +14,8 @@ namespace BackEnd.Service.IServices
         IResponseDTO EditAdvertisement(AdvertisementVM model);
         IResponseDTO DeleteAdvertisement(AdvertisementVM model);
         IResponseDTO GetByIDAdvertisement(object id);
+        IResponseDTO GetAdvertisementByCityId(int page, Guid cityId);
+        IResponseDTO GetAdvertisementByMarketId(int page, Guid marketId);
+        IResponseDTO GetAdvertisementByCategory(int page, Guid categoryId, Guid cityId);
     }
 }

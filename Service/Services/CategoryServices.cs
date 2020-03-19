@@ -14,27 +14,27 @@ using System.Threading.Tasks;
 
 namespace BackEnd.Service.Services
 {
-    public class CountryServices : IServicesCountry
+    public class CategoryServices : IServicesCategory
     {
-        private readonly IGRepository<Country> _CountryRepositroy;
+        private readonly IGRepository<Category> _CategoryRepositroy;
         private readonly IUnitOfWork<LoGooContext> _unitOfWork;
         private readonly IResponseDTO _response;
         private readonly IMapper _mapper;
-        public CountryServices(IGRepository<Country> Country,
+        public CategoryServices(IGRepository<Category> Category,
             IUnitOfWork<LoGooContext> unitOfWork, IResponseDTO responseDTO, IMapper mapper)
         {
-            _CountryRepositroy = Country;
+            _CategoryRepositroy = Category;
             _unitOfWork = unitOfWork;
             _response = responseDTO;
             _mapper = mapper;
 
         }
-        public IResponseDTO DeleteCountry(CountryVM model)
+        public IResponseDTO DeleteCategory(CategoryVM model)
         {
             try
             {
-                var DbCountry = _mapper.Map<Country>(model);
-                var entityEntry = _CountryRepositroy.Remove(DbCountry);
+                var DbCategory = _mapper.Map<Category>(model);
+                var entityEntry = _CategoryRepositroy.Remove(DbCategory);
 
                 int save = _unitOfWork.Commit();
                 if (save == 200)
@@ -58,12 +58,12 @@ namespace BackEnd.Service.Services
             }
             return _response;
         }
-        public IResponseDTO EditCountry(CountryVM model)
+        public IResponseDTO EditCategory(CategoryVM model)
         {
             try
             {
-                var DbCountry = _mapper.Map<Country>(model);
-                var entityEntry = _CountryRepositroy.Update(DbCountry);
+                var DbCategory = _mapper.Map<Category>(model);
+                var entityEntry = _CategoryRepositroy.Update(DbCategory);
                 int save = _unitOfWork.Commit();
 
                 if (save == 200)
@@ -87,14 +87,14 @@ namespace BackEnd.Service.Services
             }
             return _response;
         }
-        public IResponseDTO GetAllCountry()
+        public IResponseDTO GetAllCategory()
         {
             try
             {
-                var Countrys = _CountryRepositroy.GetAll();
+                var Categorys = _CategoryRepositroy.GetAll();
 
-                var CountrysList = _mapper.Map<List<CountryVM>>(Countrys);
-                _response.Data = CountrysList;
+                var CategorysList = _mapper.Map<List<CategoryVM>>(Categorys);
+                _response.Data = CategorysList;
                 _response.IsPassed = true;
                 _response.Message = "Done";
             }
@@ -106,14 +106,14 @@ namespace BackEnd.Service.Services
             }
             return _response;
         }
-        public IResponseDTO GetByIDCountry(object id)
+        public IResponseDTO GetByIDCategory(object id)
         {
             try
             {
-                var Countrys = _CountryRepositroy.Find(id);
+                var Categorys = _CategoryRepositroy.Find(id);
 
-                var CountrysList = _mapper.Map<CountryVM>(Countrys);
-                _response.Data = CountrysList;
+                var CategorysList = _mapper.Map<CategoryVM>(Categorys);
+                _response.Data = CategorysList;
                 _response.IsPassed = true;
                 _response.Message = "Done";
             }
@@ -125,12 +125,36 @@ namespace BackEnd.Service.Services
             }
             return _response;
         }
-        public IResponseDTO PostCountry(CountryVM model)
+        public IResponseDTO GetCategorysAds()
         {
             try
             {
-                var DbCountry = _mapper.Map<Country>(model);
-                var Country = _mapper.Map<CountryVM>(_CountryRepositroy.Add(DbCountry));
+                var Categorys = _CategoryRepositroy.GetAll();
+                //var ads = _CategoryRepositroy.GetAll();
+                var CategorysList = _mapper.Map<List<CategoryVM>>(Categorys);
+                //var adsList = _mapper.Map<List<adsVM>>(ads);
+
+                _response.Data = new DTO.AdsCategryDTO()
+                {
+                    category = CategorysList,
+                };
+                _response.IsPassed = true;
+                _response.Message = "Done";
+            }
+            catch (Exception ex)
+            {
+                _response.Data = null;
+                _response.IsPassed = false;
+                _response.Message = "Error " + ex.Message;
+            }
+            return _response;
+        }
+        public IResponseDTO PostCategory(CategoryVM model)
+        {
+            try
+            {
+                var DbCategory = _mapper.Map<Category>(model);
+                var Category = _mapper.Map<CategoryVM>(_CategoryRepositroy.Add(DbCategory));
                 int save = _unitOfWork.Commit();
 
                 if (save == 200)

@@ -14,27 +14,27 @@ using System.Threading.Tasks;
 
 namespace BackEnd.Service.Services
 {
-    public class CountryServices : IServicesCountry
+    public class AboutUsServices : IServicesAboutUs
     {
-        private readonly IGRepository<Country> _CountryRepositroy;
+        private readonly IGRepository<AboutUs> _AboutUsRepositroy;
         private readonly IUnitOfWork<LoGooContext> _unitOfWork;
         private readonly IResponseDTO _response;
         private readonly IMapper _mapper;
-        public CountryServices(IGRepository<Country> Country,
+        public AboutUsServices(IGRepository<AboutUs> AboutUs,
             IUnitOfWork<LoGooContext> unitOfWork, IResponseDTO responseDTO, IMapper mapper)
         {
-            _CountryRepositroy = Country;
+            _AboutUsRepositroy = AboutUs;
             _unitOfWork = unitOfWork;
             _response = responseDTO;
             _mapper = mapper;
 
         }
-        public IResponseDTO DeleteCountry(CountryVM model)
+        public IResponseDTO DeleteAboutUs(AboutUsVM model)
         {
             try
             {
-                var DbCountry = _mapper.Map<Country>(model);
-                var entityEntry = _CountryRepositroy.Remove(DbCountry);
+                var DbAboutUs = _mapper.Map<AboutUs>(model);
+                var entityEntry = _AboutUsRepositroy.Remove(DbAboutUs);
 
                 int save = _unitOfWork.Commit();
                 if (save == 200)
@@ -58,12 +58,12 @@ namespace BackEnd.Service.Services
             }
             return _response;
         }
-        public IResponseDTO EditCountry(CountryVM model)
+        public IResponseDTO EditAboutUs(AboutUsVM model)
         {
             try
             {
-                var DbCountry = _mapper.Map<Country>(model);
-                var entityEntry = _CountryRepositroy.Update(DbCountry);
+                var DbAboutUs = _mapper.Map<AboutUs>(model);
+                var entityEntry = _AboutUsRepositroy.Update(DbAboutUs);
                 int save = _unitOfWork.Commit();
 
                 if (save == 200)
@@ -87,14 +87,14 @@ namespace BackEnd.Service.Services
             }
             return _response;
         }
-        public IResponseDTO GetAllCountry()
+        public IResponseDTO GetAllAboutUs()
         {
             try
             {
-                var Countrys = _CountryRepositroy.GetAll();
+                var AboutUss = _AboutUsRepositroy.GetAll();
 
-                var CountrysList = _mapper.Map<List<CountryVM>>(Countrys);
-                _response.Data = CountrysList;
+                var AboutUssList = _mapper.Map<List<AboutUsVM>>(AboutUss);
+                _response.Data = AboutUssList;
                 _response.IsPassed = true;
                 _response.Message = "Done";
             }
@@ -106,14 +106,14 @@ namespace BackEnd.Service.Services
             }
             return _response;
         }
-        public IResponseDTO GetByIDCountry(object id)
+        public IResponseDTO GetByIDAboutUs(object id)
         {
             try
             {
-                var Countrys = _CountryRepositroy.Find(id);
+                var AboutUss = _AboutUsRepositroy.Find(id);
 
-                var CountrysList = _mapper.Map<CountryVM>(Countrys);
-                _response.Data = CountrysList;
+                var AboutUssList = _mapper.Map<AboutUsVM>(AboutUss);
+                _response.Data = AboutUssList;
                 _response.IsPassed = true;
                 _response.Message = "Done";
             }
@@ -125,12 +125,31 @@ namespace BackEnd.Service.Services
             }
             return _response;
         }
-        public IResponseDTO PostCountry(CountryVM model)
+        public IResponseDTO GetAboutUs()
         {
             try
             {
-                var DbCountry = _mapper.Map<Country>(model);
-                var Country = _mapper.Map<CountryVM>(_CountryRepositroy.Add(DbCountry));
+                var AboutUss = _AboutUsRepositroy.GetFirst();
+
+                var AboutUssList = _mapper.Map<AboutUsVM>(AboutUss);
+                _response.Data = AboutUssList;
+                _response.IsPassed = true;
+                _response.Message = "Done";
+            }
+            catch (Exception ex)
+            {
+                _response.Data = null;
+                _response.IsPassed = false;
+                _response.Message = "Error " + ex.Message;
+            }
+            return _response;
+        }
+        public IResponseDTO PostAboutUs(AboutUsVM model)
+        {
+            try
+            {
+                var DbAboutUs = _mapper.Map<AboutUs>(model);
+                var AboutUs = _mapper.Map<AboutUsVM>(_AboutUsRepositroy.Add(DbAboutUs));
                 int save = _unitOfWork.Commit();
 
                 if (save == 200)

@@ -63,7 +63,6 @@ namespace BackEnd.Service.Services
             }
             return _response;
         }
-
         public IResponseDTO EditMarket(MarketVM model)
         {
             try
@@ -97,7 +96,6 @@ namespace BackEnd.Service.Services
             return _response;
 
         }
-
         public IResponseDTO GetAllMarket()
         {
             try
@@ -109,6 +107,78 @@ namespace BackEnd.Service.Services
                 _response.Data = MarketsList;
                 _response.IsPassed = true;
                 _response.Message = "Done";
+            }
+            catch (Exception ex)
+            {
+                _response.Data = null;
+                _response.IsPassed = false;
+                _response.Message = "Error " + ex.Message;
+            }
+            return _response;
+        }
+        public IResponseDTO UpdateMarketToken(DTO.MarketTokenDTO marketToken)
+        {
+            try
+            {
+                var model = _MarketRepositroy.Find(marketToken.MarketId);
+                model.Token = marketToken.Token;
+                var DbMarket = _mapper.Map<Market>(model);
+                var entityEntry = _MarketRepositroy.Update(DbMarket);
+
+
+                int save = _unitOfWork.Commit();
+
+                if (save == 200)
+                {
+                    _response.Data = model;
+                    _response.IsPassed = true;
+                    _response.Message = "Ok";
+                }
+                else
+                {
+                    _response.Data = null;
+                    _response.IsPassed = false;
+                    _response.Message = "Not saved";
+                }
+            }
+            catch (Exception ex)
+            {
+                _response.Data = null;
+                _response.IsPassed = false;
+                _response.Message = "Error " + ex.Message;
+            }
+            return _response;
+        }
+        public IResponseDTO MarketLogin(DTO.MarketLoginDTO marketlogin)
+        {
+            try
+            {
+                var model = _MarketRepositroy.GetFirst(X => X.MarketEmail == marketlogin.MarketEmail && X.MarketPassword == marketlogin.MarketPassword);
+                if(model == null)
+                {
+                    _response.Data = null;
+                    _response.IsPassed = false;
+                    _response.Message = "Not saved";
+                }
+                else
+                {
+                    model.Token = marketlogin.Token;
+                    var DbMarket = _mapper.Map<Market>(model);
+                    var entityEntry = _MarketRepositroy.Update(DbMarket);
+                    int save = _unitOfWork.Commit();
+                    if (save == 200)
+                    {
+                        _response.Data = model;
+                        _response.IsPassed = true;
+                        _response.Message = "Ok";
+                    }
+                    else
+                    {
+                        _response.Data = null;
+                        _response.IsPassed = false;
+                        _response.Message = "Not saved";
+                    }
+                }
             }
             catch (Exception ex)
             {

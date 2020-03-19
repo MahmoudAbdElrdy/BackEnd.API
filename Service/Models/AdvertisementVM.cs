@@ -8,6 +8,7 @@ namespace BackEnd.Service.Models
         public Guid AdsId { get; set; }
         public Guid Marketid { get; set; }
         public Guid Cityid { get; set; }
+        public Guid Categoryid { get; set; }
         public int? AdsType { get; set; }
         public string AdsText { get; set; }
         public string AdsImage { get; set; }

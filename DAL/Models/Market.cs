@@ -7,6 +7,7 @@ namespace BackEnd.DAL.Models
     {
         public Market()
         {
+            Category = new HashSet<Category>();
             MarketFollow = new HashSet<MarketFollow>();
         }
 
@@ -23,8 +24,10 @@ namespace BackEnd.DAL.Models
         public Guid Cityid { get; set; }
         public string Token { get; set; }
         public DateTime? CreationDate { get; set; }
+        public bool Available { get; set; }
 
         public virtual City City { get; set; }
+        public virtual ICollection<Category> Category { get; set; }
         public virtual ICollection<MarketFollow> MarketFollow { get; set; }
     }
 }

@@ -61,7 +61,6 @@ namespace BackEnd.Service.Services
             }
             return _response;
         }
-
         public IResponseDTO EditAdvertisement(AdvertisementVM model)
         {
             try
@@ -95,7 +94,68 @@ namespace BackEnd.Service.Services
             return _response;
 
         }
+        public IResponseDTO GetAdvertisementByCategory(int page,Guid categoryId, Guid cityId)
+        {
+            try
+            {
+                var Advertisements = _AdvertisementRepositroy.Get(x => x.Categoryid == categoryId && x.Cityid == cityId);
 
+
+                var AdvertisementsList = _mapper.Map<List<AdvertisementVM>>(Advertisements);
+                _response.Data = AdvertisementsList;
+                _response.IsPassed = true;
+                _response.Message = "Done";
+            }
+            catch (Exception ex)
+            {
+                _response.Data = null;
+                _response.IsPassed = false;
+                _response.Message = "Error " + ex.Message;
+            }
+            return _response;
+
+        }
+        public IResponseDTO GetAdvertisementByMarketId(int page,Guid marketId)
+        {
+            try
+            {
+                var Advertisements = _AdvertisementRepositroy.Get(x => x.Marketid == marketId);
+
+                var AdvertisementsList = _mapper.Map<List<AdvertisementVM>>(Advertisements);
+                _response.Data = AdvertisementsList;
+                _response.IsPassed = true;
+                _response.Message = "Done";
+            }
+            catch (Exception ex)
+            {
+                _response.Data = null;
+                _response.IsPassed = false;
+                _response.Message = "Error " + ex.Message;
+            }
+            return _response;
+
+        }
+        public IResponseDTO GetAdvertisementByCityId(int page,Guid cityId)
+        {
+            try
+            {
+                var Advertisements = _AdvertisementRepositroy.Get(x => x.Cityid == cityId);
+
+
+                var AdvertisementsList = _mapper.Map<List<AdvertisementVM>>(Advertisements);
+                _response.Data = AdvertisementsList;
+                _response.IsPassed = true;
+                _response.Message = "Done";
+            }
+            catch (Exception ex)
+            {
+                _response.Data = null;
+                _response.IsPassed = false;
+                _response.Message = "Error " + ex.Message;
+            }
+            return _response;
+
+        }
         public IResponseDTO GetAllAdvertisement()
         {
             try

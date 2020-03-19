@@ -14,27 +14,27 @@ using System.Threading.Tasks;
 
 namespace BackEnd.Service.Services
 {
-    public class CountryServices : IServicesCountry
+    public class ContactUsServices : IServicesContactUs
     {
-        private readonly IGRepository<Country> _CountryRepositroy;
+        private readonly IGRepository<ContactUs> _ContactUsRepositroy;
         private readonly IUnitOfWork<LoGooContext> _unitOfWork;
         private readonly IResponseDTO _response;
         private readonly IMapper _mapper;
-        public CountryServices(IGRepository<Country> Country,
+        public ContactUsServices(IGRepository<ContactUs> ContactUs,
             IUnitOfWork<LoGooContext> unitOfWork, IResponseDTO responseDTO, IMapper mapper)
         {
-            _CountryRepositroy = Country;
+            _ContactUsRepositroy = ContactUs;
             _unitOfWork = unitOfWork;
             _response = responseDTO;
             _mapper = mapper;
 
         }
-        public IResponseDTO DeleteCountry(CountryVM model)
+        public IResponseDTO DeleteContactUs(ContactUsVM model)
         {
             try
             {
-                var DbCountry = _mapper.Map<Country>(model);
-                var entityEntry = _CountryRepositroy.Remove(DbCountry);
+                var DbContactUs = _mapper.Map<ContactUs>(model);
+                var entityEntry = _ContactUsRepositroy.Remove(DbContactUs);
 
                 int save = _unitOfWork.Commit();
                 if (save == 200)
@@ -58,12 +58,12 @@ namespace BackEnd.Service.Services
             }
             return _response;
         }
-        public IResponseDTO EditCountry(CountryVM model)
+        public IResponseDTO EditContactUs(ContactUsVM model)
         {
             try
             {
-                var DbCountry = _mapper.Map<Country>(model);
-                var entityEntry = _CountryRepositroy.Update(DbCountry);
+                var DbContactUs = _mapper.Map<ContactUs>(model);
+                var entityEntry = _ContactUsRepositroy.Update(DbContactUs);
                 int save = _unitOfWork.Commit();
 
                 if (save == 200)
@@ -87,14 +87,14 @@ namespace BackEnd.Service.Services
             }
             return _response;
         }
-        public IResponseDTO GetAllCountry()
+        public IResponseDTO GetAllContactUs()
         {
             try
             {
-                var Countrys = _CountryRepositroy.GetAll();
+                var ContactUss = _ContactUsRepositroy.GetAll();
 
-                var CountrysList = _mapper.Map<List<CountryVM>>(Countrys);
-                _response.Data = CountrysList;
+                var ContactUssList = _mapper.Map<List<ContactUsVM>>(ContactUss);
+                _response.Data = ContactUssList;
                 _response.IsPassed = true;
                 _response.Message = "Done";
             }
@@ -106,14 +106,14 @@ namespace BackEnd.Service.Services
             }
             return _response;
         }
-        public IResponseDTO GetByIDCountry(object id)
+        public IResponseDTO GetByIDContactUs(object id)
         {
             try
             {
-                var Countrys = _CountryRepositroy.Find(id);
+                var ContactUss = _ContactUsRepositroy.Find(id);
 
-                var CountrysList = _mapper.Map<CountryVM>(Countrys);
-                _response.Data = CountrysList;
+                var ContactUssList = _mapper.Map<ContactUsVM>(ContactUss);
+                _response.Data = ContactUssList;
                 _response.IsPassed = true;
                 _response.Message = "Done";
             }
@@ -125,12 +125,12 @@ namespace BackEnd.Service.Services
             }
             return _response;
         }
-        public IResponseDTO PostCountry(CountryVM model)
+        public IResponseDTO PostContactUs(ContactUsVM model)
         {
             try
             {
-                var DbCountry = _mapper.Map<Country>(model);
-                var Country = _mapper.Map<CountryVM>(_CountryRepositroy.Add(DbCountry));
+                var DbContactUs = _mapper.Map<ContactUs>(model);
+                var ContactUs = _mapper.Map<ContactUsVM>(_ContactUsRepositroy.Add(DbContactUs));
                 int save = _unitOfWork.Commit();
 
                 if (save == 200)

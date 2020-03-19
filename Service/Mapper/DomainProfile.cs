@@ -27,16 +27,20 @@ namespace BackEnd.Service.Mapper
             //#endregion
             #region ModelsAutoMapper
 
+            CreateMap<AboutUsVM, AboutUs>().ReverseMap();
             CreateMap<AdvertisementOpenVM, AdvertisementOpen>().ReverseMap();
             CreateMap<AdvertisementUpdateVM, AdvertisementUpdate>().ReverseMap();
             CreateMap<AdvertisementViewVM, AdvertisementView>().ReverseMap();
             CreateMap<AdvertisementVM, Advertisement>().ReverseMap();
+            CreateMap<CategoryVM, Category>().ReverseMap();
             CreateMap<CityVM, City>().ReverseMap();
+            CreateMap<ContactUsVM, ContactUs>().ReverseMap();
             CreateMap<CountryVM, Country>().ReverseMap();
             CreateMap<CustomerLoginVM, CustomerLogin>().ReverseMap();
             CreateMap<CustomerVM, Customer>().ReverseMap();
             CreateMap<MarketFollowVM, MarketFollow>().ReverseMap();
             CreateMap<MarketVM, Market>().ReverseMap();
+            CreateMap<PrivacyVM, Privacy>().ReverseMap();
             
             #endregion
 

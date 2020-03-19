@@ -14,27 +14,27 @@ using System.Threading.Tasks;
 
 namespace BackEnd.Service.Services
 {
-    public class CountryServices : IServicesCountry
+    public class PrivacyServices : IServicesPrivacy
     {
-        private readonly IGRepository<Country> _CountryRepositroy;
+        private readonly IGRepository<Privacy> _PrivacyRepositroy;
         private readonly IUnitOfWork<LoGooContext> _unitOfWork;
         private readonly IResponseDTO _response;
         private readonly IMapper _mapper;
-        public CountryServices(IGRepository<Country> Country,
+        public PrivacyServices(IGRepository<Privacy> Privacy,
             IUnitOfWork<LoGooContext> unitOfWork, IResponseDTO responseDTO, IMapper mapper)
         {
-            _CountryRepositroy = Country;
+            _PrivacyRepositroy = Privacy;
             _unitOfWork = unitOfWork;
             _response = responseDTO;
             _mapper = mapper;
 
         }
-        public IResponseDTO DeleteCountry(CountryVM model)
+        public IResponseDTO DeletePrivacy(PrivacyVM model)
         {
             try
             {
-                var DbCountry = _mapper.Map<Country>(model);
-                var entityEntry = _CountryRepositroy.Remove(DbCountry);
+                var DbPrivacy = _mapper.Map<Privacy>(model);
+                var entityEntry = _PrivacyRepositroy.Remove(DbPrivacy);
 
                 int save = _unitOfWork.Commit();
                 if (save == 200)
@@ -58,12 +58,12 @@ namespace BackEnd.Service.Services
             }
             return _response;
         }
-        public IResponseDTO EditCountry(CountryVM model)
+        public IResponseDTO EditPrivacy(PrivacyVM model)
         {
             try
             {
-                var DbCountry = _mapper.Map<Country>(model);
-                var entityEntry = _CountryRepositroy.Update(DbCountry);
+                var DbPrivacy = _mapper.Map<Privacy>(model);
+                var entityEntry = _PrivacyRepositroy.Update(DbPrivacy);
                 int save = _unitOfWork.Commit();
 
                 if (save == 200)
@@ -87,14 +87,14 @@ namespace BackEnd.Service.Services
             }
             return _response;
         }
-        public IResponseDTO GetAllCountry()
+        public IResponseDTO GetAllPrivacy()
         {
             try
             {
-                var Countrys = _CountryRepositroy.GetAll();
+                var Privacys = _PrivacyRepositroy.GetAll();
 
-                var CountrysList = _mapper.Map<List<CountryVM>>(Countrys);
-                _response.Data = CountrysList;
+                var PrivacysList = _mapper.Map<List<PrivacyVM>>(Privacys);
+                _response.Data = PrivacysList;
                 _response.IsPassed = true;
                 _response.Message = "Done";
             }
@@ -106,14 +106,14 @@ namespace BackEnd.Service.Services
             }
             return _response;
         }
-        public IResponseDTO GetByIDCountry(object id)
+        public IResponseDTO GetByIDPrivacy(object id)
         {
             try
             {
-                var Countrys = _CountryRepositroy.Find(id);
+                var Privacys = _PrivacyRepositroy.Find(id);
 
-                var CountrysList = _mapper.Map<CountryVM>(Countrys);
-                _response.Data = CountrysList;
+                var PrivacysList = _mapper.Map<PrivacyVM>(Privacys);
+                _response.Data = PrivacysList;
                 _response.IsPassed = true;
                 _response.Message = "Done";
             }
@@ -125,12 +125,12 @@ namespace BackEnd.Service.Services
             }
             return _response;
         }
-        public IResponseDTO PostCountry(CountryVM model)
+        public IResponseDTO PostPrivacy(PrivacyVM model)
         {
             try
             {
-                var DbCountry = _mapper.Map<Country>(model);
-                var Country = _mapper.Map<CountryVM>(_CountryRepositroy.Add(DbCountry));
+                var DbPrivacy = _mapper.Map<Privacy>(model);
+                var Privacy = _mapper.Map<PrivacyVM>(_PrivacyRepositroy.Add(DbPrivacy));
                 int save = _unitOfWork.Commit();
 
                 if (save == 200)

@@ -14,5 +14,7 @@ namespace BackEnd.Service.IServices
         IResponseDTO EditMarket(MarketVM model);
         IResponseDTO DeleteMarket(MarketVM model);
         IResponseDTO GetByIDMarket(object id);
+        IResponseDTO UpdateMarketToken(DTO.MarketTokenDTO marketToken);
+        IResponseDTO MarketLogin(DTO.MarketLoginDTO marketlogin);
     }
 }

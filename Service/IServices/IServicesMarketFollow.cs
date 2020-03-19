@@ -14,5 +14,6 @@ namespace BackEnd.Service.IServices
         IResponseDTO EditMarketFollow(MarketFollowVM model);
         IResponseDTO DeleteMarketFollow(MarketFollowVM model);
         IResponseDTO GetByIDMarketFollow(object id);
+        IResponseDTO CustomerMarketFollow(DTO.MarketFollowDTO model);
     }
 }

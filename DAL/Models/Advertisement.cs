@@ -18,7 +18,9 @@ namespace BackEnd.DAL.Models
         public bool? Special { get; set; }
         public bool? WaitingUpdate { get; set; }
         public DateTime? CreationDate { get; set; }
+        public Guid Categoryid { get; set; }
 
+        public virtual Category Category { get; set; }
         public virtual City City { get; set; }
     }
 }
