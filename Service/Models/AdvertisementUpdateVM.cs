@@ -17,6 +17,6 @@ namespace BackEnd.Service.Models
         public bool? Special { get; set; }
         public DateTime? CreationDate { get; set; } = DateTime.UtcNow.AddHours(3);
 
-        public virtual CityVM City { get; set; }
+    //    public virtual CityVM City { get; set; }
     }
 }

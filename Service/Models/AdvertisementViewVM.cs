@@ -9,6 +9,6 @@ namespace BackEnd.Service.Models
         public Guid Customerid { get; set; }
         public DateTime? CreationDate { get; set; } = DateTime.UtcNow.AddHours(3);
 
-        public virtual CustomerVM Customer { get; set; }
+     //   public virtual CustomerVM Customer { get; set; }
     }
 }

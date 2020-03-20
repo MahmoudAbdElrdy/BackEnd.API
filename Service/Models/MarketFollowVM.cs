@@ -11,7 +11,7 @@ namespace BackEnd.Service.Models
         public DateTime? CreationDate { get; set; } = DateTime.UtcNow.AddHours(3);
         public int MarketCustomerId { get; set; }
 
-        public virtual CustomerVM Customer { get; set; }
-        public virtual MarketVM Market { get; set; }
+        //public virtual CustomerVM Customer { get; set; }
+        //public virtual MarketVM Market { get; set; }
     }
 }

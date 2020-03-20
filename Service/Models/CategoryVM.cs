@@ -13,7 +13,7 @@ namespace BackEnd.Service.Models
         public bool? Available { get; set; }
         public DateTime? CreationDate { get; set; }
 
-        public virtual MarketVM Market { get; set; }
-        public virtual ICollection<AdvertisementVM> Advertisement { get; set; }
+       // public virtual MarketVM Market { get; set; }
+      //  public virtual ICollection<AdvertisementVM> Advertisement { get; set; }
     }
 }

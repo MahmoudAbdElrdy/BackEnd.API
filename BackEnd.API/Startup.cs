@@ -108,6 +108,20 @@ namespace BackEnd.API
             //services.AddScoped<RoleManager<IdentityRole>, RoleManager<IdentityRole>>();
             services.AddAutoMapper(x => x.AddProfile(new DomainProfile()));
             services.AddScoped<IServicesCountry,CountryServices>().Reverse();
+            services.AddScoped<IServicesCity,CityServices>().Reverse();
+            services.AddScoped<IServicesContactUs,ContactUsServices>().Reverse();
+            services.AddScoped<IServicesAdvertisementView, AdvertisementViewServices >().Reverse();
+            services.AddScoped<IServicesAboutUs, AboutUsServices >().Reverse();
+            services.AddScoped<IServicesAdvertisement, AdvertisementServices >().Reverse();
+            services.AddScoped<IServicesAdvertisementOpen, AdvertisementOpenServices >().Reverse();
+            services.AddScoped<IServicesAdvertisementUpdate, AdvertisementUpdateServices  >().Reverse();
+            services.AddScoped<IServicesCategory, CategoryServices >().Reverse();
+            services.AddScoped<IServicesCustomer, CustomerServices >().Reverse();
+            services.AddScoped<IServicesCustomerLogin,CustomerLoginServices >().Reverse();
+            services.AddScoped<IServicesMarket,MarketServices >().Reverse();
+            services.AddScoped<IServicesMarketFollow,MarketFollowServices >().Reverse();
+            services.AddScoped<IServicesPrivacy,PrivacyServices >().Reverse();
+         //   services.AddScoped<ise,PrivacyServices >().Reverse();
             services.AddScoped<IResponseDTO,ResponseDTO>().Reverse();
             //
            // services.AddScoped<IDepartmentServices,DepartmentServices>().Reverse();

@@ -12,8 +12,8 @@ namespace BackEnd.Service.Models
         public DateTime? CreationDate { get; set; } = DateTime.UtcNow.AddHours(3);
 
         public virtual CityVM City { get; set; }
-        public virtual ICollection<AdvertisementViewVM> AdvertisementView { get; set; }
-        public virtual ICollection<CustomerLoginVM> CustomerLogin { get; set; }
-        public virtual ICollection<MarketFollowVM> MarketFollow { get; set; }
+      //  public virtual ICollection<AdvertisementViewVM> AdvertisementView { get; set; }
+       // public virtual ICollection<CustomerLoginVM> CustomerLogin { get; set; }
+       // public virtual ICollection<MarketFollowVM> MarketFollow { get; set; }
     }
 }

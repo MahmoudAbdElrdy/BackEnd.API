@@ -20,6 +20,6 @@ namespace BackEnd.Service.Models
         public bool? WaitingUpdate { get; set; }
         public DateTime? CreationDate { get; set; } = DateTime.UtcNow.AddHours(3);
 
-        public virtual CityVM City { get; set; }
+     //   public virtual CityVM City { get; set; }
     }
 }
