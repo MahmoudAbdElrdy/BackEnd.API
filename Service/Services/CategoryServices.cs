@@ -17,13 +17,15 @@ namespace BackEnd.Service.Services
     public class CategoryServices : IServicesCategory
     {
         private readonly IGRepository<Category> _CategoryRepositroy;
+        private readonly IGRepository<Advertisement> _AdvertisementRepositroy;
         private readonly IUnitOfWork<LoGooContext> _unitOfWork;
         private readonly IResponseDTO _response;
         private readonly IMapper _mapper;
-        public CategoryServices(IGRepository<Category> Category,
+        public CategoryServices(IGRepository<Category> Category,IGRepository<Advertisement> Advertisement,
             IUnitOfWork<LoGooContext> unitOfWork, IResponseDTO responseDTO, IMapper mapper)
         {
             _CategoryRepositroy = Category;
+            _AdvertisementRepositroy = Advertisement;
             _unitOfWork = unitOfWork;
             _response = responseDTO;
             _mapper = mapper;
@@ -130,13 +132,14 @@ namespace BackEnd.Service.Services
             try
             {
                 var Categorys = _CategoryRepositroy.GetAll();
-                //var ads = _CategoryRepositroy.GetAll();
+                var ads = _AdvertisementRepositroy.Get(x => x.Special == true);
                 var CategorysList = _mapper.Map<List<CategoryVM>>(Categorys);
-                //var adsList = _mapper.Map<List<adsVM>>(ads);
+                var adsList = _mapper.Map<List<AdvertisementVM>>(ads);
 
                 _response.Data = new DTO.AdsCategryDTO()
                 {
                     category = CategorysList,
+                    ads = adsList,
                 };
                 _response.IsPassed = true;
                 _response.Message = "Done";
