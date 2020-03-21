@@ -1,11 +1,16 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace BackEnd.Service.Models
+namespace BackEnd.API.Models
 {
-    public partial class MarketVM
+    public partial class Market
     {
-        public Guid MarketId { get; set; } = Guid.NewGuid();
+        public Market()
+        {
+            MarketFollow = new HashSet<MarketFollow>();
+        }
+
+        public Guid MarketId { get; set; }
         public string MarketName { get; set; }
         public int? MarketLatlng { get; set; }
         public string MarketLogo { get; set; }
@@ -17,9 +22,10 @@ namespace BackEnd.Service.Models
         public bool Plateform { get; set; }
         public Guid Cityid { get; set; }
         public string Token { get; set; }
-        public DateTime? CreationDate { get; set; } = DateTime.UtcNow.AddHours(3);
+        public DateTime? CreationDate { get; set; }
+        public bool Available { get; set; }
 
-      //  public virtual CityVM City { get; set; }
-      //  public virtual ICollection<MarketFollowVM> MarketFollow { get; set; }
+        public virtual City City { get; set; }
+        public virtual ICollection<MarketFollow> MarketFollow { get; set; }
     }
 }

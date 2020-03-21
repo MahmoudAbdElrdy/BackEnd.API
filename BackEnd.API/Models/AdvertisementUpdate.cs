@@ -1,11 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace BackEnd.Service.Models
+namespace BackEnd.API.Models
 {
-    public partial class AdvertisementUpdateVM
+    public partial class AdvertisementUpdate
     {
-        public Guid AdsUpdateId { get; set; } = Guid.NewGuid();
+        public Guid AdsUpdateId { get; set; }
         public Guid Cityid { get; set; }
         public int? AdsType { get; set; }
         public string AdsText { get; set; }
@@ -15,9 +15,10 @@ namespace BackEnd.Service.Models
         public DateTime? EndDate { get; set; }
         public bool? Available { get; set; }
         public bool? Special { get; set; }
-        public DateTime? CreationDate { get; set; } = DateTime.UtcNow.AddHours(3);
+        public DateTime? CreationDate { get; set; }
         public Guid? AdsId { get; set; }
 
-        //public virtual CityVM City { get; set; }
+        public virtual Advertisement Ads { get; set; }
+        public virtual City City { get; set; }
     }
 }
