@@ -19,11 +19,11 @@ namespace BackEnd.Service.Services
     public class CityServices : IServicesCity
     {
         private readonly IGRepository<City> _CityRepositroy;
-        private readonly IUnitOfWork<LoGooContext> _unitOfWork;
+        private readonly IUnitOfWork<DB_A56457_LookandGoContext> _unitOfWork;
         private readonly IResponseDTO _response;
         private readonly IMapper _mapper;
         public CityServices(IGRepository<City> City,
-            IUnitOfWork<LoGooContext> unitOfWork,IResponseDTO responseDTO, IMapper mapper)
+            IUnitOfWork<DB_A56457_LookandGoContext> unitOfWork,IResponseDTO responseDTO, IMapper mapper)
         {
             _CityRepositroy = City;
             _unitOfWork = unitOfWork;

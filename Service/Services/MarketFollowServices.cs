@@ -17,11 +17,11 @@ namespace BackEnd.Service.Services
     public class MarketFollowServices : IServicesMarketFollow
     {
         private readonly IGRepository<MarketFollow> _MarketFollowRepositroy;
-        private readonly IUnitOfWork<LoGooContext> _unitOfWork;
+        private readonly IUnitOfWork<DB_A56457_LookandGoContext> _unitOfWork;
         private readonly IResponseDTO _response;
         private readonly IMapper _mapper;
         public MarketFollowServices(IGRepository<MarketFollow> MarketFollow,
-            IUnitOfWork<LoGooContext> unitOfWork, IResponseDTO responseDTO, IMapper mapper)
+            IUnitOfWork<DB_A56457_LookandGoContext> unitOfWork, IResponseDTO responseDTO, IMapper mapper)
         {
             _MarketFollowRepositroy = MarketFollow;
             _unitOfWork = unitOfWork;

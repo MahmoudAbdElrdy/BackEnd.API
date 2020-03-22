@@ -57,7 +57,7 @@ namespace BackEnd.API
                  (resolver as DefaultContractResolver).NamingStrategy = null;
 
          });
-            services.AddDbContext<LoGooContext>(options =>
+            services.AddDbContext<DB_A56457_LookandGoContext>(options =>
                     options.UseLazyLoadingProxies()
                     .UseSqlServer(Configuration.GetConnectionString("DatabaseConnection")));
        
@@ -65,7 +65,7 @@ namespace BackEnd.API
     //                {
     //                    options.User.RequireUniqueEmail = false;
     //                })
-    //.AddEntityFrameworkStores<LoGooContext>()
+    //.AddEntityFrameworkStores<DB_A56457_LookandGoContext>()
     //.AddDefaultTokenProviders()
     //.AddDefaultUI();
     //        services.Configure<IdentityOptions>(options =>

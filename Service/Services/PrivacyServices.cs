@@ -17,11 +17,11 @@ namespace BackEnd.Service.Services
     public class PrivacyServices : IServicesPrivacy
     {
         private readonly IGRepository<Privacy> _PrivacyRepositroy;
-        private readonly IUnitOfWork<LoGooContext> _unitOfWork;
+        private readonly IUnitOfWork<DB_A56457_LookandGoContext> _unitOfWork;
         private readonly IResponseDTO _response;
         private readonly IMapper _mapper;
         public PrivacyServices(IGRepository<Privacy> Privacy,
-            IUnitOfWork<LoGooContext> unitOfWork, IResponseDTO responseDTO, IMapper mapper)
+            IUnitOfWork<DB_A56457_LookandGoContext> unitOfWork, IResponseDTO responseDTO, IMapper mapper)
         {
             _PrivacyRepositroy = Privacy;
             _unitOfWork = unitOfWork;

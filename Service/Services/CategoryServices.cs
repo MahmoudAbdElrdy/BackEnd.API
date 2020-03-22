@@ -18,11 +18,11 @@ namespace BackEnd.Service.Services
     {
         private readonly IGRepository<Category> _CategoryRepositroy;
         private readonly IGRepository<Advertisement> _AdvertisementRepositroy;
-        private readonly IUnitOfWork<LoGooContext> _unitOfWork;
+        private readonly IUnitOfWork<DB_A56457_LookandGoContext> _unitOfWork;
         private readonly IResponseDTO _response;
         private readonly IMapper _mapper;
         public CategoryServices(IGRepository<Category> Category,IGRepository<Advertisement> Advertisement,
-            IUnitOfWork<LoGooContext> unitOfWork, IResponseDTO responseDTO, IMapper mapper)
+            IUnitOfWork<DB_A56457_LookandGoContext> unitOfWork, IResponseDTO responseDTO, IMapper mapper)
         {
             _CategoryRepositroy = Category;
             _AdvertisementRepositroy = Advertisement;

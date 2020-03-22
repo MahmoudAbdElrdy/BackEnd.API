@@ -19,11 +19,11 @@ namespace BackEnd.Service.Services
     public class MarketServices : IServicesMarket
     {
         private readonly IGRepository<Market> _MarketRepositroy;
-        private readonly IUnitOfWork<LoGooContext> _unitOfWork;
+        private readonly IUnitOfWork<DB_A56457_LookandGoContext> _unitOfWork;
         private readonly IResponseDTO _response;
         private readonly IMapper _mapper;
         public MarketServices(IGRepository<Market> Market,
-            IUnitOfWork<LoGooContext> unitOfWork, IResponseDTO responseDTO, IMapper mapper)
+            IUnitOfWork<DB_A56457_LookandGoContext> unitOfWork, IResponseDTO responseDTO, IMapper mapper)
         {
             _MarketRepositroy = Market;
             _unitOfWork = unitOfWork;

@@ -20,7 +20,7 @@ public class GRepository<T> : IGRepository<T>
         #endregion
 
         #region Constructor
-        public GRepository(LoGooContext dbContext)
+        public GRepository(DB_A56457_LookandGoContext dbContext)
         {
             _dbContext = dbContext;
         }

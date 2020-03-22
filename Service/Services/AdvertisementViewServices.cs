@@ -17,11 +17,11 @@ namespace BackEnd.Service.Services
     public class AdvertisementViewServices : IServicesAdvertisementView
     {
         private readonly IGRepository<AdvertisementView> _AdvertisementViewRepositroy;
-        private readonly IUnitOfWork<LoGooContext> _unitOfWork;
+        private readonly IUnitOfWork<DB_A56457_LookandGoContext> _unitOfWork;
         private readonly IResponseDTO _response;
         private readonly IMapper _mapper;
         public AdvertisementViewServices(IGRepository<AdvertisementView> AdvertisementView,
-            IUnitOfWork<LoGooContext> unitOfWork, IResponseDTO responseDTO, IMapper mapper)
+            IUnitOfWork<DB_A56457_LookandGoContext> unitOfWork, IResponseDTO responseDTO, IMapper mapper)
         {
             _AdvertisementViewRepositroy = AdvertisementView;
             _unitOfWork = unitOfWork;

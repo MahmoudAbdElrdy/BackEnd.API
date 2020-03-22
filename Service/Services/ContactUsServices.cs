@@ -17,11 +17,11 @@ namespace BackEnd.Service.Services
     public class ContactUsServices : IServicesContactUs
     {
         private readonly IGRepository<ContactUs> _ContactUsRepositroy;
-        private readonly IUnitOfWork<LoGooContext> _unitOfWork;
+        private readonly IUnitOfWork<DB_A56457_LookandGoContext> _unitOfWork;
         private readonly IResponseDTO _response;
         private readonly IMapper _mapper;
         public ContactUsServices(IGRepository<ContactUs> ContactUs,
-            IUnitOfWork<LoGooContext> unitOfWork, IResponseDTO responseDTO, IMapper mapper)
+            IUnitOfWork<DB_A56457_LookandGoContext> unitOfWork, IResponseDTO responseDTO, IMapper mapper)
         {
             _ContactUsRepositroy = ContactUs;
             _unitOfWork = unitOfWork;

@@ -17,11 +17,11 @@ namespace BackEnd.Service.Services
     public class AdvertisementOpenServices : IServicesAdvertisementOpen
     {
         private readonly IGRepository<AdvertisementOpen> _AdvertisementOpenRepositroy;
-        private readonly IUnitOfWork<LoGooContext> _unitOfWork;
+        private readonly IUnitOfWork<DB_A56457_LookandGoContext> _unitOfWork;
         private readonly IResponseDTO _response;
         private readonly IMapper _mapper;
         public AdvertisementOpenServices(IGRepository<AdvertisementOpen> AdvertisementOpen,
-            IUnitOfWork<LoGooContext> unitOfWork, IResponseDTO responseDTO, IMapper mapper)
+            IUnitOfWork<DB_A56457_LookandGoContext> unitOfWork, IResponseDTO responseDTO, IMapper mapper)
         {
             _AdvertisementOpenRepositroy = AdvertisementOpen;
             _unitOfWork = unitOfWork;
