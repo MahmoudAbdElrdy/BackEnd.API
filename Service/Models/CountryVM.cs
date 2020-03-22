@@ -7,6 +7,6 @@ namespace BackEnd.Service.Models
    public class CountryVM
     {
         public string CountryName { get; set; }
-        public Guid CountryId { get; set; }
+        public Guid CountryId { get; set; } = Guid.NewGuid();
     }
 }

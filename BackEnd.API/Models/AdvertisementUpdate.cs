@@ -5,7 +5,7 @@ namespace BackEnd.API.Models
 {
     public partial class AdvertisementUpdate
     {
-        public Guid AdsId { get; set; }
+        public Guid AdsUpdateId { get; set; }
         public Guid Cityid { get; set; }
         public int? AdsType { get; set; }
         public string AdsText { get; set; }
@@ -16,7 +16,9 @@ namespace BackEnd.API.Models
         public bool? Available { get; set; }
         public bool? Special { get; set; }
         public DateTime? CreationDate { get; set; }
+        public Guid? AdsId { get; set; }
 
+        public virtual Advertisement Ads { get; set; }
         public virtual City City { get; set; }
     }
 }

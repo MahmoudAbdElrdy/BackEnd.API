@@ -5,7 +5,7 @@ namespace BackEnd.Service.Models
 {
     public partial class AboutUsVM
     {
-        public Guid AboutUsId { get; set; }
+        public Guid AboutUsId { get; set; } = Guid.NewGuid();
         public string Info { get; set; }
         public string Email { get; set; }
         public string Phone { get; set; }

@@ -7,6 +7,7 @@ namespace BackEnd.API.Models
     {
         public Customer()
         {
+            AdvertisementOpen = new HashSet<AdvertisementOpen>();
             AdvertisementView = new HashSet<AdvertisementView>();
             ContactUs = new HashSet<ContactUs>();
             CustomerLogin = new HashSet<CustomerLogin>();
@@ -20,6 +21,7 @@ namespace BackEnd.API.Models
         public DateTime? CreationDate { get; set; }
 
         public virtual City City { get; set; }
+        public virtual ICollection<AdvertisementOpen> AdvertisementOpen { get; set; }
         public virtual ICollection<AdvertisementView> AdvertisementView { get; set; }
         public virtual ICollection<ContactUs> ContactUs { get; set; }
         public virtual ICollection<CustomerLogin> CustomerLogin { get; set; }

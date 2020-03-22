@@ -5,7 +5,7 @@ namespace BackEnd.Service.Models
 {
     public partial class AdvertisementVM
     {
-        public Guid AdsId { get; set; }
+        public Guid AdsId { get; set; } = Guid.NewGuid();
         public Guid Marketid { get; set; }
         public Guid Cityid { get; set; }
         public Guid Categoryid { get; set; }
@@ -20,6 +20,6 @@ namespace BackEnd.Service.Models
         public bool? WaitingUpdate { get; set; }
         public DateTime? CreationDate { get; set; } = DateTime.UtcNow.AddHours(3);
 
-     //   public virtual CityVM City { get; set; }
+        //public virtual CityVM City { get; set; }
     }
 }

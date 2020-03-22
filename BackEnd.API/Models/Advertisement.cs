@@ -5,6 +5,13 @@ namespace BackEnd.API.Models
 {
     public partial class Advertisement
     {
+        public Advertisement()
+        {
+            AdvertisementOpen = new HashSet<AdvertisementOpen>();
+            AdvertisementUpdate = new HashSet<AdvertisementUpdate>();
+            AdvertisementView = new HashSet<AdvertisementView>();
+        }
+
         public Guid AdsId { get; set; }
         public Guid Marketid { get; set; }
         public Guid Cityid { get; set; }
@@ -22,5 +29,8 @@ namespace BackEnd.API.Models
 
         public virtual Category Category { get; set; }
         public virtual City City { get; set; }
+        public virtual ICollection<AdvertisementOpen> AdvertisementOpen { get; set; }
+        public virtual ICollection<AdvertisementUpdate> AdvertisementUpdate { get; set; }
+        public virtual ICollection<AdvertisementView> AdvertisementView { get; set; }
     }
 }

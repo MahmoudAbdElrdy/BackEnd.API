@@ -5,7 +5,7 @@ namespace BackEnd.Service.Models
 {
     public partial class MarketVM
     {
-        public Guid MarketId { get; set; }
+        public Guid MarketId { get; set; } = Guid.NewGuid();
         public string MarketName { get; set; }
         public int? MarketLatlng { get; set; }
         public string MarketLogo { get; set; }
