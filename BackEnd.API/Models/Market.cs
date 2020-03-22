@@ -20,7 +20,7 @@ namespace BackEnd.API.Models
         public string MarketPassword { get; set; }
         public string MarketInfo { get; set; }
         public bool Plateform { get; set; }
-        public Guid Cityid { get; set; }
+        public Guid CityId { get; set; }
         public string Token { get; set; }
         public DateTime? CreationDate { get; set; }
         public bool Available { get; set; }

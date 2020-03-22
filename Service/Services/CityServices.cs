@@ -102,7 +102,7 @@ namespace BackEnd.Service.Services
         {
             try
             {
-                var Citys = _CityRepositroy.Get(x => x.Countryid == Guid.Parse("fd3f74d2-f3ca-4f17-b3be-cdf6ef800f7a"));
+                var Citys = _CityRepositroy.Get(x => x.CountryId == Guid.Parse("fd3f74d2-f3ca-4f17-b3be-cdf6ef800f7a"));
                 var CitysList = _mapper.Map<List<CityVM>>(Citys);
                 _response.Data = CitysList;
                 _response.IsPassed = true;

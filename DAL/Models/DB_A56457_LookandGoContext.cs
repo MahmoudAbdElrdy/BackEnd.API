@@ -34,7 +34,7 @@ namespace BackEnd.DAL.Models
         {
             if (!optionsBuilder.IsConfigured)
             {
-#warning To protect potentially sensitive information in your connection string, you should move it out of source code. See http://go.microsoft.com/fwlink/?LinkId=723263 for guidance on storing connection strings.
+#warning To protect potentially sensitive information in your connection string, you should move it out of source code. See http://go.microsoft.com/fwlink/?LinkId=723263 for guIdance on storing connection strings.
                 optionsBuilder.UseSqlServer("Server=SQL5052.site4now.net;Database=DB_A56457_LookandGo;User Id=DB_A56457_LookandGo_admin;Password=Ta056178;");
             }
         }
@@ -45,24 +45,24 @@ namespace BackEnd.DAL.Models
 
             modelBuilder.Entity<AboutUs>(entity =>
             {
-                entity.ToTable("about_us");
+                entity.ToTable("AboutUs");
 
                 entity.Property(e => e.AboutUsId)
-                    .HasColumnName("about_us_id")
+                    .HasColumnName("AboutUsId")
                     .ValueGeneratedNever();
 
                 entity.Property(e => e.CreationDate)
-                    .HasColumnName("creation_date")
+                    .HasColumnName("CreationDate")
                     .HasColumnType("datetime");
 
                 entity.Property(e => e.Email)
-                    .HasColumnName("email")
+                    .HasColumnName("Email")
                     .HasMaxLength(50);
 
-                entity.Property(e => e.Info).HasColumnName("info");
+                entity.Property(e => e.Info).HasColumnName("Info");
 
                 entity.Property(e => e.Phone)
-                    .HasColumnName("phone")
+                    .HasColumnName("Phone")
                     .HasMaxLength(50);
             });
 
@@ -70,51 +70,51 @@ namespace BackEnd.DAL.Models
             {
                 entity.HasKey(e => e.AdsId);
 
-                entity.ToTable("advertisement");
+                entity.ToTable("Advertisement");
 
                 entity.Property(e => e.AdsId)
-                    .HasColumnName("ads_id")
+                    .HasColumnName("AdsId")
                     .ValueGeneratedNever();
 
-                entity.Property(e => e.AdsImage).HasColumnName("ads_image");
+                entity.Property(e => e.AdsImage).HasColumnName("AdsImage");
 
-                entity.Property(e => e.AdsText).HasColumnName("ads_text");
+                entity.Property(e => e.AdsText).HasColumnName("AdsText");
 
-                entity.Property(e => e.AdsType).HasColumnName("ads_type");
+                entity.Property(e => e.AdsType).HasColumnName("AdsType");
 
-                entity.Property(e => e.AdsVideo).HasColumnName("ads_video");
+                entity.Property(e => e.AdsVideo).HasColumnName("AdsVideo");
 
-                entity.Property(e => e.Available).HasColumnName("available");
+                entity.Property(e => e.Available).HasColumnName("Available");
 
-                entity.Property(e => e.Categoryid).HasColumnName("categoryid");
+                entity.Property(e => e.CategoryId).HasColumnName("CategoryId");
 
-                entity.Property(e => e.Cityid).HasColumnName("cityid");
+                entity.Property(e => e.CityId).HasColumnName("CityId");
 
                 entity.Property(e => e.CreationDate)
-                    .HasColumnName("creation_date")
+                    .HasColumnName("CreationDate")
                     .HasColumnType("datetime");
 
                 entity.Property(e => e.EndDate)
-                    .HasColumnName("end_date")
+                    .HasColumnName("EndDate")
                     .HasColumnType("datetime");
 
-                entity.Property(e => e.Marketid).HasColumnName("marketid");
+                entity.Property(e => e.MarketId).HasColumnName("MarketId");
 
                 entity.Property(e => e.StartDate)
-                    .HasColumnName("start_date")
+                    .HasColumnName("StartDate")
                     .HasColumnType("datetime");
 
-                entity.Property(e => e.WaitingUpdate).HasColumnName("waiting_update");
+                entity.Property(e => e.WaitingUpdate).HasColumnName("WaitingUpdate");
 
                 entity.HasOne(d => d.Category)
                     .WithMany(p => p.Advertisement)
-                    .HasForeignKey(d => d.Categoryid)
+                    .HasForeignKey(d => d.CategoryId)
                     .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("FK_advertisement_category");
 
                 entity.HasOne(d => d.City)
                     .WithMany(p => p.Advertisement)
-                    .HasForeignKey(d => d.Cityid)
+                    .HasForeignKey(d => d.CityId)
                     .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("FK_advertisement_city");
             });
@@ -123,56 +123,56 @@ namespace BackEnd.DAL.Models
             {
                 entity.HasKey(e => e.AdsId);
 
-                entity.ToTable("advertisement_open");
+                entity.ToTable("AdvertisementOpen");
 
                 entity.Property(e => e.AdsId)
-                    .HasColumnName("ads_id")
+                    .HasColumnName("AdsId")
                     .ValueGeneratedNever();
 
                 entity.Property(e => e.CreationDate)
-                    .HasColumnName("creation_date")
+                    .HasColumnName("CreationDate")
                     .HasColumnType("datetime");
 
-                entity.Property(e => e.Customerid).HasColumnName("customerid");
+                entity.Property(e => e.CustomerId).HasColumnName("CustomerId");
             });
 
             modelBuilder.Entity<AdvertisementUpdate>(entity =>
             {
                 entity.HasKey(e => e.AdsId);
 
-                entity.ToTable("advertisement_update");
+                entity.ToTable("AdvertisementUpdate");
 
                 entity.Property(e => e.AdsId)
-                    .HasColumnName("ads_id")
+                    .HasColumnName("AdsId")
                     .ValueGeneratedNever();
 
-                entity.Property(e => e.AdsImage).HasColumnName("ads_image");
+                entity.Property(e => e.AdsImage).HasColumnName("AdsImage");
 
-                entity.Property(e => e.AdsText).HasColumnName("ads_text");
+                entity.Property(e => e.AdsText).HasColumnName("AdsText");
 
-                entity.Property(e => e.AdsType).HasColumnName("ads_type");
+                entity.Property(e => e.AdsType).HasColumnName("AdsType");
 
-                entity.Property(e => e.AdsVideo).HasColumnName("ads_video");
+                entity.Property(e => e.AdsVideo).HasColumnName("AdsVideo");
 
-                entity.Property(e => e.Available).HasColumnName("available");
+                entity.Property(e => e.Available).HasColumnName("Available");
 
-                entity.Property(e => e.Cityid).HasColumnName("cityid");
+                entity.Property(e => e.CityId).HasColumnName("CityId");
 
                 entity.Property(e => e.CreationDate)
-                    .HasColumnName("creation_date")
+                    .HasColumnName("CreationDate")
                     .HasColumnType("datetime");
 
                 entity.Property(e => e.EndDate)
-                    .HasColumnName("end_date")
+                    .HasColumnName("EndDate")
                     .HasColumnType("datetime");
 
                 entity.Property(e => e.StartDate)
-                    .HasColumnName("start_date")
+                    .HasColumnName("StartDate")
                     .HasColumnType("datetime");
 
                 entity.HasOne(d => d.City)
                     .WithMany(p => p.AdvertisementUpdate)
-                    .HasForeignKey(d => d.Cityid)
+                    .HasForeignKey(d => d.CityId)
                     .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("FK_advertisement_update_city");
             });
@@ -181,148 +181,141 @@ namespace BackEnd.DAL.Models
             {
                 entity.HasKey(e => e.AdsId);
 
-                entity.ToTable("advertisement_View");
+                entity.ToTable("AdvertisementView");
 
                 entity.Property(e => e.AdsId)
-                    .HasColumnName("ads_id")
+                    .HasColumnName("AdsId")
                     .ValueGeneratedNever();
 
                 entity.Property(e => e.CreationDate)
-                    .HasColumnName("creation_date")
+                    .HasColumnName("CreationDate")
                     .HasColumnType("datetime");
 
-                entity.Property(e => e.Customerid).HasColumnName("customerid");
+                entity.Property(e => e.CustomerId).HasColumnName("CustomerId");
 
                 entity.HasOne(d => d.Customer)
                     .WithMany(p => p.AdvertisementView)
-                    .HasForeignKey(d => d.Customerid)
+                    .HasForeignKey(d => d.CustomerId)
                     .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("FK_advertisement_View_customer");
             });
 
             modelBuilder.Entity<Category>(entity =>
             {
-                entity.ToTable("category");
+                entity.ToTable("Category");
 
                 entity.Property(e => e.CategoryId)
-                    .HasColumnName("category_id")
+                    .HasColumnName("CategoryId")
                     .ValueGeneratedNever();
 
-                entity.Property(e => e.Available).HasColumnName("available");
+                entity.Property(e => e.Available).HasColumnName("Available");
 
-                entity.Property(e => e.CategoryImage).HasColumnName("category_image");
+                entity.Property(e => e.CategoryImage).HasColumnName("CategoryImage");
 
                 entity.Property(e => e.CategoryName)
-                    .HasColumnName("category_name")
+                    .HasColumnName("CategoryName")
                     .HasMaxLength(50);
 
                 entity.Property(e => e.CreationDate)
-                    .HasColumnName("creation_date")
+                    .HasColumnName("CreationDate")
                     .HasColumnType("datetime");
 
-                entity.Property(e => e.MarketId).HasColumnName("market_id");
-
-                entity.HasOne(d => d.Market)
-                    .WithMany(p => p.Category)
-                    .HasForeignKey(d => d.MarketId)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK_category_market");
             });
 
             modelBuilder.Entity<City>(entity =>
             {
-                entity.ToTable("city");
+                entity.ToTable("City");
 
                 entity.Property(e => e.CityId)
-                    .HasColumnName("city_id")
+                    .HasColumnName("CityId")
                     .ValueGeneratedNever();
 
                 entity.Property(e => e.CityName)
-                    .HasColumnName("city_name")
+                    .HasColumnName("CityName")
                     .HasMaxLength(50);
 
-                entity.Property(e => e.Countryid).HasColumnName("countryid");
+                entity.Property(e => e.CountryId).HasColumnName("CountryId");
 
                 entity.HasOne(d => d.Country)
                     .WithMany(p => p.City)
-                    .HasForeignKey(d => d.Countryid)
+                    .HasForeignKey(d => d.CountryId)
                     .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("FK_city_country");
             });
 
             modelBuilder.Entity<ContactUs>(entity =>
             {
-                entity.ToTable("contact_us");
+                entity.ToTable("ContactUs");
 
                 entity.Property(e => e.ContactUsId)
-                    .HasColumnName("contact_us_id")
+                    .HasColumnName("ContactUsId")
                     .ValueGeneratedNever();
 
                 entity.Property(e => e.CreationDate)
-                    .HasColumnName("creation_date")
+                    .HasColumnName("CreationDate")
                     .HasColumnType("datetime");
 
-                entity.Property(e => e.Customerid).HasColumnName("customerid");
+                entity.Property(e => e.CustomerId).HasColumnName("CustomerId");
 
                 entity.Property(e => e.Email)
-                    .HasColumnName("email")
+                    .HasColumnName("Email")
                     .HasMaxLength(50);
 
                 entity.Property(e => e.Name)
-                    .HasColumnName("name")
+                    .HasColumnName("Name")
                     .HasMaxLength(50);
 
                 entity.Property(e => e.Phone)
-                    .HasColumnName("phone")
+                    .HasColumnName("Phone")
                     .HasMaxLength(50);
 
-                entity.Property(e => e.Plateform).HasColumnName("plateform");
+                entity.Property(e => e.Plateform).HasColumnName("Plateform");
 
-                entity.Property(e => e.Solver).HasColumnName("solver");
+                entity.Property(e => e.Solver).HasColumnName("Solver");
 
                 entity.Property(e => e.Title)
-                    .HasColumnName("title")
+                    .HasColumnName("Title")
                     .HasMaxLength(50);
 
                 entity.HasOne(d => d.Customer)
                     .WithMany(p => p.ContactUs)
-                    .HasForeignKey(d => d.Customerid)
+                    .HasForeignKey(d => d.CustomerId)
                     .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("FK_contact_us_customer");
             });
 
             modelBuilder.Entity<Country>(entity =>
             {
-                entity.ToTable("country");
+                entity.ToTable("Country");
 
                 entity.Property(e => e.CountryId)
-                    .HasColumnName("country_id")
+                    .HasColumnName("CountryId")
                     .ValueGeneratedNever();
 
-                entity.Property(e => e.CountryName).HasColumnName("country_name");
+                entity.Property(e => e.CountryName).HasColumnName("CountryName");
             });
 
             modelBuilder.Entity<Customer>(entity =>
             {
-                entity.ToTable("customer");
+                entity.ToTable("Customer");
 
                 entity.Property(e => e.CustomerId)
-                    .HasColumnName("customer_id")
+                    .HasColumnName("CustomerId")
                     .ValueGeneratedNever();
 
-                entity.Property(e => e.Cityid).HasColumnName("cityid");
+                entity.Property(e => e.CityId).HasColumnName("CityId");
 
                 entity.Property(e => e.CreationDate)
-                    .HasColumnName("creation_date")
+                    .HasColumnName("CreationDate")
                     .HasColumnType("datetime");
 
-                entity.Property(e => e.Plateform).HasColumnName("plateform");
+                entity.Property(e => e.Plateform).HasColumnName("Plateform");
 
-                entity.Property(e => e.Token).HasColumnName("token");
+                entity.Property(e => e.Token).HasColumnName("Token");
 
                 entity.HasOne(d => d.City)
                     .WithMany(p => p.Customer)
-                    .HasForeignKey(d => d.Cityid)
+                    .HasForeignKey(d => d.CityId)
                     .HasConstraintName("FK_customer_city");
             });
 
@@ -330,73 +323,73 @@ namespace BackEnd.DAL.Models
             {
                 entity.HasKey(e => e.LoginId);
 
-                entity.ToTable("customer_login");
+                entity.ToTable("CustomerLogin");
 
                 entity.Property(e => e.LoginId)
-                    .HasColumnName("login_id")
+                    .HasColumnName("LoginId")
                     .ValueGeneratedNever();
 
-                entity.Property(e => e.Customerid).HasColumnName("customerid");
+                entity.Property(e => e.CustomerId).HasColumnName("CustomerId");
 
                 entity.Property(e => e.LoginDate)
-                    .HasColumnName("login_date")
+                    .HasColumnName("LoginDate")
                     .HasColumnType("datetime");
 
                 entity.HasOne(d => d.Customer)
                     .WithMany(p => p.CustomerLogin)
-                    .HasForeignKey(d => d.Customerid)
+                    .HasForeignKey(d => d.CustomerId)
                     .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("FK_customer_login_customer");
             });
 
             modelBuilder.Entity<Market>(entity =>
             {
-                entity.ToTable("market");
+                entity.ToTable("Market");
 
                 entity.Property(e => e.MarketId)
-                    .HasColumnName("market_id")
+                    .HasColumnName("MarketId")
                     .ValueGeneratedNever();
 
-                entity.Property(e => e.Available).HasColumnName("available");
+                entity.Property(e => e.Available).HasColumnName("Available");
 
-                entity.Property(e => e.Cityid).HasColumnName("cityid");
+                entity.Property(e => e.CityId).HasColumnName("CityId");
 
                 entity.Property(e => e.CreationDate)
-                    .HasColumnName("creation_date")
+                    .HasColumnName("CreationDate")
                     .HasColumnType("datetime");
 
-                entity.Property(e => e.MarketAddress).HasColumnName("market_address");
+                entity.Property(e => e.MarketAddress).HasColumnName("MarketAddress");
 
                 entity.Property(e => e.MarketEmail)
-                    .HasColumnName("market_email")
+                    .HasColumnName("MarketEmail")
                     .HasMaxLength(50);
 
-                entity.Property(e => e.MarketInfo).HasColumnName("market_info");
+                entity.Property(e => e.MarketInfo).HasColumnName("MarketInfo");
 
-                entity.Property(e => e.MarketLatlng).HasColumnName("market_latlng");
+                entity.Property(e => e.MarketLatlng).HasColumnName("MarketLatlng");
 
-                entity.Property(e => e.MarketLogo).HasColumnName("market_logo");
+                entity.Property(e => e.MarketLogo).HasColumnName("MarketLogo");
 
                 entity.Property(e => e.MarketName)
-                    .HasColumnName("market_name")
+                    .HasColumnName("MarketName")
                     .HasMaxLength(50);
 
                 entity.Property(e => e.MarketPassword)
-                    .HasColumnName("market_password")
+                    .HasColumnName("MarketPassword")
                     .HasMaxLength(50);
 
                 entity.Property(e => e.MarketPhone)
                     .IsRequired()
-                    .HasColumnName("market_phone")
+                    .HasColumnName("MarketPhone")
                     .HasMaxLength(50);
 
-                entity.Property(e => e.Plateform).HasColumnName("plateform");
+                entity.Property(e => e.Plateform).HasColumnName("Plateform");
 
-                entity.Property(e => e.Token).HasColumnName("token");
+                entity.Property(e => e.Token).HasColumnName("Token");
 
                 entity.HasOne(d => d.City)
                     .WithMany(p => p.Market)
-                    .HasForeignKey(d => d.Cityid)
+                    .HasForeignKey(d => d.CityId)
                     .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("FK_market_city");
             });
@@ -405,45 +398,45 @@ namespace BackEnd.DAL.Models
             {
                 entity.HasKey(e => e.MarketCustomerId);
 
-                entity.ToTable("market_follow");
+                entity.ToTable("MarketFollow");
 
                 entity.Property(e => e.MarketCustomerId).ValueGeneratedNever();
 
                 entity.Property(e => e.CreationDate)
-                    .HasColumnName("creation_date")
+                    .HasColumnName("CreationDate")
                     .HasColumnType("datetime");
 
-                entity.Property(e => e.Customerid).HasColumnName("customerid");
+                entity.Property(e => e.CustomerId).HasColumnName("CustomerId");
 
-                entity.Property(e => e.Follow).HasColumnName("follow");
+                entity.Property(e => e.Follow).HasColumnName("Follow");
 
-                entity.Property(e => e.Marketid).HasColumnName("marketid");
+                entity.Property(e => e.MarketId).HasColumnName("MarketId");
 
                 entity.HasOne(d => d.Customer)
                     .WithMany(p => p.MarketFollow)
-                    .HasForeignKey(d => d.Customerid)
+                    .HasForeignKey(d => d.CustomerId)
                     .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("FK_market_follow_customer");
 
                 entity.HasOne(d => d.Market)
                     .WithMany(p => p.MarketFollow)
-                    .HasForeignKey(d => d.Marketid)
+                    .HasForeignKey(d => d.MarketId)
                     .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("FK_market_follow_market");
             });
 
             modelBuilder.Entity<Privacy>(entity =>
             {
-                entity.ToTable("privacy");
+                entity.ToTable("Privacy");
 
                 entity.Property(e => e.PrivacyId)
-                    .HasColumnName("privacy_id")
+                    .HasColumnName("PrivacyId")
                     .ValueGeneratedNever();
 
-                entity.Property(e => e.Content).HasColumnName("content");
+                entity.Property(e => e.Content).HasColumnName("Content");
 
                 entity.Property(e => e.CreationDate)
-                    .HasColumnName("creation_date")
+                    .HasColumnName("CreationDate")
                     .HasColumnType("datetime");
             });
         }

@@ -178,7 +178,7 @@ namespace BackEnd.Service.Services
         {
             try
             {
-                var currentFollow = _MarketFollowRepositroy.GetFirst(x => x.Customerid == model.Customerid && x.Marketid == model.Marketid);
+                var currentFollow = _MarketFollowRepositroy.GetFirst(x => x.CustomerId == model.Customerid && x.MarketId == model.Marketid);
                 if (currentFollow != null) 
                 {
                     currentFollow.Follow = model.Follow;

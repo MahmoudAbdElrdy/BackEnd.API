@@ -10,11 +10,11 @@ namespace BackEnd.API.Models
             Advertisement = new HashSet<Advertisement>();
         }
 
-        public Guid Categoryid { get; set; }
-        public string Categoryimage { get; set; }
-        public string Categoryname { get; set; }
+        public Guid CategoryId { get; set; }
+        public string CategoryImage { get; set; }
+        public string CategoryName { get; set; }
         public bool? Available { get; set; }
-        public DateTime? Creationdate { get; set; }
+        public DateTime? CreationDate { get; set; }
 
         public virtual ICollection<Advertisement> Advertisement { get; set; }
     }

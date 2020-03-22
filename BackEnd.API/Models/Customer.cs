@@ -17,7 +17,7 @@ namespace BackEnd.API.Models
         public Guid CustomerId { get; set; }
         public bool? Plateform { get; set; }
         public string Token { get; set; }
-        public Guid? Cityid { get; set; }
+        public Guid? CityId { get; set; }
         public DateTime? CreationDate { get; set; }
 
         public virtual City City { get; set; }

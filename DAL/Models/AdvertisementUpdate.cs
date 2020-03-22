@@ -6,7 +6,7 @@ namespace BackEnd.DAL.Models
     public partial class AdvertisementUpdate
     {
         public Guid AdsId { get; set; }
-        public Guid Cityid { get; set; }
+        public Guid CityId { get; set; }
         public int? AdsType { get; set; }
         public string AdsText { get; set; }
         public string AdsImage { get; set; }

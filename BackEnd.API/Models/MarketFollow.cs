@@ -6,8 +6,8 @@ namespace BackEnd.API.Models
     public partial class MarketFollow
     {
         public Guid MarketCustomerId { get; set; }
-        public Guid Marketid { get; set; }
-        public Guid Customerid { get; set; }
+        public Guid MarketId { get; set; }
+        public Guid CustomerId { get; set; }
         public bool Follow { get; set; }
         public DateTime? CreationDate { get; set; }
 

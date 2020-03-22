@@ -13,7 +13,7 @@ namespace BackEnd.API.Models
         public bool? Plateform { get; set; }
         public string Phone { get; set; }
         public DateTime? CreationDate { get; set; }
-        public Guid Customerid { get; set; }
+        public Guid CustomerId { get; set; }
         public string Message { get; set; }
 
         public virtual Customer Customer { get; set; }

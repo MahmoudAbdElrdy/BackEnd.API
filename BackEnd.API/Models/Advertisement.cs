@@ -13,8 +13,8 @@ namespace BackEnd.API.Models
         }
 
         public Guid AdsId { get; set; }
-        public Guid Marketid { get; set; }
-        public Guid Cityid { get; set; }
+        public Guid MarketId { get; set; }
+        public Guid CityId { get; set; }
         public int? AdsType { get; set; }
         public string AdsText { get; set; }
         public string AdsImage { get; set; }
@@ -25,7 +25,7 @@ namespace BackEnd.API.Models
         public bool? Special { get; set; }
         public bool? WaitingUpdate { get; set; }
         public DateTime? CreationDate { get; set; }
-        public Guid Categoryid { get; set; }
+        public Guid CategoryId { get; set; }
 
         public virtual Category Category { get; set; }
         public virtual City City { get; set; }

@@ -98,7 +98,7 @@ namespace BackEnd.Service.Services
         {
             try
             {
-                var Advertisements = _AdvertisementRepositroy.Get(x => x.Categoryid == categoryId && x.Cityid == cityId);
+                var Advertisements = _AdvertisementRepositroy.Get(x => x.CategoryId == categoryId && x.CityId == cityId);
 
 
                 var AdvertisementsList = _mapper.Map<List<AdvertisementVM>>(Advertisements);
@@ -119,7 +119,7 @@ namespace BackEnd.Service.Services
         {
             try
             {
-                var Advertisements = _AdvertisementRepositroy.Get(x => x.Marketid == marketId);
+                var Advertisements = _AdvertisementRepositroy.Get(x => x.MarketId == marketId);
 
                 var AdvertisementsList = _mapper.Map<List<AdvertisementVM>>(Advertisements);
                 _response.Data = AdvertisementsList;
@@ -139,7 +139,7 @@ namespace BackEnd.Service.Services
         {
             try
             {
-                var Advertisements = _AdvertisementRepositroy.Get(x => x.Cityid == cityId);
+                var Advertisements = _AdvertisementRepositroy.Get(x => x.CityId == cityId);
 
 
                 var AdvertisementsList = _mapper.Map<List<AdvertisementVM>>(Advertisements);
