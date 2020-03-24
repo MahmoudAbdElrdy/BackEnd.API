@@ -6,7 +6,7 @@ namespace BackEnd.Service.Models
     public partial class AdvertisementUpdateVM
     {
         public Guid AdsUpdateId { get; set; } = Guid.NewGuid();
-        public Guid Cityid { get; set; }
+        public Guid CityId { get; set; }
         public int? AdsType { get; set; }
         public string AdsText { get; set; }
         public string AdsImage { get; set; }

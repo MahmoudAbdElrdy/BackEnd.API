@@ -271,7 +271,7 @@ namespace BackEnd.DAL.Models
 
                 entity.Property(e => e.Plateform).HasColumnName("Plateform");
 
-                entity.Property(e => e.Solver).HasColumnName("Solver");
+                entity.Property(e => e.Solved).HasColumnName("Solved");
 
                 entity.Property(e => e.Title)
                     .HasColumnName("Title")

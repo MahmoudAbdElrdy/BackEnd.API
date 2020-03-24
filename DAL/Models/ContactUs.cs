@@ -9,7 +9,7 @@ namespace BackEnd.DAL.Models
         public string Name { get; set; }
         public string Title { get; set; }
         public string Email { get; set; }
-        public bool? Solver { get; set; }
+        public bool? Solved { get; set; }
         public bool? Plateform { get; set; }
         public string Phone { get; set; }
         public DateTime? CreationDate { get; set; }

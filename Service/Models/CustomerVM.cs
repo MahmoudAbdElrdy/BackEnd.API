@@ -8,7 +8,7 @@ namespace BackEnd.Service.Models
         public Guid CustomerId { get; set; } = Guid.NewGuid();
         public bool? Plateform { get; set; }
         public string Token { get; set; }
-        public Guid? Cityid { get; set; }
+        public Guid? CityId { get; set; }
         public DateTime? CreationDate { get; set; } = DateTime.UtcNow.AddHours(3);
 
         //public virtual CityVM City { get; set; }

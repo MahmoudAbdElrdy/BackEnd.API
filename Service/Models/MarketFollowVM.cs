@@ -6,8 +6,8 @@ namespace BackEnd.Service.Models
     public partial class MarketFollowVM
     {
         public Guid MarketCustomerId { get; set; } = Guid.NewGuid();
-        public Guid Marketid { get; set; }
-        public Guid Customerid { get; set; }
+        public Guid MarketId { get; set; }
+        public Guid CustomerId { get; set; }
         public bool Follow { get; set; }
         public DateTime? CreationDate { get; set; } = DateTime.UtcNow.AddHours(3);
 

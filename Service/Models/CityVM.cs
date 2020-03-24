@@ -8,7 +8,7 @@ namespace BackEnd.Service.Models
 
         public Guid CityId { get; set; } = Guid.NewGuid();
         public string CityName { get; set; }
-        public Guid Countryid { get; set; }
+        public Guid CountryId { get; set; }
 
         //public virtual CountryVM Country { get; set; }
     }
