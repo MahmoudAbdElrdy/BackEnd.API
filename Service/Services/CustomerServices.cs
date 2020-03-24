@@ -143,7 +143,7 @@ namespace BackEnd.Service.Services
                 var customer = new CustomerVM()
                 {
                     CustomerId = Guid.NewGuid(),
-                    Cityid = model.Cityid,
+                    CityId = model.Cityid,
                     CreationDate = DateTime.UtcNow.AddHours(3),
                     Token = model.Token,
                     Plateform = model.Plateform,

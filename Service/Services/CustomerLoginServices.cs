@@ -182,7 +182,7 @@ namespace BackEnd.Service.Services
                 var customerLogin = new CustomerLoginVM()
                 {
                     LoginId = Guid.NewGuid(),
-                    Customerid = customer_id,
+                    CustomerId = customer_id,
                     LoginDate = DateTime.UtcNow.AddHours(3),                    
                 };
                 var DbCustomerLogin = _mapper.Map<CustomerLogin>(customerLogin);

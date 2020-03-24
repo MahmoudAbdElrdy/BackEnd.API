@@ -190,9 +190,9 @@ namespace BackEnd.Service.Services
                     {
                         //MarketCustomerId = Guid.NewGuid(),
                         CreationDate = DateTime.UtcNow.AddHours(3),
-                        Marketid = model.Marketid,
+                        MarketId = model.Marketid,
                         Follow = model.Follow,
-                        Customerid = model.Customerid,
+                        CustomerId = model.Customerid,
                     };
                     var DbMarketFollow = _mapper.Map<MarketFollow>(model);
 
