@@ -2,7 +2,7 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata;
 
-namespace BackEnd.DAL.Models
+namespace BackEnd.API.Models
 {
     public partial class DB_A56457_LookandGoContext : DbContext
     {
@@ -239,11 +239,6 @@ namespace BackEnd.DAL.Models
                 entity.Property(e => e.CreationDate).HasColumnType("datetime");
 
                 entity.Property(e => e.MarketEmail).HasMaxLength(50);
-
-                entity.Property(e => e.MarketLatlng)
-                    .IsRequired()
-                    .HasMaxLength(50)
-                    .HasDefaultValueSql("('')");
 
                 entity.Property(e => e.MarketName).HasMaxLength(50);
 

@@ -101,16 +101,36 @@ namespace BackEnd.API.Controllers
             return depart;
         }
         #endregion
+
+        #region Post: api/Upload/UploadAdvertisement
         [HttpPost]
         //[Consumes("multipart/form-data")]
         [Route("~/api/Upload/UploadAdvertisement")]
         public IActionResult Upload()
         {
-
-            var xx = UploadHelper.SaveFile(Request.Form.Files[0],"media");
-            //string path = xx[0];
-            return Ok(xx);
-
+            ResponseDTO res;
+            try
+            {
+                var xx = UploadHelper.SaveFile(Request.Form.Files[0], "media");
+                //string path = xx[0];
+                res = new ResponseDTO()
+                {
+                    IsPassed = true,
+                    Message = "",
+                    Data = xx,
+                };
+            }
+            catch (Exception ex)
+            {
+                res = new ResponseDTO()
+                {
+                    IsPassed = false,
+                    Message = "Error " + ex.Message,
+                    Data = null,
+                };
+            }
+            return Ok(res);
         }
+        #endregion
     }
 }

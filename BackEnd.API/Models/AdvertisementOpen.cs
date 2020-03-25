@@ -1,11 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace BackEnd.DAL.Models
+namespace BackEnd.API.Models
 {
-    public partial class AdvertisementView
+    public partial class AdvertisementOpen
     {
-        public Guid AdsViewId { get; set; }
+        public Guid AdsOpenId { get; set; }
         public Guid CustomerId { get; set; }
         public DateTime? CreationDate { get; set; }
         public Guid? AdsId { get; set; }

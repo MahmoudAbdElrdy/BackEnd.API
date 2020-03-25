@@ -163,12 +163,12 @@ namespace BackEnd.Service.Services
                 else
                 {
                     model.Token = marketlogin.Token;
-                    var DbMarket = _mapper.Map<Market>(model);
-                    var entityEntry = _MarketRepositroy.Update(DbMarket);
+                    var entityEntry = _MarketRepositroy.Update(model);
                     int save = _unitOfWork.Commit();
+                    var DbMarket = _mapper.Map<MarketVM>(model);
                     if (save == 200)
                     {
-                        _response.Data = model;
+                        _response.Data = DbMarket;
                         _response.IsPassed = true;
                         _response.Message = "Ok";
                     }

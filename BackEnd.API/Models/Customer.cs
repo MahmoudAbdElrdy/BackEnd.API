@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace BackEnd.DAL.Models
+namespace BackEnd.API.Models
 {
     public partial class Customer
     {
