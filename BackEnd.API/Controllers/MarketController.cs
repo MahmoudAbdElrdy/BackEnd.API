@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using BackEnd.API.Hlper;
 using BackEnd.Service.IServices;
 using BackEnd.Service.Models;
 using Microsoft.AspNetCore.Http;
@@ -28,6 +29,16 @@ namespace BackEnd.API.Controllers
         {
             var depart = _MarketServices.PostMarket(MarketVM);
             return depart;
+        }
+        [HttpPost]
+        //[Consumes("multipart/form-data")]
+        [Route("~/api/Upload/UploadMarketLog")]
+        public IActionResult Upload()
+        {
+            var xx = UploadHelper.SaveFile(Request.Form.Files[0], "logo");
+            //string path = xx[0];
+            return Ok(xx);
+
         }
         #endregion
 
