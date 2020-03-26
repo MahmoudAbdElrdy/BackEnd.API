@@ -16,6 +16,7 @@ namespace BackEnd.DAL.Models
         }
 
         public virtual DbSet<AboutUs> AboutUs { get; set; }
+        public virtual DbSet<AdminUsers> AdminUsers { get; set; }
         public virtual DbSet<Advertisement> Advertisement { get; set; }
         public virtual DbSet<AdvertisementOpen> AdvertisementOpen { get; set; }
         public virtual DbSet<AdvertisementUpdate> AdvertisementUpdate { get; set; }
@@ -23,6 +24,7 @@ namespace BackEnd.DAL.Models
         public virtual DbSet<Category> Category { get; set; }
         public virtual DbSet<City> City { get; set; }
         public virtual DbSet<ContactUs> ContactUs { get; set; }
+        public virtual DbSet<ContactUsMarket> ContactUsMarket { get; set; }
         public virtual DbSet<Country> Country { get; set; }
         public virtual DbSet<Customer> Customer { get; set; }
         public virtual DbSet<CustomerLogin> CustomerLogin { get; set; }
@@ -47,11 +49,36 @@ namespace BackEnd.DAL.Models
             {
                 entity.Property(e => e.AboutUsId).ValueGeneratedNever();
 
-                entity.Property(e => e.CreationDate).HasColumnType("datetime");
+                entity.Property(e => e.CreationDate)
+                    .HasColumnType("datetime")
+                    .HasDefaultValueSql("(dateadd(hour,(3),getutcdate()))");
 
-                entity.Property(e => e.Email).HasMaxLength(50);
+                entity.Property(e => e.Email)
+                    .HasMaxLength(50)
+                    .HasDefaultValueSql("('')");
 
-                entity.Property(e => e.Phone).HasMaxLength(50);
+                entity.Property(e => e.Info).HasDefaultValueSql("('')");
+
+                entity.Property(e => e.Phone)
+                    .HasMaxLength(50)
+                    .HasDefaultValueSql("('')");
+            });
+
+            modelBuilder.Entity<AdminUsers>(entity =>
+            {
+                entity.HasKey(e => e.UserId);
+
+                entity.Property(e => e.UserId).ValueGeneratedNever();
+
+                entity.Property(e => e.Available)
+                    .IsRequired()
+                    .HasDefaultValueSql("((1))");
+
+                entity.Property(e => e.Password).IsRequired();
+
+                entity.Property(e => e.UserName)
+                    .IsRequired()
+                    .HasDefaultValueSql("('')");
             });
 
             modelBuilder.Entity<Advertisement>(entity =>
@@ -61,11 +88,27 @@ namespace BackEnd.DAL.Models
 
                 entity.Property(e => e.AdsId).ValueGeneratedNever();
 
-                entity.Property(e => e.CreationDate).HasColumnType("datetime");
+                entity.Property(e => e.AdsImage).HasDefaultValueSql("('')");
+
+                entity.Property(e => e.AdsText).HasDefaultValueSql("('')");
+
+                entity.Property(e => e.AdsType).HasDefaultValueSql("((0))");
+
+                entity.Property(e => e.AdsVideo).HasDefaultValueSql("('')");
+
+                entity.Property(e => e.Available).HasDefaultValueSql("((0))");
+
+                entity.Property(e => e.CreationDate)
+                    .HasColumnType("datetime")
+                    .HasDefaultValueSql("(dateadd(hour,(3),getutcdate()))");
 
                 entity.Property(e => e.EndDate).HasColumnType("datetime");
 
+                entity.Property(e => e.Special).HasDefaultValueSql("((0))");
+
                 entity.Property(e => e.StartDate).HasColumnType("datetime");
+
+                entity.Property(e => e.WaitingUpdate).HasDefaultValueSql("((0))");
 
                 entity.HasOne(d => d.Category)
                     .WithMany(p => p.Advertisement)
@@ -87,7 +130,9 @@ namespace BackEnd.DAL.Models
 
                 entity.Property(e => e.AdsOpenId).ValueGeneratedNever();
 
-                entity.Property(e => e.CreationDate).HasColumnType("datetime");
+                entity.Property(e => e.CreationDate)
+                    .HasColumnType("datetime")
+                    .HasDefaultValueSql("(dateadd(hour,(3),getutcdate()))");
 
                 entity.HasOne(d => d.Ads)
                     .WithMany(p => p.AdvertisementOpen)
@@ -108,9 +153,23 @@ namespace BackEnd.DAL.Models
 
                 entity.Property(e => e.AdsUpdateId).ValueGeneratedNever();
 
-                entity.Property(e => e.CreationDate).HasColumnType("datetime");
+                entity.Property(e => e.AdsImage).HasDefaultValueSql("('')");
+
+                entity.Property(e => e.AdsText).HasDefaultValueSql("('')");
+
+                entity.Property(e => e.AdsType).HasDefaultValueSql("((0))");
+
+                entity.Property(e => e.AdsVideo).HasDefaultValueSql("('')");
+
+                entity.Property(e => e.Available).HasDefaultValueSql("((0))");
+
+                entity.Property(e => e.CreationDate)
+                    .HasColumnType("datetime")
+                    .HasDefaultValueSql("(dateadd(hour,(3),getutcdate()))");
 
                 entity.Property(e => e.EndDate).HasColumnType("datetime");
+
+                entity.Property(e => e.Special).HasDefaultValueSql("((0))");
 
                 entity.Property(e => e.StartDate).HasColumnType("datetime");
 
@@ -133,7 +192,9 @@ namespace BackEnd.DAL.Models
 
                 entity.Property(e => e.AdsViewId).ValueGeneratedNever();
 
-                entity.Property(e => e.CreationDate).HasColumnType("datetime");
+                entity.Property(e => e.CreationDate)
+                    .HasColumnType("datetime")
+                    .HasDefaultValueSql("(dateadd(hour,(3),getutcdate()))");
 
                 entity.HasOne(d => d.Ads)
                     .WithMany(p => p.AdvertisementView)
@@ -151,16 +212,30 @@ namespace BackEnd.DAL.Models
             {
                 entity.Property(e => e.CategoryId).ValueGeneratedNever();
 
-                entity.Property(e => e.CategoryName).HasMaxLength(50);
+                entity.Property(e => e.Available).HasDefaultValueSql("((1))");
 
-                entity.Property(e => e.CreationDate).HasColumnType("datetime");
+                entity.Property(e => e.CategoryImage).HasDefaultValueSql("('')");
+
+                entity.Property(e => e.CategoryName)
+                    .HasMaxLength(50)
+                    .HasDefaultValueSql("('')");
+
+                entity.Property(e => e.CreationDate)
+                    .HasColumnType("datetime")
+                    .HasDefaultValueSql("(dateadd(hour,(3),getutcdate()))");
             });
 
             modelBuilder.Entity<City>(entity =>
             {
                 entity.Property(e => e.CityId).ValueGeneratedNever();
 
-                entity.Property(e => e.CityName).HasMaxLength(50);
+                entity.Property(e => e.Available)
+                    .IsRequired()
+                    .HasDefaultValueSql("((1))");
+
+                entity.Property(e => e.CityName)
+                    .HasMaxLength(50)
+                    .HasDefaultValueSql("('')");
 
                 entity.HasOne(d => d.Country)
                     .WithMany(p => p.City)
@@ -173,20 +248,27 @@ namespace BackEnd.DAL.Models
             {
                 entity.Property(e => e.ContactUsId).ValueGeneratedNever();
 
-                entity.Property(e => e.CreationDate).HasColumnType("datetime");
+                entity.Property(e => e.CreationDate)
+                    .HasColumnType("datetime")
+                    .HasDefaultValueSql("(dateadd(hour,(3),getutcdate()))");
 
-                entity.Property(e => e.Email).HasMaxLength(50);
-
-                entity.Property(e => e.Message)
-                    .IsRequired()
+                entity.Property(e => e.Email)
                     .HasMaxLength(50)
                     .HasDefaultValueSql("('')");
 
-                entity.Property(e => e.Name).HasMaxLength(50);
+                entity.Property(e => e.Message)
+                    .IsRequired()
+                    .HasDefaultValueSql("('')");
+
+                entity.Property(e => e.Name)
+                    .HasMaxLength(50)
+                    .HasDefaultValueSql("('')");
 
                 entity.Property(e => e.Phone)
                     .HasMaxLength(50)
                     .HasDefaultValueSql("('')");
+
+                entity.Property(e => e.Solved).HasDefaultValueSql("((0))");
 
                 entity.Property(e => e.Title)
                     .HasMaxLength(50)
@@ -199,16 +281,70 @@ namespace BackEnd.DAL.Models
                     .HasConstraintName("FK_contact_us_customer");
             });
 
+            modelBuilder.Entity<ContactUsMarket>(entity =>
+            {
+                entity.HasKey(e => e.ContactUsId)
+                    .HasName("PK_contact_us_market");
+
+                entity.Property(e => e.ContactUsId).ValueGeneratedNever();
+
+                entity.Property(e => e.CreationDate)
+                    .HasColumnType("datetime")
+                    .HasDefaultValueSql("(dateadd(hour,(3),getutcdate()))");
+
+                entity.Property(e => e.Email)
+                    .HasMaxLength(50)
+                    .HasDefaultValueSql("('')");
+
+                entity.Property(e => e.Message)
+                    .IsRequired()
+                    .HasDefaultValueSql("('')");
+
+                entity.Property(e => e.Name)
+                    .HasMaxLength(50)
+                    .HasDefaultValueSql("('')");
+
+                entity.Property(e => e.Phone)
+                    .HasMaxLength(50)
+                    .HasDefaultValueSql("('')");
+
+                entity.Property(e => e.Solved).HasDefaultValueSql("((0))");
+
+                entity.Property(e => e.Title)
+                    .HasMaxLength(50)
+                    .HasDefaultValueSql("('')");
+
+                entity.HasOne(d => d.Market)
+                    .WithMany(p => p.ContactUsMarket)
+                    .HasForeignKey(d => d.MarketId)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("FK_contact_us_market_market");
+            });
+
             modelBuilder.Entity<Country>(entity =>
             {
                 entity.Property(e => e.CountryId).ValueGeneratedNever();
+
+                entity.Property(e => e.Available)
+                    .IsRequired()
+                    .HasDefaultValueSql("((1))");
+
+                entity.Property(e => e.CountryName).HasDefaultValueSql("('')");
+
+                entity.Property(e => e.CreationDate)
+                    .HasColumnType("datetime")
+                    .HasDefaultValueSql("(dateadd(hour,(3),getutcdate()))");
             });
 
             modelBuilder.Entity<Customer>(entity =>
             {
                 entity.Property(e => e.CustomerId).ValueGeneratedNever();
 
-                entity.Property(e => e.CreationDate).HasColumnType("datetime");
+                entity.Property(e => e.CreationDate)
+                    .HasColumnType("datetime")
+                    .HasDefaultValueSql("(dateadd(hour,(3),getutcdate()))");
+
+                entity.Property(e => e.Token).HasDefaultValueSql("('')");
 
                 entity.HasOne(d => d.City)
                     .WithMany(p => p.Customer)
@@ -223,7 +359,9 @@ namespace BackEnd.DAL.Models
 
                 entity.Property(e => e.LoginId).ValueGeneratedNever();
 
-                entity.Property(e => e.LoginDate).HasColumnType("datetime");
+                entity.Property(e => e.LoginDate)
+                    .HasColumnType("datetime")
+                    .HasDefaultValueSql("(dateadd(hour,(3),getutcdate()))");
 
                 entity.HasOne(d => d.Customer)
                     .WithMany(p => p.CustomerLogin)
@@ -236,22 +374,39 @@ namespace BackEnd.DAL.Models
             {
                 entity.Property(e => e.MarketId).ValueGeneratedNever();
 
-                entity.Property(e => e.CreationDate).HasColumnType("datetime");
+                entity.Property(e => e.CreationDate)
+                    .HasColumnType("datetime")
+                    .HasDefaultValueSql("(dateadd(hour,(3),getutcdate()))");
 
-                entity.Property(e => e.MarketEmail).HasMaxLength(50);
+                entity.Property(e => e.MarketAddress).HasDefaultValueSql("('')");
+
+                entity.Property(e => e.MarketEmail)
+                    .HasMaxLength(50)
+                    .HasDefaultValueSql("('')");
+
+                entity.Property(e => e.MarketInfo).HasDefaultValueSql("('')");
 
                 entity.Property(e => e.MarketLatlng)
                     .IsRequired()
                     .HasMaxLength(50)
                     .HasDefaultValueSql("('')");
 
-                entity.Property(e => e.MarketName).HasMaxLength(50);
+                entity.Property(e => e.MarketLogo).HasDefaultValueSql("('')");
 
-                entity.Property(e => e.MarketPassword).HasMaxLength(50);
+                entity.Property(e => e.MarketName)
+                    .HasMaxLength(50)
+                    .HasDefaultValueSql("('')");
+
+                entity.Property(e => e.MarketPassword)
+                    .HasMaxLength(50)
+                    .HasDefaultValueSql("('')");
 
                 entity.Property(e => e.MarketPhone)
                     .IsRequired()
-                    .HasMaxLength(50);
+                    .HasMaxLength(50)
+                    .HasDefaultValueSql("('')");
+
+                entity.Property(e => e.Token).HasDefaultValueSql("('')");
 
                 entity.HasOne(d => d.City)
                     .WithMany(p => p.Market)
@@ -267,7 +422,9 @@ namespace BackEnd.DAL.Models
 
                 entity.Property(e => e.MarketCustomerId).ValueGeneratedNever();
 
-                entity.Property(e => e.CreationDate).HasColumnType("datetime");
+                entity.Property(e => e.CreationDate)
+                    .HasColumnType("datetime")
+                    .HasDefaultValueSql("(dateadd(hour,(3),getutcdate()))");
 
                 entity.HasOne(d => d.Customer)
                     .WithMany(p => p.MarketFollow)
@@ -286,7 +443,15 @@ namespace BackEnd.DAL.Models
             {
                 entity.Property(e => e.PrivacyId).ValueGeneratedNever();
 
-                entity.Property(e => e.CreationDate).HasColumnType("datetime");
+                entity.Property(e => e.Available)
+                    .IsRequired()
+                    .HasDefaultValueSql("((1))");
+
+                entity.Property(e => e.Content).HasDefaultValueSql("('')");
+
+                entity.Property(e => e.CreationDate)
+                    .HasColumnType("datetime")
+                    .HasDefaultValueSql("(dateadd(hour,(3),getutcdate()))");
             });
         }
     }

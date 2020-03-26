@@ -15,6 +15,7 @@ namespace BackEnd.DAL.Models
         public string CategoryName { get; set; }
         public bool? Available { get; set; }
         public DateTime? CreationDate { get; set; }
+        public int Order { get; set; }
 
         public virtual ICollection<Advertisement> Advertisement { get; set; }
     }

@@ -1,9 +1,11 @@
 ﻿using AutoMapper;
+//using BackEnd.DAL.Entities;
 using BackEnd.DAL.Models;
 using BackEnd.Repositories.Generics;
 using BackEnd.Repositories.UOW;
 using BackEnd.Service.IServices;
 using BackEnd.Service.Models;
+//using DAL;
 using Microsoft.EntityFrameworkCore.ChangeTracking;
 using System;
 using System.Collections.Generic;
@@ -14,31 +16,32 @@ using System.Threading.Tasks;
 
 namespace BackEnd.Service.Services
 {
-    public class CategoryServices : IServicesCategory
+    public class AdminUsersServices : IServicesAdminUsers
     {
-        private readonly IGRepository<Category> _CategoryRepositroy;
-        private readonly IGRepository<Advertisement> _AdvertisementRepositroy;
+        private readonly IGRepository<AdminUsers> _AdminUsersRepositroy;
         private readonly IUnitOfWork<DB_A56457_LookandGoContext> _unitOfWork;
         private readonly IResponseDTO _response;
         private readonly IMapper _mapper;
-        public CategoryServices(IGRepository<Category> Category,IGRepository<Advertisement> Advertisement,
+        public AdminUsersServices(IGRepository<AdminUsers> AdminUsers,
             IUnitOfWork<DB_A56457_LookandGoContext> unitOfWork, IResponseDTO responseDTO, IMapper mapper)
         {
-            _CategoryRepositroy = Category;
-            _AdvertisementRepositroy = Advertisement;
+            _AdminUsersRepositroy = AdminUsers;
             _unitOfWork = unitOfWork;
             _response = responseDTO;
             _mapper = mapper;
 
         }
-        public IResponseDTO DeleteCategory(CategoryVM model)
+        public IResponseDTO DeleteAdminUsers(AdminUsersVM model)
         {
             try
             {
-                var DbCategory = _mapper.Map<Category>(model);
-                var entityEntry = _CategoryRepositroy.Remove(DbCategory);
+
+                var DbAdminUsers = _mapper.Map<AdminUsers>(model);
+                var entityEntry = _AdminUsersRepositroy.Remove(DbAdminUsers);
+
 
                 int save = _unitOfWork.Commit();
+
                 if (save == 200)
                 {
                     _response.Data = null;
@@ -60,104 +63,14 @@ namespace BackEnd.Service.Services
             }
             return _response;
         }
-        public IResponseDTO EditCategory(CategoryVM model)
+        public IResponseDTO EditAdminUsers(AdminUsersVM model)
         {
             try
             {
-                var DbCategory = _mapper.Map<Category>(model);
-                var entityEntry = _CategoryRepositroy.Update(DbCategory);
-                int save = _unitOfWork.Commit();
+                var DbAdminUsers = _mapper.Map<AdminUsers>(model);
+                var entityEntry = _AdminUsersRepositroy.Update(DbAdminUsers);
 
-                if (save == 200)
-                {
-                    _response.Data = model;
-                    _response.IsPassed = true;
-                    _response.Message = "Ok";
-                }
-                else
-                {
-                    _response.Data = null;
-                    _response.IsPassed = false;
-                    _response.Message = "Not saved";
-                }
-            }
-            catch (Exception ex)
-            {
-                _response.Data = null;
-                _response.IsPassed = false;
-                _response.Message = "Error " + ex.Message;
-            }
-            return _response;
-        }
-        public IResponseDTO GetAllCategory()
-        {
-            try
-            {
-                var Categorys = _CategoryRepositroy.GetAll().OrderBy(y => y.Order).OrderBy(z => z.CategoryName);
 
-                var CategorysList = _mapper.Map<List<CategoryVM>>(Categorys);
-                _response.Data = CategorysList;
-                _response.IsPassed = true;
-                _response.Message = "Done";
-            }
-            catch (Exception ex)
-            {
-                _response.Data = null;
-                _response.IsPassed = false;
-                _response.Message = "Error " + ex.Message;
-            }
-            return _response;
-        }
-        public IResponseDTO GetByIDCategory(object id)
-        {
-            try
-            {
-                var Categorys = _CategoryRepositroy.Find(id);
-
-                var CategorysList = _mapper.Map<CategoryVM>(Categorys);
-                _response.Data = CategorysList;
-                _response.IsPassed = true;
-                _response.Message = "Done";
-            }
-            catch (Exception ex)
-            {
-                _response.Data = null;
-                _response.IsPassed = false;
-                _response.Message = "Error " + ex.Message;
-            }
-            return _response;
-        }
-        public IResponseDTO GetCategorysAds()
-        {
-            try
-            {
-                var Categorys = _CategoryRepositroy.GetAll();
-                var ads = _AdvertisementRepositroy.Get(x => x.Special == true);
-                var CategorysList = _mapper.Map<List<CategoryVM>>(Categorys);
-                var adsList = _mapper.Map<List<AdvertisementVM>>(ads);
-
-                _response.Data = new DTO.AdsCategryDTO()
-                {
-                    category = CategorysList,
-                    ads = adsList,
-                };
-                _response.IsPassed = true;
-                _response.Message = "Done";
-            }
-            catch (Exception ex)
-            {
-                _response.Data = null;
-                _response.IsPassed = false;
-                _response.Message = "Error " + ex.Message;
-            }
-            return _response;
-        }
-        public IResponseDTO PostCategory(CategoryVM model)
-        {
-            try
-            {
-                var DbCategory = _mapper.Map<Category>(model);
-                var Category = _mapper.Map<CategoryVM>(_CategoryRepositroy.Add(DbCategory));
                 int save = _unitOfWork.Commit();
 
                 if (save == 200)
@@ -179,7 +92,112 @@ namespace BackEnd.Service.Services
                 _response.IsPassed = false;
                 _response.Message = "Error " + ex.Message;
             }
+
             return _response;
+
+        }
+        public IResponseDTO GetAllAdminUsers()
+        {
+            try
+            {
+                var AdminUserss = _AdminUsersRepositroy.GetAll();
+
+
+                var AdminUserssList = _mapper.Map<List<AdminUsersVM>>(AdminUserss);
+                _response.Data = AdminUserssList;
+                _response.IsPassed = true;
+                _response.Message = "Done";
+            }
+            catch (Exception ex)
+            {
+                _response.Data = null;
+                _response.IsPassed = false;
+                _response.Message = "Error " + ex.Message;
+            }
+            return _response;
+        }
+        public IResponseDTO AdminUsersLogin(AdminUsersVM model)
+        {
+            try
+            {
+                var res = _AdminUsersRepositroy.GetFirst(X => X.UserName == model.UserName && X.Password == model.Password);
+                if(res == null)
+                {
+                    _response.Data = null;
+                    _response.IsPassed = false;
+                    _response.Message = "Not saved";
+                }
+                else
+                {
+                    var DbAdminUsers = _mapper.Map<AdminUsersVM>(model);
+                    _response.Data = DbAdminUsers;
+                    _response.IsPassed = true;
+                    _response.Message = "Ok";
+                }
+            }
+            catch (Exception ex)
+            {
+                _response.Data = null;
+                _response.IsPassed = false;
+                _response.Message = "Error " + ex.Message;
+            }
+            return _response;
+        }
+        public IResponseDTO GetByIDAdminUsers(object id)
+        {
+            try
+            {
+                var AdminUserss = _AdminUsersRepositroy.Find(id);
+
+
+                var AdminUserssList = _mapper.Map<AdminUsersVM>(AdminUserss);
+                _response.Data = AdminUserssList;
+                _response.IsPassed = true;
+                _response.Message = "Done";
+            }
+            catch (Exception ex)
+            {
+                _response.Data = null;
+                _response.IsPassed = false;
+                _response.Message = "Error " + ex.Message;
+            }
+            return _response;
+        }
+        public IResponseDTO PostAdminUsers(AdminUsersVM model)
+        {
+
+            try
+            {
+                var DbAdminUsers = _mapper.Map<AdminUsers>(model);
+
+                var AdminUsers = _mapper.Map<AdminUsersVM>(_AdminUsersRepositroy.Add(DbAdminUsers));
+
+                int save = _unitOfWork.Commit();
+
+                if (save == 200)
+                {
+                    _response.Data = model;
+                    _response.IsPassed = true;
+                    _response.Message = "Ok";
+                }
+                else
+                {
+                    _response.Data = null;
+                    _response.IsPassed = false;
+                    _response.Message = "Not saved";
+                }
+
+            }
+            catch (Exception ex)
+            {
+                _response.Data = null;
+                _response.IsPassed = false;
+                _response.Message = "Error " + ex.Message;
+            }
+
+
+            return _response;
+
         }
     }
 }

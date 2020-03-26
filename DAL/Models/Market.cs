@@ -7,6 +7,7 @@ namespace BackEnd.DAL.Models
     {
         public Market()
         {
+            ContactUsMarket = new HashSet<ContactUsMarket>();
             MarketFollow = new HashSet<MarketFollow>();
         }
 
@@ -26,6 +27,7 @@ namespace BackEnd.DAL.Models
         public string MarketLatlng { get; set; }
 
         public virtual City City { get; set; }
+        public virtual ICollection<ContactUsMarket> ContactUsMarket { get; set; }
         public virtual ICollection<MarketFollow> MarketFollow { get; set; }
     }
 }

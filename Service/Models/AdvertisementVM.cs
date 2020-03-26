@@ -15,9 +15,9 @@ namespace BackEnd.Service.Models
         public string AdsVideo { get; set; }
         public DateTime? StartDate { get; set; }
         public DateTime? EndDate { get; set; }
-        public bool? Available { get; set; }
-        public bool? Special { get; set; }
-        public bool? WaitingUpdate { get; set; }
+        public bool? Available { get; set; } = false;
+        public bool? Special { get; set; } = false;
+        public bool? WaitingUpdate { get; set; } = false;
         public DateTime? CreationDate { get; set; } = DateTime.UtcNow.AddHours(3);
 
         //public virtual CityVM City { get; set; }

@@ -10,7 +10,8 @@ namespace BackEnd.Service.Models
         public string CategoryImage { get; set; }
         public string CategoryName { get; set; }
         public bool? Available { get; set; }
-        public DateTime? CreationDate { get; set; }
+        public DateTime? CreationDate { get; set; } = DateTime.UtcNow.AddHours(3);
+        public int Order { get; set; } = 0;
 
         //public virtual ICollection<AdvertisementVM> Advertisement { get; set; }
     }
