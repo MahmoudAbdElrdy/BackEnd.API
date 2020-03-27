@@ -28,6 +28,9 @@ using Swashbuckle.AspNetCore.Swagger;
 using System.Text;
 using Microsoft.IdentityModel.Tokens;
 using BackEnd.DAL.Models;
+using Microsoft.AspNetCore.Http;
+using Microsoft.Extensions.FileProviders;
+using System.IO;
 
 namespace BackEnd.API
 {
@@ -191,10 +194,16 @@ namespace BackEnd.API
                 c.SwaggerEndpoint("/swagger/v1/swagger.json", " Auditor V1");
 
             });
+            app.UseStaticFiles();
+            app.UseStaticFiles(new StaticFileOptions()
+            {
+                FileProvider = new PhysicalFileProvider(Path.Combine(Directory.GetCurrentDirectory(), @"UploadFiles")),
+                RequestPath = new PathString("/UploadFiles")
+            });
             app.UseAuthentication();
             app.UseMvc();
-            
 
+           
         }
     }
 }

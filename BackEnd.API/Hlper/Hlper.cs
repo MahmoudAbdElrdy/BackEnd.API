@@ -64,14 +64,14 @@ namespace BackEnd.API.Hlper
                     var _ext = Path.GetFileNameWithoutExtension(file.FileName);
 
                     //  var fullPath = Path.Combine(pathToSave, _imgname +_ext);
-                    var filepath = Path.Combine(folderName, _imgname + _ext);
+                    var filepath = Path.Combine(folderName, _imgname + extension);
 
                     using (var stream = new FileStream(filepath, FileMode.Create))
 
                     {
                         file.CopyTo(stream);
                     }
-                    string dbPath = "http://lookandgo-001-site1.dtempurl.com/api/UploadFiles/" +  _imgname+extension;
+                    string dbPath = "http://lookandgo-001-site1.dtempurl.com/UploadFiles/" +  _imgname+extension;
                     temp.Add("dbPath", dbPath);
                     temp.Add("_ext", _ext);
                     temp.Add("stat", "done");
