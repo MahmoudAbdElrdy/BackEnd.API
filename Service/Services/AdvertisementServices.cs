@@ -177,6 +177,27 @@ namespace BackEnd.Service.Services
             return _response;
 
         }
+        public IResponseDTO GetNewAdvertisement(int page)
+        {
+            try
+            {
+                var Advertisements = _AdvertisementRepositroy.GetAll().OrderBy(x => x.StartDate);
+
+
+                var AdvertisementsList = _mapper.Map<List<AdvertisementVM>>(Advertisements);
+                _response.Data = AdvertisementsList;
+                _response.IsPassed = true;
+                _response.Message = "Done";
+            }
+            catch (Exception ex)
+            {
+                _response.Data = null;
+                _response.IsPassed = false;
+                _response.Message = "Error " + ex.Message;
+            }
+            return _response;
+
+        }
         public IResponseDTO GetByIDAdvertisement(object id)
         {
             try

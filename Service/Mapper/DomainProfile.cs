@@ -29,12 +29,14 @@ namespace BackEnd.Service.Mapper
 
             CreateMap<AboutUsVM, AboutUs>().ReverseMap();
             CreateMap<AdvertisementOpenVM, AdvertisementOpen>().ReverseMap();
+            CreateMap<AdminUsersVM, AdminUsers>().ReverseMap();
             CreateMap<AdvertisementUpdateVM, AdvertisementUpdate>().ReverseMap();
             CreateMap<AdvertisementViewVM, AdvertisementView>().ReverseMap();
             CreateMap<AdvertisementVM, Advertisement>().ReverseMap();
             CreateMap<CategoryVM, Category>().ReverseMap();
             CreateMap<CityVM, City>().ReverseMap();
             CreateMap<ContactUsVM, ContactUs>().ReverseMap();
+            CreateMap<ContactUsMarketVM, ContactUsMarket>().ReverseMap();
             CreateMap<CountryVM, Country>().ReverseMap();
             CreateMap<CustomerLoginVM, CustomerLogin>().ReverseMap();
             CreateMap<CustomerVM, Customer>().ReverseMap();

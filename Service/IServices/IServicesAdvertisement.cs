@@ -11,6 +11,7 @@ namespace BackEnd.Service.IServices
     {
         IResponseDTO PostAdvertisement(AdvertisementVM model);
         IResponseDTO GetAllAdvertisement();
+        IResponseDTO GetNewAdvertisement(int page);
         IResponseDTO EditAdvertisement(AdvertisementVM model);
         IResponseDTO DeleteAdvertisement(AdvertisementVM model);
         IResponseDTO GetByIDAdvertisement(object id);
