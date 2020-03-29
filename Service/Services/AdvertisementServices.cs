@@ -98,7 +98,10 @@ namespace BackEnd.Service.Services
         {
             try
             {
-                var Advertisements = _AdvertisementRepositroy.Get(x => x.CategoryId == categoryId && x.CityId == cityId);
+                var paging = new DTO.Pageing();
+                paging.pageNumber = page;
+                var Advertisements = _AdvertisementRepositroy.Get(x => x.CategoryId == categoryId && x.CityId == cityId)
+                                                             .Skip(paging.skip).Take(paging.pageSize);
 
 
                 var AdvertisementsList = _mapper.Map<List<AdvertisementVM>>(Advertisements);
@@ -119,7 +122,10 @@ namespace BackEnd.Service.Services
         {
             try
             {
-                var Advertisements = _AdvertisementRepositroy.Get(x => x.MarketId == marketId);
+                var paging = new DTO.Pageing();
+                paging.pageNumber = page;
+                var Advertisements = _AdvertisementRepositroy.Get(x => x.MarketId == marketId)
+                                                             .Skip(paging.skip).Take(paging.pageSize);
 
                 var AdvertisementsList = _mapper.Map<List<AdvertisementVM>>(Advertisements);
                 _response.Data = AdvertisementsList;
@@ -139,7 +145,10 @@ namespace BackEnd.Service.Services
         {
             try
             {
-                var Advertisements = _AdvertisementRepositroy.Get(x => x.CityId == cityId);
+                var paging = new DTO.Pageing();
+                paging.pageNumber = page;
+                var Advertisements = _AdvertisementRepositroy.Get(x => x.CityId == cityId)
+                                                             .Skip(paging.skip).Take(paging.pageSize);
 
 
                 var AdvertisementsList = _mapper.Map<List<AdvertisementVM>>(Advertisements);
@@ -181,9 +190,10 @@ namespace BackEnd.Service.Services
         {
             try
             {
-                var Advertisements = _AdvertisementRepositroy.GetAll().OrderBy(x => x.StartDate);
-
-
+                var paging = new DTO.Pageing();
+                paging.pageNumber = page;
+                var Advertisements = _AdvertisementRepositroy.GetAll().OrderBy(x => x.StartDate)
+                                                             .Skip(paging.skip).Take(paging.pageSize);
                 var AdvertisementsList = _mapper.Map<List<AdvertisementVM>>(Advertisements);
                 _response.Data = AdvertisementsList;
                 _response.IsPassed = true;
