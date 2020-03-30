@@ -54,9 +54,9 @@ namespace BackEnd.API.Controllers
         #region Get: api/Category/GetCategorysAds
         [HttpGet]
         [Route("GetCategorysAds")]
-        public IResponseDTO GetCategorysAds()
+        public IResponseDTO GetCategorysAds(Guid CustomerId)
         {
-            var depart = _CategoryServices.GetCategorysAds();
+            var depart = _CategoryServices.GetCategorysAds(CustomerId);
             return depart;
         }
         #endregion

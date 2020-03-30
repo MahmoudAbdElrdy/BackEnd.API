@@ -14,6 +14,6 @@ namespace BackEnd.Service.IServices
         IResponseDTO EditCategory(CategoryVM model);
         IResponseDTO DeleteCategory(CategoryVM model);
         IResponseDTO GetByIDCategory(object id);
-        IResponseDTO GetCategorysAds();
+        IResponseDTO GetCategorysAds(Guid CustomerId);
     }
 }

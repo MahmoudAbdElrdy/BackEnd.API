@@ -55,9 +55,9 @@ namespace BackEnd.API.Controllers
         #region Get: api/Advertisement/GetNewAdvertisement
         [HttpGet]
         [Route("GetNewAdvertisement")]
-        public IResponseDTO GetNewAdvertisement(int page)
+        public IResponseDTO GetNewAdvertisement(int page,Guid CustomerId)
         {
-            var depart = _AdvertisementServices.GetNewAdvertisement(page);
+            var depart = _AdvertisementServices.GetNewAdvertisement(page, CustomerId);
             return depart;
         }
         #endregion
@@ -75,9 +75,9 @@ namespace BackEnd.API.Controllers
         #region Get: api/Advertisement/GetAdvertisementByMarketId
         [HttpGet]
         [Route("GetAdvertisementByMarketId")]
-        public IResponseDTO GetAdvertisementByMarketId(int page, Guid marketId)
+        public IResponseDTO GetAdvertisementByMarketId(int page, Guid marketId , Guid? CustomerId)
         {
-            var depart = _AdvertisementServices.GetAdvertisementByMarketId(page, marketId);
+            var depart = _AdvertisementServices.GetAdvertisementByMarketId(page, marketId, CustomerId);
             return depart;
         }
         #endregion
@@ -85,9 +85,9 @@ namespace BackEnd.API.Controllers
         #region Get: api/Advertisement/GetAdvertisementByCityId
         [HttpGet]
         [Route("GetAdvertisementByCityId")]
-        public IResponseDTO GetAdvertisementByCityId(int page, Guid cityId)
+        public IResponseDTO GetAdvertisementByCityId(int page, Guid cityId , Guid CustomerId)
         {
-            var depart = _AdvertisementServices.GetAdvertisementByCityId(page, cityId);
+            var depart = _AdvertisementServices.GetAdvertisementByCityId(page, cityId, CustomerId);
             return depart;
         }
         #endregion
@@ -95,9 +95,9 @@ namespace BackEnd.API.Controllers
         #region Get: api/Advertisement/GetAdvertisementByCategory
         [HttpGet]
         [Route("GetAdvertisementByCategory")]
-        public IResponseDTO GetAdvertisementByCategory(int page, Guid categoryId, Guid cityId)
+        public IResponseDTO GetAdvertisementByCategory(int page, Guid categoryId, Guid cityId , Guid CustomerId)
         {
-            var depart = _AdvertisementServices.GetAdvertisementByCategory(page, categoryId, cityId);
+            var depart = _AdvertisementServices.GetAdvertisementByCategory(page, categoryId, cityId, CustomerId);
             return depart;
         }
         #endregion

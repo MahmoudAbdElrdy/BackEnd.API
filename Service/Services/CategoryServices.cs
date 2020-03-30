@@ -18,18 +18,20 @@ namespace BackEnd.Service.Services
     {
         private readonly IGRepository<Category> _CategoryRepositroy;
         private readonly IGRepository<Advertisement> _AdvertisementRepositroy;
+        private readonly IGRepository<AdvertisementView> _AdvertisementViewRepositroy;
         private readonly IUnitOfWork<DB_A56457_LookandGoContext> _unitOfWork;
         private readonly IResponseDTO _response;
         private readonly IMapper _mapper;
         public CategoryServices(IGRepository<Category> Category,IGRepository<Advertisement> Advertisement,
-            IUnitOfWork<DB_A56457_LookandGoContext> unitOfWork, IResponseDTO responseDTO, IMapper mapper)
+            IGRepository<AdvertisementView> AdvertisementView, IUnitOfWork<DB_A56457_LookandGoContext> unitOfWork,
+            IResponseDTO responseDTO, IMapper mapper)
         {
             _CategoryRepositroy = Category;
             _AdvertisementRepositroy = Advertisement;
+            _AdvertisementViewRepositroy = AdvertisementView;
             _unitOfWork = unitOfWork;
             _response = responseDTO;
             _mapper = mapper;
-
         }
         public IResponseDTO DeleteCategory(CategoryVM model)
         {
@@ -127,7 +129,7 @@ namespace BackEnd.Service.Services
             }
             return _response;
         }
-        public IResponseDTO GetCategorysAds()
+        public IResponseDTO GetCategorysAds(Guid CustomerId)
         {
             try
             {
@@ -135,7 +137,15 @@ namespace BackEnd.Service.Services
                 var ads = _AdvertisementRepositroy.Get(x => x.Special == true);
                 var CategorysList = _mapper.Map<List<CategoryVM>>(Categorys);
                 var adsList = _mapper.Map<List<AdvertisementVM>>(ads);
-
+                foreach(var add in ads)
+                {
+                    _AdvertisementViewRepositroy.Add(new AdvertisementView()
+                    {
+                        AdsViewId = Guid.NewGuid(),
+                        AdsId = add.AdsId,
+                        CustomerId = CustomerId,
+                    });
+                }
                 _response.Data = new DTO.AdsCategryDTO()
                 {
                     category = CategorysList,

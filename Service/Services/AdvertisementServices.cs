@@ -18,12 +18,14 @@ namespace BackEnd.Service.Services
     {
         private readonly IGRepository<Advertisement> _AdvertisementRepositroy;
         private readonly IUnitOfWork<DB_A56457_LookandGoContext> _unitOfWork;
+        private readonly IGRepository<AdvertisementView> _AdvertisementViewRepositroy;
         private readonly IResponseDTO _response;
         private readonly IMapper _mapper;
-        public AdvertisementServices(IGRepository<Advertisement> Advertisement,
+        public AdvertisementServices(IGRepository<Advertisement> Advertisement, IGRepository<AdvertisementView> AdvertisementView,
             IUnitOfWork<DB_A56457_LookandGoContext> unitOfWork, IResponseDTO responseDTO, IMapper mapper)
         {
             _AdvertisementRepositroy = Advertisement;
+            _AdvertisementViewRepositroy = AdvertisementView;
             _unitOfWork = unitOfWork;
             _response = responseDTO;
             _mapper = mapper;
@@ -94,7 +96,7 @@ namespace BackEnd.Service.Services
             return _response;
 
         }
-        public IResponseDTO GetAdvertisementByCategory(int page,Guid categoryId, Guid cityId)
+        public IResponseDTO GetAdvertisementByCategory(int page,Guid categoryId, Guid cityId,Guid CustomerId)
         {
             try
             {
@@ -102,7 +104,15 @@ namespace BackEnd.Service.Services
                 paging.pageNumber = page;
                 var Advertisements = _AdvertisementRepositroy.Get(x => x.CategoryId == categoryId && x.CityId == cityId)
                                                              .Skip(paging.skip).Take(paging.pageSize);
-
+                foreach (var add in Advertisements)
+                {
+                    _AdvertisementViewRepositroy.Add(new AdvertisementView()
+                    {
+                        AdsViewId = Guid.NewGuid(),
+                        AdsId = add.AdsId,
+                        CustomerId = CustomerId,
+                    });
+                }
 
                 var AdvertisementsList = _mapper.Map<List<AdvertisementVM>>(Advertisements);
                 _response.Data = AdvertisementsList;
@@ -118,7 +128,7 @@ namespace BackEnd.Service.Services
             return _response;
 
         }
-        public IResponseDTO GetAdvertisementByMarketId(int page,Guid marketId)
+        public IResponseDTO GetAdvertisementByMarketId(int page,Guid marketId, Guid? CustomerId)
         {
             try
             {
@@ -126,7 +136,18 @@ namespace BackEnd.Service.Services
                 paging.pageNumber = page;
                 var Advertisements = _AdvertisementRepositroy.Get(x => x.MarketId == marketId)
                                                              .Skip(paging.skip).Take(paging.pageSize);
-
+                if (CustomerId != null && CustomerId != Guid.Empty)
+                {
+                    foreach (var add in Advertisements)
+                    {
+                        _AdvertisementViewRepositroy.Add(new AdvertisementView()
+                        {
+                            AdsViewId = Guid.NewGuid(),
+                            AdsId = add.AdsId,
+                            CustomerId = (Guid)CustomerId,
+                        });
+                    }
+                }
                 var AdvertisementsList = _mapper.Map<List<AdvertisementVM>>(Advertisements);
                 _response.Data = AdvertisementsList;
                 _response.IsPassed = true;
@@ -141,7 +162,7 @@ namespace BackEnd.Service.Services
             return _response;
 
         }
-        public IResponseDTO GetAdvertisementByCityId(int page,Guid cityId)
+        public IResponseDTO GetAdvertisementByCityId(int page,Guid cityId, Guid CustomerId)
         {
             try
             {
@@ -149,7 +170,15 @@ namespace BackEnd.Service.Services
                 paging.pageNumber = page;
                 var Advertisements = _AdvertisementRepositroy.Get(x => x.CityId == cityId)
                                                              .Skip(paging.skip).Take(paging.pageSize);
-
+                foreach (var add in Advertisements)
+                {
+                    _AdvertisementViewRepositroy.Add(new AdvertisementView()
+                    {
+                        AdsViewId = Guid.NewGuid(),
+                        AdsId = add.AdsId,
+                        CustomerId = CustomerId,
+                    });
+                }
 
                 var AdvertisementsList = _mapper.Map<List<AdvertisementVM>>(Advertisements);
                 _response.Data = AdvertisementsList;
@@ -186,7 +215,7 @@ namespace BackEnd.Service.Services
             return _response;
 
         }
-        public IResponseDTO GetNewAdvertisement(int page)
+        public IResponseDTO GetNewAdvertisement(int page, Guid CustomerId)
         {
             try
             {
@@ -194,6 +223,15 @@ namespace BackEnd.Service.Services
                 paging.pageNumber = page;
                 var Advertisements = _AdvertisementRepositroy.GetAll().OrderBy(x => x.StartDate)
                                                              .Skip(paging.skip).Take(paging.pageSize);
+                foreach (var add in Advertisements)
+                {
+                    _AdvertisementViewRepositroy.Add(new AdvertisementView()
+                    {
+                        AdsViewId = Guid.NewGuid(),
+                        AdsId = add.AdsId,
+                        CustomerId = CustomerId,
+                    });
+                }
                 var AdvertisementsList = _mapper.Map<List<AdvertisementVM>>(Advertisements);
                 _response.Data = AdvertisementsList;
                 _response.IsPassed = true;

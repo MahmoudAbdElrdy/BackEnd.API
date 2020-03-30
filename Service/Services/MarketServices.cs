@@ -213,6 +213,14 @@ namespace BackEnd.Service.Services
 
             try
             {
+
+                var res = _MarketRepositroy.Get(x => x.MarketEmail == model.MarketEmail);
+                if (res != null) 
+                {
+                    _response.Data = null;
+                    _response.IsPassed = false;
+                    _response.Message = "This email already exists";
+                }
                 var DbMarket = _mapper.Map<Market>(model);
 
                 var Market = _mapper.Map<MarketVM>(_MarketRepositroy.Add(DbMarket));

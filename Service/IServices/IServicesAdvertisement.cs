@@ -11,12 +11,12 @@ namespace BackEnd.Service.IServices
     {
         IResponseDTO PostAdvertisement(AdvertisementVM model);
         IResponseDTO GetAllAdvertisement();
-        IResponseDTO GetNewAdvertisement(int page);
+        IResponseDTO GetNewAdvertisement(int page, Guid CustomerId);
         IResponseDTO EditAdvertisement(AdvertisementVM model);
         IResponseDTO DeleteAdvertisement(AdvertisementVM model);
         IResponseDTO GetByIDAdvertisement(object id);
-        IResponseDTO GetAdvertisementByCityId(int page, Guid cityId);
-        IResponseDTO GetAdvertisementByMarketId(int page, Guid marketId);
-        IResponseDTO GetAdvertisementByCategory(int page, Guid categoryId, Guid cityId);
+        IResponseDTO GetAdvertisementByCityId(int page, Guid cityId, Guid CustomerId);
+        IResponseDTO GetAdvertisementByMarketId(int page, Guid marketId, Guid? CustomerId);
+        IResponseDTO GetAdvertisementByCategory(int page, Guid categoryId, Guid cityId, Guid CustomerId);
     }
 }
