@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 //using BackEnd.DAL.Entities;
 using BackEnd.DAL.Models;
+using BackEnd.DAL.Views;
 using BackEnd.Service.Models;
 //using DAL.Entities;
 using Microsoft.AspNetCore.Identity;
@@ -45,7 +46,11 @@ namespace BackEnd.Service.Mapper
             CreateMap<MarketVM, Market>().ReverseMap();
             CreateMap<MarketVM2, Market>().ReverseMap();
             CreateMap<PrivacyVM, Privacy>().ReverseMap();
-            
+            CreateMap<View_City, CityVM>();
+            CreateMap<CityVM, View_City>().ForSourceMember(t => t.CountryName, opt => opt.DoNotValidate());
+               
+
+
             #endregion
 
 

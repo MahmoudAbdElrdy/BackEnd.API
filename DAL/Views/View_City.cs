@@ -1,11 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Text;
 
-namespace BackEnd.Service.Models
+namespace BackEnd.DAL.Views
 {
-    public partial class CityVM
+    public class View_City
     {
-
         public Guid CityId { get; set; } = Guid.NewGuid();
         public string CityName { get; set; }
         public Guid CountryId { get; set; }
