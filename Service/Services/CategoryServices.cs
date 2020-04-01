@@ -134,9 +134,9 @@ namespace BackEnd.Service.Services
             try
             {
                 var Categorys = _CategoryRepositroy.GetAll();
-                var ads = _AdvertisementRepositroy.Get(x => x.Special == true);
+                var ads = _AdvertisementRepositroy.Get(x => x.Special == true, includeProperties: "Market");
                 var CategorysList = _mapper.Map<List<CategoryVM>>(Categorys);
-                var adsList = _mapper.Map<List<AdvertisementVM>>(ads);
+                var adsList = _mapper.Map<List<AdvertisementVM2>>(ads);
                 foreach(var add in ads)
                 {
                     _AdvertisementViewRepositroy.Add(new AdvertisementView()

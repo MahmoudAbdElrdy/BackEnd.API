@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace BackEnd.Service.Models
 {
-    public partial class AdvertisementVM
+    public partial class AdvertisementVM2
     {
         public Guid AdsId { get; set; } = Guid.NewGuid();
         public Guid CityId { get; set; }
@@ -19,7 +19,7 @@ namespace BackEnd.Service.Models
         public bool? WaitingUpdate { get; set; } = false;
         public DateTime? CreationDate { get; set; } = DateTime.UtcNow.AddHours(3);
         public Guid? MarketId { get; set; }
-        //public virtual MarketVM Market { get; set; }
+        public virtual MarketVM2 Market { get; set; }
         //public virtual CityVM City { get; set; }
     }
 }

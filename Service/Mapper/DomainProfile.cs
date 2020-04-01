@@ -32,6 +32,7 @@ namespace BackEnd.Service.Mapper
             CreateMap<AdminUsersVM, AdminUsers>().ReverseMap();
             CreateMap<AdvertisementUpdateVM, AdvertisementUpdate>().ReverseMap();
             CreateMap<AdvertisementViewVM, AdvertisementView>().ReverseMap();
+            CreateMap<AdvertisementVM2, Advertisement>().ReverseMap();
             CreateMap<AdvertisementVM, Advertisement>().ReverseMap();
             CreateMap<CategoryVM, Category>().ReverseMap();
             CreateMap<CityVM, City>().ReverseMap();
@@ -42,6 +43,7 @@ namespace BackEnd.Service.Mapper
             CreateMap<CustomerVM, Customer>().ReverseMap();
             CreateMap<MarketFollowVM, MarketFollow>().ReverseMap();
             CreateMap<MarketVM, Market>().ReverseMap();
+            CreateMap<MarketVM2, Market>().ReverseMap();
             CreateMap<PrivacyVM, Privacy>().ReverseMap();
             
             #endregion

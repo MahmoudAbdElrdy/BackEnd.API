@@ -121,6 +121,11 @@ namespace BackEnd.DAL.Models
                     .HasForeignKey(d => d.CityId)
                     .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("FK_advertisement_city");
+
+                entity.HasOne(d => d.Market)
+                    .WithMany(p => p.Advertisement)
+                    .HasForeignKey(d => d.MarketId)
+                    .HasConstraintName("FK_advertisement_Market");
             });
 
             modelBuilder.Entity<AdvertisementOpen>(entity =>

@@ -13,7 +13,6 @@ namespace BackEnd.DAL.Models
         }
 
         public Guid AdsId { get; set; }
-        public Guid MarketId { get; set; }
         public Guid CityId { get; set; }
         public int? AdsType { get; set; }
         public string AdsText { get; set; }
@@ -26,9 +25,11 @@ namespace BackEnd.DAL.Models
         public bool? WaitingUpdate { get; set; }
         public DateTime? CreationDate { get; set; }
         public Guid CategoryId { get; set; }
+        public Guid? MarketId { get; set; }
 
         public virtual Category Category { get; set; }
         public virtual City City { get; set; }
+        public virtual Market Market { get; set; }
         public virtual ICollection<AdvertisementOpen> AdvertisementOpen { get; set; }
         public virtual ICollection<AdvertisementUpdate> AdvertisementUpdate { get; set; }
         public virtual ICollection<AdvertisementView> AdvertisementView { get; set; }

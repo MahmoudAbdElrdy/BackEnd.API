@@ -61,7 +61,7 @@ namespace BackEnd.API
 
          });
             services.AddDbContext<DB_A56457_LookandGoContext>(options =>
-                    options.UseLazyLoadingProxies()
+                    options.UseLazyLoadingProxies(false)
                     .UseSqlServer(Configuration.GetConnectionString("DatabaseConnection")));
        
     //        services.AddIdentity<ApplicationUser, IdentityRole>(options =>

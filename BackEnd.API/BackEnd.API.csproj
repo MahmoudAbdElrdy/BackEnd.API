@@ -6,6 +6,13 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="UploadFiles\Image\**" />
+    <Content Remove="UploadFiles\Image\**" />
+    <EmbeddedResource Remove="UploadFiles\Image\**" />
+    <None Remove="UploadFiles\Image\**" />
+  </ItemGroup>
+
+  <ItemGroup>
     <Compile Remove="Controllers\ApplicationUserController.cs" />
     <Compile Remove="Controllers\DepartmentController.cs" />
     <Compile Remove="Controllers\ValuesController.cs" />
@@ -24,7 +31,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="UploadFiles\Image\" />
+    <Folder Include="UploadFiles\" />
   </ItemGroup>
 
 </Project>

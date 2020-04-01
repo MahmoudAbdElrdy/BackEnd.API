@@ -102,7 +102,7 @@ namespace BackEnd.Service.Services
             {
                 var paging = new DTO.Pageing();
                 paging.pageNumber = page;
-                var Advertisements = _AdvertisementRepositroy.Get(x => x.CategoryId == categoryId && x.CityId == cityId)
+                var Advertisements = _AdvertisementRepositroy.Get(x => x.CategoryId == categoryId && x.CityId == cityId, includeProperties: "Market")
                                                              .Skip(paging.skip).Take(paging.pageSize);
                 foreach (var add in Advertisements)
                 {
@@ -114,7 +114,7 @@ namespace BackEnd.Service.Services
                     });
                 }
 
-                var AdvertisementsList = _mapper.Map<List<AdvertisementVM>>(Advertisements);
+                var AdvertisementsList = _mapper.Map<List<AdvertisementVM2>>(Advertisements);
                 _response.Data = AdvertisementsList;
                 _response.IsPassed = true;
                 _response.Message = "Done";
@@ -134,7 +134,7 @@ namespace BackEnd.Service.Services
             {
                 var paging = new DTO.Pageing();
                 paging.pageNumber = page;
-                var Advertisements = _AdvertisementRepositroy.Get(x => x.MarketId == marketId)
+                var Advertisements = _AdvertisementRepositroy.Get(x => x.MarketId == marketId, includeProperties: "Market")
                                                              .Skip(paging.skip).Take(paging.pageSize);
                 if (CustomerId != null && CustomerId != Guid.Empty)
                 {
@@ -148,7 +148,7 @@ namespace BackEnd.Service.Services
                         });
                     }
                 }
-                var AdvertisementsList = _mapper.Map<List<AdvertisementVM>>(Advertisements);
+                var AdvertisementsList = _mapper.Map<List<AdvertisementVM2>>(Advertisements);
                 _response.Data = AdvertisementsList;
                 _response.IsPassed = true;
                 _response.Message = "Done";
@@ -168,7 +168,7 @@ namespace BackEnd.Service.Services
             {
                 var paging = new DTO.Pageing();
                 paging.pageNumber = page;
-                var Advertisements = _AdvertisementRepositroy.Get(x => x.CityId == cityId)
+                var Advertisements = _AdvertisementRepositroy.Get(x => x.CityId == cityId, includeProperties: "Market")
                                                              .Skip(paging.skip).Take(paging.pageSize);
                 foreach (var add in Advertisements)
                 {
@@ -180,7 +180,7 @@ namespace BackEnd.Service.Services
                     });
                 }
 
-                var AdvertisementsList = _mapper.Map<List<AdvertisementVM>>(Advertisements);
+                var AdvertisementsList = _mapper.Map<List<AdvertisementVM2>>(Advertisements);
                 _response.Data = AdvertisementsList;
                 _response.IsPassed = true;
                 _response.Message = "Done";
@@ -198,7 +198,7 @@ namespace BackEnd.Service.Services
         {
             try
             {
-                var Advertisements = _AdvertisementRepositroy.GetAll();
+                var Advertisements = _AdvertisementRepositroy.GetAll().OrderByDescending(x=>x.CreationDate);
 
 
                 var AdvertisementsList = _mapper.Map<List<AdvertisementVM>>(Advertisements);
@@ -221,7 +221,7 @@ namespace BackEnd.Service.Services
             {
                 var paging = new DTO.Pageing();
                 paging.pageNumber = page;
-                var Advertisements = _AdvertisementRepositroy.GetAll().OrderBy(x => x.StartDate)
+                var Advertisements = _AdvertisementRepositroy.Get(includeProperties: "Market").OrderBy(x => x.StartDate)
                                                              .Skip(paging.skip).Take(paging.pageSize);
                 foreach (var add in Advertisements)
                 {
@@ -232,7 +232,7 @@ namespace BackEnd.Service.Services
                         CustomerId = CustomerId,
                     });
                 }
-                var AdvertisementsList = _mapper.Map<List<AdvertisementVM>>(Advertisements);
+                var AdvertisementsList = _mapper.Map<List<AdvertisementVM2>>(Advertisements);
                 _response.Data = AdvertisementsList;
                 _response.IsPassed = true;
                 _response.Message = "Done";
