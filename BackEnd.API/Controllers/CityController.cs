@@ -50,6 +50,15 @@ namespace BackEnd.API.Controllers
             return depart;
         }
         #endregion
+        #region Get: api/City/GetAllCity
+        [HttpGet]
+        [Route("GetAllCitySTP")]
+        public IResponseDTO GetAllCitySTP()
+        {
+            var depart = _CityServices.GetAllCitySTP();
+            return depart;
+        }
+        #endregion
 
         #region Get: api/City/GetSaudiCity
         [HttpGet]

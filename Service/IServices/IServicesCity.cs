@@ -15,5 +15,6 @@ namespace BackEnd.Service.IServices
         IResponseDTO EditCity(CityVM model);
         IResponseDTO DeleteCity(CityVM model);
         IResponseDTO GetByIDCity(object id);
+        IResponseDTO GetAllCitySTP();
     }
 }

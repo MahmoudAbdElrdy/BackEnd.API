@@ -472,5 +472,31 @@ public class GRepository<T> : IGRepository<T>
             _disposed = true;
         }
         #endregion
+        #region Database
+        public IEnumerable<T> ExecuteQueryView(string query, object[] parameters)
+        {
+            //var cc=_dbContext.Database.s Set<T>().FromSql(query, parameters);
+            if (parameters == null)
+            {
+                var model = _dbContext.Query<T>().FromSql(query);
+                return model;
+            }
+            else
+            {
+                return _dbContext.Query<T>().FromSql(query, parameters);
+            }
+
+
+        }
+        public IEnumerable<T> ExecuteQuery(string spQuery, object[] parameters)
+        {
+            var model= _dbContext.Set<T>().FromSql(spQuery);
+            if (parameters == null)
+                return _dbContext.Set<T>().FromSql(spQuery);
+            else
+                return _dbContext.Set<T>().FromSql(spQuery, parameters);
+
+        }
+        #endregion
     }
 }

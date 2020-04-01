@@ -86,6 +86,7 @@ namespace BackEnd.Repositories.Generics
         object GetMaximum(Expression<Func<T, object>> selector);
         Task<object> GetMaximumAsync(Expression<Func<T, object>> selector);
         #endregion
-
+        IEnumerable<T> ExecuteQueryView(string query, object[] parameters);
+        IEnumerable<T> ExecuteQuery(string spQuery, object[] parameters);
     }
 }
