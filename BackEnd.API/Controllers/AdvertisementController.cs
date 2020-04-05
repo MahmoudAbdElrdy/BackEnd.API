@@ -55,9 +55,9 @@ namespace BackEnd.API.Controllers
         #region Get: api/Advertisement/GetNewAdvertisement
         [HttpGet]
         [Route("GetNewAdvertisement")]
-        public IResponseDTO GetNewAdvertisement(int page,Guid CustomerId)
+        public IResponseDTO GetNewAdvertisement(int page,Guid CustomerId, Guid cityId)
         {
-            var depart = _AdvertisementServices.GetNewAdvertisement(page, CustomerId);
+            var depart = _AdvertisementServices.GetNewAdvertisement(page, cityId, CustomerId);
             return depart;
         }
         #endregion
