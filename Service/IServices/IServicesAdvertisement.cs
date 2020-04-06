@@ -18,5 +18,6 @@ namespace BackEnd.Service.IServices
         IResponseDTO GetAdvertisementByCityId(int page, Guid cityId, Guid CustomerId);
         IResponseDTO GetAdvertisementByMarketId(int page, Guid marketId, Guid? CustomerId);
         IResponseDTO GetAdvertisementByCategory(int page, Guid categoryId, Guid cityId, Guid CustomerId);
+        IResponseDTO GetAllAdvertisementSTP();
     }
 }

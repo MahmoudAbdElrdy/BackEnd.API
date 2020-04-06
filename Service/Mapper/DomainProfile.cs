@@ -47,7 +47,11 @@ namespace BackEnd.Service.Mapper
             CreateMap<MarketVM2, Market>().ReverseMap();
             CreateMap<PrivacyVM, Privacy>().ReverseMap();
             CreateMap<View_City, CityVM>();
+            CreateMap<View_Advertisement, AdvertisementVM>();
             CreateMap<CityVM, View_City>().ForSourceMember(t => t.CountryName, opt => opt.DoNotValidate());
+            CreateMap<AdvertisementVM, View_Advertisement>().ForSourceMember(t => t.CityName, opt => opt.DoNotValidate());
+            CreateMap<AdvertisementVM, View_Advertisement>().ForSourceMember(t => t.CategoryName, opt => opt.DoNotValidate());
+            CreateMap<AdvertisementVM, View_Advertisement>().ForSourceMember(t => t.MarketName, opt => opt.DoNotValidate());
                
 
 

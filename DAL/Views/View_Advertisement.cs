@@ -1,12 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Text;
 
-namespace BackEnd.Service.Models
+namespace BackEnd.DAL.Views
 {
-    public partial class AdvertisementVM
+   public class View_Advertisement
     {
         public Guid AdsId { get; set; } = Guid.NewGuid();
-        
+       
         public int? AdsType { get; set; }
         public string AdsText { get; set; }
         public string AdsImage { get; set; }
@@ -21,7 +22,5 @@ namespace BackEnd.Service.Models
         public string CategoryName { get; set; }
         public string CityName { get; set; }
         public string MarketName { get; set; }
-        //public virtual MarketVM Market { get; set; }
-        //public virtual CityVM City { get; set; }
     }
 }

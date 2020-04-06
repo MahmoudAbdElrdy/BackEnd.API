@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using BackEnd.DAL.Models;
+using BackEnd.DAL.Views;
 using BackEnd.Repositories.Generics;
 using BackEnd.Repositories.UOW;
 using BackEnd.Service.IServices;
@@ -19,16 +20,19 @@ namespace BackEnd.Service.Services
         private readonly IGRepository<Advertisement> _AdvertisementRepositroy;
         private readonly IUnitOfWork<DB_A56457_LookandGoContext> _unitOfWork;
         private readonly IGRepository<AdvertisementView> _AdvertisementViewRepositroy;
+        private readonly IGRepository<View_Advertisement> _View_AdvertisementRepositroy;
         private readonly IResponseDTO _response;
         private readonly IMapper _mapper;
         public AdvertisementServices(IGRepository<Advertisement> Advertisement, IGRepository<AdvertisementView> AdvertisementView,
-            IUnitOfWork<DB_A56457_LookandGoContext> unitOfWork, IResponseDTO responseDTO, IMapper mapper)
+            IUnitOfWork<DB_A56457_LookandGoContext> unitOfWork, IResponseDTO responseDTO, IMapper mapper
+           , IGRepository<View_Advertisement> View_AdvertisementRepositroy)
         {
             _AdvertisementRepositroy = Advertisement;
             _AdvertisementViewRepositroy = AdvertisementView;
             _unitOfWork = unitOfWork;
             _response = responseDTO;
             _mapper = mapper;
+            _View_AdvertisementRepositroy = View_AdvertisementRepositroy;
 
         }
         public IResponseDTO DeleteAdvertisement(AdvertisementVM model)
@@ -302,6 +306,24 @@ namespace BackEnd.Service.Services
 
             return _response;
 
+        }
+        public IResponseDTO GetAllAdvertisementSTP()
+        {
+            try
+            {
+                var Citys = _View_AdvertisementRepositroy.ExecuteQueryView("SELECT * FROM [dbo].[View_Advertisement]", null).ToList();
+                var CitysList = _mapper.Map<List<AdvertisementVM>>(Citys);
+                _response.Data = CitysList;
+                _response.IsPassed = true;
+                _response.Message = "Done";
+            }
+            catch (Exception ex)
+            {
+                _response.Data = null;
+                _response.IsPassed = false;
+                _response.Message = "Error " + ex.Message;
+            }
+            return _response;
         }
     }
 }

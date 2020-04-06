@@ -142,5 +142,14 @@ namespace BackEnd.API.Controllers
             return Ok(res);
         }
         #endregion
+        #region Get: api/City/GetAllAdvertisementSTP
+        [HttpGet]
+        [Route("GetAllAdvertisementSTP")]
+        public IResponseDTO GetAllAdvertisementSTP()
+        {
+            var depart = _AdvertisementServices.GetAllAdvertisementSTP();
+            return depart;
+        }
+        #endregion
     }
 }
