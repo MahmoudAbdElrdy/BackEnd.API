@@ -106,7 +106,9 @@ namespace BackEnd.Service.Services
             {
                 var paging = new DTO.Pageing();
                 paging.pageNumber = page;
-                var Advertisements = _AdvertisementRepositroy.Get(x => x.CategoryId == categoryId && x.CityId == cityId, includeProperties: "Market")
+                var Advertisements = _AdvertisementRepositroy.Get(x => x.CategoryId == categoryId 
+                                                                    && x.CityId == cityId && x.Available == true,
+                                                                    includeProperties: "Market")
                                                              .Skip(paging.skip).Take(paging.pageSize);
                 foreach (var add in Advertisements)
                 {
@@ -172,7 +174,7 @@ namespace BackEnd.Service.Services
             {
                 var paging = new DTO.Pageing();
                 paging.pageNumber = page;
-                var Advertisements = _AdvertisementRepositroy.Get(x => x.CityId == cityId, includeProperties: "Market")
+                var Advertisements = _AdvertisementRepositroy.Get(x => x.CityId == cityId && x.Available == true, includeProperties: "Market")
                                                              .Skip(paging.skip).Take(paging.pageSize);
                 foreach (var add in Advertisements)
                 {
@@ -219,13 +221,14 @@ namespace BackEnd.Service.Services
             return _response;
 
         }
-        public IResponseDTO GetNewAdvertisement(int page, Guid CustomerId)
+        public IResponseDTO GetNewAdvertisement(int page, Guid cityId, Guid CustomerId)
         {
             try
             {
                 var paging = new DTO.Pageing();
                 paging.pageNumber = page;
-                var Advertisements = _AdvertisementRepositroy.Get(includeProperties: "Market").OrderBy(x => x.StartDate)
+                var Advertisements = _AdvertisementRepositroy.Get(x=>x.CityId == cityId && x.Available == true ,includeProperties: "Market")
+                                                             .OrderBy(x => x.StartDate)
                                                              .Skip(paging.skip).Take(paging.pageSize);
                 foreach (var add in Advertisements)
                 {
