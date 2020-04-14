@@ -171,5 +171,26 @@ namespace BackEnd.Service.Services
             return _response;
 
         }
+        public IResponseDTO WaitingUpdate(Guid? id)
+        {
+            try
+            {
+                var Advertisements = _AdvertisementUpdateRepositroy.Get(x => x.AdsId == id).FirstOrDefault();
+
+
+                var AdvertisementsList = _mapper.Map<AdvertisementUpdateVM>(Advertisements);
+                _response.Data = AdvertisementsList;
+                _response.IsPassed = true;
+                _response.Message = "Done";
+            }
+            catch (Exception ex)
+            {
+                _response.Data = null;
+                _response.IsPassed = false;
+                _response.Message = "Error " + ex.Message;
+            }
+            return _response;
+
+        }
     }
 }

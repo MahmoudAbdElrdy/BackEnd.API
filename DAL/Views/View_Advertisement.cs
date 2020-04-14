@@ -22,5 +22,13 @@ namespace BackEnd.DAL.Views
         public string CategoryName { get; set; }
         public string CityName { get; set; }
         public string MarketName { get; set; }
+        public int CountAdvertismenOpen { get; set; }
+        public int CountAdvertismenView { get; set; }
+        public int CountCustomerOpen { get; set; }
+        public int CountCustomerView { get; set; }
+        public Guid CategoryId { get; set; }
+        public Guid CityId { get; set; }
+        public Guid MarketId { get; set; }
+
     }
 }

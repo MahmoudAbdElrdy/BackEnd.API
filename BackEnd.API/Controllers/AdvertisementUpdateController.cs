@@ -60,6 +60,15 @@ namespace BackEnd.API.Controllers
             return depart;
         }
         #endregion
+        #region watingupdate
+        [HttpGet]
+        [Route("GetAdvertisementWaitingUpdate")]
+        public IResponseDTO WaitingUpdate(Guid? id)
+        {
+            var depart = _AdvertisementUpdateServices.WaitingUpdate(id);
+            return depart;
+        }
+        #endregion
 
         #region Delete: api/AdvertisementUpdate/RemoveAdvertisementUpdate
         [HttpDelete]

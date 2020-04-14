@@ -14,5 +14,6 @@ namespace BackEnd.Service.IServices
         IResponseDTO EditAdvertisementUpdate(AdvertisementUpdateVM model);
         IResponseDTO DeleteAdvertisementUpdate(AdvertisementUpdateVM model);
         IResponseDTO GetByIDAdvertisementUpdate(object id);
+        IResponseDTO WaitingUpdate(Guid? id);
     }
 }
