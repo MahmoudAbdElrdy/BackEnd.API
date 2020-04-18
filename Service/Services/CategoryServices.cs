@@ -146,6 +146,7 @@ namespace BackEnd.Service.Services
                         CustomerId = CustomerId,
                     });
                 }
+                _unitOfWork.Commit();
                 _response.Data = new DTO.AdsCategryDTO()
                 {
                     category = CategorysList,

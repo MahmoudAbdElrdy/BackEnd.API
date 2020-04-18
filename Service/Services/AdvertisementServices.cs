@@ -119,7 +119,7 @@ namespace BackEnd.Service.Services
                         CustomerId = CustomerId,
                     });
                 }
-
+                _unitOfWork.Commit();
                 var AdvertisementsList = _mapper.Map<List<AdvertisementVM2>>(Advertisements);
                 _response.Data = AdvertisementsList;
                 _response.IsPassed = true;
@@ -153,6 +153,7 @@ namespace BackEnd.Service.Services
                             CustomerId = (Guid)CustomerId,
                         });
                     }
+                    _unitOfWork.Commit();
                 }
                 var AdvertisementsList = _mapper.Map<List<AdvertisementVM2>>(Advertisements);
                 _response.Data = AdvertisementsList;
@@ -185,7 +186,7 @@ namespace BackEnd.Service.Services
                         CustomerId = CustomerId,
                     });
                 }
-
+                _unitOfWork.Commit();
                 var AdvertisementsList = _mapper.Map<List<AdvertisementVM2>>(Advertisements);
                 _response.Data = AdvertisementsList;
                 _response.IsPassed = true;
@@ -239,6 +240,7 @@ namespace BackEnd.Service.Services
                         CustomerId = CustomerId,
                     });
                 }
+                _unitOfWork.Commit();
                 var AdvertisementsList = _mapper.Map<List<AdvertisementVM2>>(Advertisements);
                 _response.Data = AdvertisementsList;
                 _response.IsPassed = true;
