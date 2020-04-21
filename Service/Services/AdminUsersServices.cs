@@ -169,7 +169,7 @@ namespace BackEnd.Service.Services
             try
             {
                 var DbAdminUsers = _mapper.Map<AdminUsers>(model);
-
+                DbAdminUsers.UserId = Guid.NewGuid();
                 var AdminUsers = _mapper.Map<AdminUsersVM>(_AdminUsersRepositroy.Add(DbAdminUsers));
 
                 int save = _unitOfWork.Commit();

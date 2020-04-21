@@ -252,5 +252,44 @@ namespace BackEnd.Service.Services
             return _response;
 
         }
+        public IResponseDTO GetAllMarketContorlPanel()
+        {
+            try
+            {
+                var Markets = from entity in _MarketRepositroy.Get(includeProperties: "City").ToList()
+                              select new
+                            {
+                                  MarketId = entity.MarketId,
+                                  MarketAddress = entity.MarketAddress,
+                                  MarketEmail = entity.MarketEmail,
+                                  //MarketFollow = entity.MarketFollow,
+                                  MarketInfo = entity.MarketInfo,
+                                  MarketLatlng = entity.MarketLatlng,
+                                  MarketLogo = entity.MarketLogo,
+                                  MarketName = entity.MarketName,
+                                  MarketPassword = entity.MarketPassword,
+                                  MarketPhone = entity.MarketPhone,
+                                  Plateform = entity.Plateform,
+                                  Token = entity.Token,
+                                  Available = entity.Available,
+                                  CityId = entity.CityId,
+                                  CityName = entity.City.CityName,
+                                
+                            };
+
+
+                var MarketsList = Markets.ToList();
+                _response.Data = MarketsList;
+                _response.IsPassed = true;
+                _response.Message = "Done";
+            }
+            catch (Exception ex)
+            {
+                _response.Data = null;
+                _response.IsPassed = false;
+                _response.Message = "Error " + ex.Message;
+            }
+            return _response;
+        }
     }
 }

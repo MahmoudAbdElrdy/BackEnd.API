@@ -16,5 +16,6 @@ namespace BackEnd.Service.IServices
         IResponseDTO GetByIDMarket(object id);
         IResponseDTO UpdateMarketToken(DTO.MarketTokenDTO marketToken);
         IResponseDTO MarketLogin(DTO.MarketLoginDTO marketlogin);
+        IResponseDTO GetAllMarketContorlPanel();
     }
 }
