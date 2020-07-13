@@ -32,6 +32,31 @@ namespace BackEnd.API.Controllers
         }
         #endregion
 
+        #region Post: api/Market/SignupMarket
+        [HttpPost]
+        [Route("SignupMarket")]
+        public IResponseDTO SignupMarket(MarketVM MarketVM)
+        {
+            ResponseDTO res;
+            try
+            {
+                var logoUrl = UploadHelper.SaveFile(Request.Form.Files[0], "logo");
+                MarketVM.MarketLogo = logoUrl;
+                return _MarketServices.PostMarket(MarketVM);
+            }
+            catch (Exception ex)
+            {
+                res = new ResponseDTO()
+                {
+                    IsPassed = false,
+                    Message = "Error in UploadMarketLog " + ex.Message,
+                    Data = null,
+                };
+            }
+            return res;
+        }
+        #endregion
+
         #region Post: api/Upload/UploadMarketLog
         [HttpPost]
         //[Consumes("multipart/form-data")]
