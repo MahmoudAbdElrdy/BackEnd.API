@@ -150,5 +150,15 @@ namespace BackEnd.API.Controllers
             return depart;
         }
         #endregion
+        //IResponseDTO GetAllMarketContorlPanel()
+        #region Get: api/Market/GetAllMarket
+        [HttpGet]
+        [Route("GetAllMarketContorlPanel")]
+        public IResponseDTO GetAllMarketContorlPanel()
+        {
+            var depart = _MarketServices.GetAllMarketContorlPanel();
+            return depart;
+        }
+        #endregion
     }
 }
