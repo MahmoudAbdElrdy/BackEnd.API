@@ -192,7 +192,7 @@ namespace BackEnd.API
             app.UseSwaggerUI(c =>
             {
                 c.SwaggerEndpoint("/swagger/v1/swagger.json", " Auditor V1");
-
+                c.DocExpansion(DocExpansion.None);
             });
             app.UseStaticFiles();
             app.UseStaticFiles(new StaticFileOptions()

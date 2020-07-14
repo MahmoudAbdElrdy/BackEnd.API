@@ -57,6 +57,83 @@ namespace BackEnd.API.Controllers
         }
         #endregion
 
+        #region Post: api/Market/SignupMarket3
+        [HttpPost]
+        [Route("SignupMarket3")]
+        public IResponseDTO SignupMarket3(MarketImageVM MarketVM)
+        {
+            ResponseDTO res;
+            try
+            {
+                var logoUrl = UploadHelper.SaveFile(MarketVM.Image, "logo");
+                MarketVM.MarketLogo = logoUrl;
+                return _MarketServices.PostMarket(new MarketVM()
+                {
+                    CityId = MarketVM.CityId,
+                    MarketAddress = MarketVM.MarketAddress,
+                    MarketEmail = MarketVM.MarketEmail,
+                    MarketInfo = MarketVM.MarketInfo,
+                    MarketLatlng = MarketVM.MarketLatlng,
+                    MarketName = MarketVM.MarketName,
+                    MarketPassword = MarketVM.MarketPassword,
+                    MarketPhone = MarketVM.MarketPhone,
+                    Plateform = MarketVM.Plateform,
+                    Token = MarketVM.Token,
+                    MarketLogo = logoUrl,
+                });
+            }
+            catch (Exception ex)
+            {
+                res = new ResponseDTO()
+                {
+                    IsPassed = false,
+                    Message = "Error in UploadMarketLog " + ex.Message,
+                    Data = null,
+                };
+            }
+            return res;
+        }
+        #endregion
+
+        #region Get: api/Market/SignupMarket2
+        [HttpGet]
+        [Route("SignupMarket2")]
+        public IResponseDTO SignupMarket2(string MarketName, string MarketAddress, string MarketPhone, string MarketEmail, string MarketPassword, string MarketInfo, bool Plateform, Guid CityId, string Token, string MarketLatlng)
+        {
+            ResponseDTO res;
+            try
+            {
+                
+                var logoUrl = UploadHelper.SaveFile(Request.Form.Files[0], "logo");
+                MarketVM MarketVM = new MarketVM()
+                {
+                    CityId = CityId,
+                    MarketAddress = MarketAddress,
+                    MarketEmail = MarketEmail,
+                    MarketInfo = MarketInfo,
+                    MarketLatlng = MarketLatlng,
+                    MarketName = MarketName,
+                    MarketPassword = MarketPassword,
+                    MarketPhone = MarketPhone,
+                    Plateform = Plateform,
+                    Token = Token,
+                    MarketLogo = logoUrl,
+                };
+                return _MarketServices.PostMarket(MarketVM);
+            }
+            catch (Exception ex)
+            {
+                res = new ResponseDTO()
+                {
+                    IsPassed = false,
+                    Message = "Error in UploadMarketLog " + ex.Message,
+                    Data = null,
+                };
+            }
+            return res;
+        }
+        #endregion
+
         #region Post: api/Upload/UploadMarketLog
         [HttpPost]
         //[Consumes("multipart/form-data")]
