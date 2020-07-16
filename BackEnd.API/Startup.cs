@@ -81,7 +81,7 @@ namespace BackEnd.API
     //        });
             services.AddSwaggerGen(c =>
             {
-                c.SwaggerDoc("v1", new Info { Title = "AspNetCoreApiStarter", Version = "v1" });
+                c.SwaggerDoc("v1", new Info { Title = "Loogo", Version = "v1" });
                 // Swagger 2.+ support
   //              c.AddSecurityDefinition("Bearer", new ApiKeyScheme
   //              {

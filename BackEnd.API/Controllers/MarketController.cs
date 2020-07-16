@@ -40,8 +40,11 @@ namespace BackEnd.API.Controllers
             ResponseDTO res;
             try
             {
-                var logoUrl = UploadHelper.SaveFile(Request.Form.Files[0], "logo");
-                MarketVM.MarketLogo = logoUrl;
+                if (Request.Form.Files["MarkeImage"] != null)
+                {
+                    var logoUrl = UploadHelper.SaveFile(Request.Form.Files["MarkeImage"], "logo");
+                    MarketVM.MarketLogo = logoUrl;
+                }
                 return _MarketServices.PostMarket(MarketVM);
             }
             catch (Exception ex)
