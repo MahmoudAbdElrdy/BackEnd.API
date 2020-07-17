@@ -208,7 +208,7 @@ namespace BackEnd.API.Controllers
             ResponseDTO res;
             try
             {
-                if(MarketVM.Image == null)
+                if(MarketVM.Image != null)
                 {
                     var logoUrl = UploadHelper.SaveFile(MarketVM.Image, "logo");
                     MarketVM.MarketLogo = logoUrl;
@@ -313,7 +313,7 @@ namespace BackEnd.API.Controllers
             ResponseDTO res;
             try
             {
-                if (MarketVM.Image == null)
+                if (MarketVM.Image != null)
                 {
                     var logoUrl = UploadHelper.SaveFile(MarketVM.Image, "logo");
                     MarketVM.MarketLogo = logoUrl;

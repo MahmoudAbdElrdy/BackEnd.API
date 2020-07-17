@@ -39,12 +39,12 @@ namespace BackEnd.API.Controllers
             ResponseDTO res;
             try
             {
-                if (AdvertisementUpdateVM.Image == null)
+                if (AdvertisementUpdateVM.Image != null)
                 {
                     var logoUrl = Hlper.UploadHelper.SaveFile(AdvertisementUpdateVM.Image, "AdsImage");
                     AdvertisementUpdateVM.AdsImage = logoUrl;
                 }
-                if (AdvertisementUpdateVM.Video == null)
+                if (AdvertisementUpdateVM.Video != null)
                 {
                     var VideoUrl = Hlper.UploadHelper.SaveFile(AdvertisementUpdateVM.Video, "AdsVideo");
                     AdvertisementUpdateVM.AdsVideo = VideoUrl;
