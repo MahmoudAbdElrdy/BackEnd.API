@@ -32,6 +32,55 @@ namespace BackEnd.API.Controllers
         }
         #endregion
 
+        #region Post: api/Advertisement/NewSaveAdvertisement
+        [HttpPost]
+        [Route("NewSaveAdvertisement")]
+        public IResponseDTO NewSaveAdvertisement([FromForm]AdvertisementImageVM AdvertisementVM)
+        {
+            ResponseDTO res;
+            try
+            {
+                if (AdvertisementVM.Image == null)
+                {
+                    var logoUrl = UploadHelper.SaveFile(AdvertisementVM.Image, "AdsImage");
+                    AdvertisementVM.AdsImage = logoUrl;
+                }
+                if (AdvertisementVM.Video == null)
+                {
+                    var VideoUrl = UploadHelper.SaveFile(AdvertisementVM.Video, "AdsVideo");
+                    AdvertisementVM.AdsVideo = VideoUrl;
+                }
+                return _AdvertisementServices.PostAdvertisement(new AdvertisementVM()
+                {
+                    AdsId = Guid.NewGuid(),
+                    AdsText = AdvertisementVM.AdsText,
+                    AdsImage = AdvertisementVM.AdsImage,
+                    AdsType = AdvertisementVM.AdsType,
+                    AdsVideo = AdvertisementVM.AdsVideo,
+                    Available = AdvertisementVM.Available,
+                    CategoryId = AdvertisementVM.CategoryId,
+                    CityId = AdvertisementVM.CityId,
+                    CreationDate = AdvertisementVM.CreationDate,
+                    MarketId = AdvertisementVM.MarketId,
+                    WaitingUpdate = AdvertisementVM.WaitingUpdate,
+                    EndDate = AdvertisementVM.EndDate,
+                    Special = AdvertisementVM.Special,
+                    StartDate = AdvertisementVM.StartDate,
+                });
+            }
+            catch (Exception ex)
+            {
+                res = new ResponseDTO()
+                {
+                    IsPassed = false,
+                    Message = "Error in UploadMarketLog " + ex.Message,
+                    Data = null,
+                };
+            }
+            return res;
+        }
+        #endregion
+
         #region Put: api/Advertisement/UpdateAdvertisement
         [HttpPut]
         [Route("UpdateAdvertisement")]
@@ -142,6 +191,7 @@ namespace BackEnd.API.Controllers
             return Ok(res);
         }
         #endregion
+
         #region Get: api/City/GetAllAdvertisementSTP
         [HttpGet]
         [Route("GetAllAdvertisementSTP")]

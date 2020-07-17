@@ -31,6 +31,53 @@ namespace BackEnd.API.Controllers
         }
         #endregion
 
+        #region Post: api/AdvertisementUpdate/NewSaveAdvertisementUpdate
+        [HttpPost]
+        [Route("NewSaveAdvertisementUpdate")]
+        public IResponseDTO NewSaveAdvertisementUpdate([FromForm]AdvertisementImageUpdateVM AdvertisementUpdateVM)
+        {
+            ResponseDTO res;
+            try
+            {
+                if (AdvertisementUpdateVM.Image == null)
+                {
+                    var logoUrl = Hlper.UploadHelper.SaveFile(AdvertisementUpdateVM.Image, "AdsImage");
+                    AdvertisementUpdateVM.AdsImage = logoUrl;
+                }
+                if (AdvertisementUpdateVM.Video == null)
+                {
+                    var VideoUrl = Hlper.UploadHelper.SaveFile(AdvertisementUpdateVM.Video, "AdsVideo");
+                    AdvertisementUpdateVM.AdsVideo = VideoUrl;
+                }
+                return _AdvertisementUpdateServices.PostAdvertisementUpdate(new AdvertisementUpdateVM()
+                {
+                    AdsUpdateId = Guid.NewGuid(),
+                    AdsText = AdvertisementUpdateVM.AdsText,
+                    AdsImage = AdvertisementUpdateVM.AdsImage,
+                    AdsType = AdvertisementUpdateVM.AdsType,
+                    AdsVideo = AdvertisementUpdateVM.AdsVideo,
+                    Available = AdvertisementUpdateVM.Available,
+                    CityId = AdvertisementUpdateVM.CityId,
+                    CreationDate = AdvertisementUpdateVM.CreationDate,
+                    EndDate = AdvertisementUpdateVM.EndDate,
+                    Special = AdvertisementUpdateVM.Special,
+                    StartDate = AdvertisementUpdateVM.StartDate,
+                    AdsId = AdvertisementUpdateVM.AdsId,
+                });
+            }
+            catch (Exception ex)
+            {
+                res = new ResponseDTO()
+                {
+                    IsPassed = false,
+                    Message = "Error in UploadMarketLog " + ex.Message,
+                    Data = null,
+                };
+            }
+            return res;
+        }
+        #endregion
+
         #region Put: api/AdvertisementUpdate/UpdateAdvertisementUpdate
         [HttpPut]
         [Route("UpdateAdvertisementUpdate")]

@@ -32,44 +32,187 @@ namespace BackEnd.API.Controllers
         }
         #endregion
 
+        //#region Post: api/Market/SignupMarket
+        //[HttpPost]
+        //[Route("SignupMarket")]
+        //public IResponseDTO SignupMarket(MarketVM MarketVM)
+        //{
+        //    ResponseDTO res;
+        //    try
+        //    {
+        //        if (Request.Form.Files["MarkeImage"] != null)
+        //        {
+        //            var logoUrl = UploadHelper.SaveFile(Request.Form.Files["MarkeImage"], "logo");
+        //            MarketVM.MarketLogo = logoUrl;
+        //        }
+        //        return _MarketServices.PostMarket(MarketVM);
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        res = new ResponseDTO()
+        //        {
+        //            IsPassed = false,
+        //            Message = "Error in UploadMarketLog " + ex.Message,
+        //            Data = null,
+        //        };
+        //    }
+        //    return res;
+        //}
+        //#endregion
+
+        //#region Post: api/Market/SignupMarket3
+        //[HttpPost]
+        //[Route("SignupMarket3")]
+        //public IResponseDTO SignupMarket3(MarketImageVM MarketVM)
+        //{
+        //    ResponseDTO res;
+        //    try
+        //    {
+        //        var logoUrl = UploadHelper.SaveFile(MarketVM.Image, "logo");
+        //        MarketVM.MarketLogo = logoUrl;
+        //        return _MarketServices.PostMarket(new MarketVM()
+        //        {
+        //            CityId = MarketVM.CityId,
+        //            MarketAddress = MarketVM.MarketAddress,
+        //            MarketEmail = MarketVM.MarketEmail,
+        //            MarketInfo = MarketVM.MarketInfo,
+        //            MarketLatlng = MarketVM.MarketLatlng,
+        //            MarketName = MarketVM.MarketName,
+        //            MarketPassword = MarketVM.MarketPassword,
+        //            MarketPhone = MarketVM.MarketPhone,
+        //            Plateform = MarketVM.Plateform,
+        //            Token = MarketVM.Token,
+        //            MarketLogo = logoUrl,
+        //        });
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        res = new ResponseDTO()
+        //        {
+        //            IsPassed = false,
+        //            Message = "Error in UploadMarketLog " + ex.Message,
+        //            Data = null,
+        //        };
+        //    }
+        //    return res;
+        //}
+        //#endregion
+
+        //#region Get: api/Market/SignupMarket4
+        //[HttpGet]
+        //[Route("SignupMarket4")]
+        //public IResponseDTO SignupMarket4(string MarketName, string MarketAddress, string MarketPhone, string MarketEmail, string MarketPassword, string MarketInfo, bool Plateform, Guid CityId, string Token, string MarketLatlng)
+        //{
+        //    ResponseDTO res;
+        //    try
+        //    {
+
+        //        var logoUrl = UploadHelper.SaveFile(Request.Form.Files[0], "logo");
+        //        MarketVM MarketVM = new MarketVM()
+        //        {
+        //            CityId = CityId,
+        //            MarketAddress = MarketAddress,
+        //            MarketEmail = MarketEmail,
+        //            MarketInfo = MarketInfo,
+        //            MarketLatlng = MarketLatlng,
+        //            MarketName = MarketName,
+        //            MarketPassword = MarketPassword,
+        //            MarketPhone = MarketPhone,
+        //            Plateform = Plateform,
+        //            Token = Token,
+        //            MarketLogo = logoUrl,
+        //        };
+        //        return _MarketServices.PostMarket(MarketVM);
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        res = new ResponseDTO()
+        //        {
+        //            IsPassed = false,
+        //            Message = "Error in UploadMarketLog " + ex.Message,
+        //            Data = null,
+        //        };
+        //    }
+        //    return res;
+        //}
+        //#endregion
+
+        //#region Post: api/Market/SignupMarket5
+        //[HttpPost]
+        //[Route("SignupMarket5")]
+        //public IResponseDTO SignupMarket5(ModelBinding.MarketImageModel model)
+        //{
+        //    ResponseDTO res;
+        //    try
+        //    {
+        //        var logoUrl = UploadHelper.SaveFile(model.Image, "logo");
+        //        model.Market.MarketLogo = logoUrl;
+        //        return _MarketServices.PostMarket(model.Market);
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        res = new ResponseDTO()
+        //        {
+        //            IsPassed = false,
+        //            Message = "Error in UploadMarketLog " + ex.Message,
+        //            Data = null,
+        //        };
+        //    }
+        //    return res;
+        //}
+        //#endregion
+        //#region Post: api/Market/SignupMarket2
+        //[HttpPost]
+        //[Route("SignupMarket2")]
+        //public IResponseDTO SignupMarket2(string MarketName, string MarketAddress, string MarketPhone, string MarketEmail, string MarketPassword, string MarketInfo, bool Plateform, Guid CityId, string Token, string MarketLatlng)
+        //{
+        //    ResponseDTO res;
+        //    try
+        //    {
+
+        //        var logoUrl = UploadHelper.SaveFile(Request.Form.Files[0], "logo");
+        //        MarketVM MarketVM = new MarketVM()
+        //        {
+        //            CityId = CityId,
+        //            MarketAddress = MarketAddress,
+        //            MarketEmail = MarketEmail,
+        //            MarketInfo = MarketInfo,
+        //            MarketLatlng = MarketLatlng,
+        //            MarketName = MarketName,
+        //            MarketPassword = MarketPassword,
+        //            MarketPhone = MarketPhone,
+        //            Plateform = Plateform,
+        //            Token = Token,
+        //            MarketLogo = logoUrl,
+        //        };
+        //        return _MarketServices.PostMarket(MarketVM);
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        res = new ResponseDTO()
+        //        {
+        //            IsPassed = false,
+        //            Message = "Error in UploadMarketLog " + ex.Message,
+        //            Data = null,
+        //        };
+        //    }
+        //    return res;
+        //}
+        //#endregion
+
         #region Post: api/Market/SignupMarket
         [HttpPost]
         [Route("SignupMarket")]
-        public IResponseDTO SignupMarket(MarketVM MarketVM)
+        public IResponseDTO SignupMarket([FromForm]MarketImageVM MarketVM)
         {
             ResponseDTO res;
             try
             {
-                if (Request.Form.Files["MarkeImage"] != null)
+                if(MarketVM.Image == null)
                 {
-                    var logoUrl = UploadHelper.SaveFile(Request.Form.Files["MarkeImage"], "logo");
+                    var logoUrl = UploadHelper.SaveFile(MarketVM.Image, "logo");
                     MarketVM.MarketLogo = logoUrl;
                 }
-                return _MarketServices.PostMarket(MarketVM);
-            }
-            catch (Exception ex)
-            {
-                res = new ResponseDTO()
-                {
-                    IsPassed = false,
-                    Message = "Error in UploadMarketLog " + ex.Message,
-                    Data = null,
-                };
-            }
-            return res;
-        }
-        #endregion
-
-        #region Post: api/Market/SignupMarket3
-        [HttpPost]
-        [Route("SignupMarket3")]
-        public IResponseDTO SignupMarket3(MarketImageVM MarketVM)
-        {
-            ResponseDTO res;
-            try
-            {
-                var logoUrl = UploadHelper.SaveFile(MarketVM.Image, "logo");
-                MarketVM.MarketLogo = logoUrl;
                 return _MarketServices.PostMarket(new MarketVM()
                 {
                     CityId = MarketVM.CityId,
@@ -82,149 +225,8 @@ namespace BackEnd.API.Controllers
                     MarketPhone = MarketVM.MarketPhone,
                     Plateform = MarketVM.Plateform,
                     Token = MarketVM.Token,
-                    MarketLogo = logoUrl,
+                    MarketLogo = MarketVM.MarketLogo,
                 });
-            }
-            catch (Exception ex)
-            {
-                res = new ResponseDTO()
-                {
-                    IsPassed = false,
-                    Message = "Error in UploadMarketLog " + ex.Message,
-                    Data = null,
-                };
-            }
-            return res;
-        }
-        #endregion
-
-        #region Get: api/Market/SignupMarket4
-        [HttpGet]
-        [Route("SignupMarket4")]
-        public IResponseDTO SignupMarket4(string MarketName, string MarketAddress, string MarketPhone, string MarketEmail, string MarketPassword, string MarketInfo, bool Plateform, Guid CityId, string Token, string MarketLatlng)
-        {
-            ResponseDTO res;
-            try
-            {
-                
-                var logoUrl = UploadHelper.SaveFile(Request.Form.Files[0], "logo");
-                MarketVM MarketVM = new MarketVM()
-                {
-                    CityId = CityId,
-                    MarketAddress = MarketAddress,
-                    MarketEmail = MarketEmail,
-                    MarketInfo = MarketInfo,
-                    MarketLatlng = MarketLatlng,
-                    MarketName = MarketName,
-                    MarketPassword = MarketPassword,
-                    MarketPhone = MarketPhone,
-                    Plateform = Plateform,
-                    Token = Token,
-                    MarketLogo = logoUrl,
-                };
-                return _MarketServices.PostMarket(MarketVM);
-            }
-            catch (Exception ex)
-            {
-                res = new ResponseDTO()
-                {
-                    IsPassed = false,
-                    Message = "Error in UploadMarketLog " + ex.Message,
-                    Data = null,
-                };
-            }
-            return res;
-        }
-        #endregion
-
-        #region Post: api/Market/SignupMarket5
-        [HttpPost]
-        [Route("SignupMarket5")]
-        public IResponseDTO SignupMarket5(ModelBinding.MarketImageModel model)
-        {
-            ResponseDTO res;
-            try
-            {
-                var logoUrl = UploadHelper.SaveFile(model.Image, "logo");
-                model.Market.MarketLogo = logoUrl;
-                return _MarketServices.PostMarket(model.Market);
-            }
-            catch (Exception ex)
-            {
-                res = new ResponseDTO()
-                {
-                    IsPassed = false,
-                    Message = "Error in UploadMarketLog " + ex.Message,
-                    Data = null,
-                };
-            }
-            return res;
-        }
-        #endregion
-
-        #region Post: api/Market/SignupMarket6
-        [HttpPost]
-        [Route("SignupMarket6")]
-        public IResponseDTO SignupMarket6([FromForm]MarketImageVM MarketVM)
-        {
-            ResponseDTO res;
-            try
-            {
-                var logoUrl = UploadHelper.SaveFile(MarketVM.Image, "logo");
-                MarketVM.MarketLogo = logoUrl;
-                return _MarketServices.PostMarket(new MarketVM()
-                {
-                    CityId = MarketVM.CityId,
-                    MarketAddress = MarketVM.MarketAddress,
-                    MarketEmail = MarketVM.MarketEmail,
-                    MarketInfo = MarketVM.MarketInfo,
-                    MarketLatlng = MarketVM.MarketLatlng,
-                    MarketName = MarketVM.MarketName,
-                    MarketPassword = MarketVM.MarketPassword,
-                    MarketPhone = MarketVM.MarketPhone,
-                    Plateform = MarketVM.Plateform,
-                    Token = MarketVM.Token,
-                    MarketLogo = logoUrl,
-                });
-            }
-            catch (Exception ex)
-            {
-                res = new ResponseDTO()
-                {
-                    IsPassed = false,
-                    Message = "Error in UploadMarketLog " + ex.Message,
-                    Data = null,
-                };
-            }
-            return res;
-        }
-        #endregion
-
-        #region Post: api/Market/SignupMarket2
-        [HttpPost]
-        [Route("SignupMarket2")]
-        public IResponseDTO SignupMarket2(string MarketName, string MarketAddress, string MarketPhone, string MarketEmail, string MarketPassword, string MarketInfo, bool Plateform, Guid CityId, string Token, string MarketLatlng)
-        {
-            ResponseDTO res;
-            try
-            {
-
-                var logoUrl = UploadHelper.SaveFile(Request.Form.Files[0], "logo");
-                MarketVM MarketVM = new MarketVM()
-                {
-                    CityId = CityId,
-                    MarketAddress = MarketAddress,
-                    MarketEmail = MarketEmail,
-                    MarketInfo = MarketInfo,
-                    MarketLatlng = MarketLatlng,
-                    MarketName = MarketName,
-                    MarketPassword = MarketPassword,
-                    MarketPhone = MarketPhone,
-                    Plateform = Plateform,
-                    Token = Token,
-                    MarketLogo = logoUrl,
-                };
-                return _MarketServices.PostMarket(MarketVM);
             }
             catch (Exception ex)
             {
@@ -300,6 +302,47 @@ namespace BackEnd.API.Controllers
         {
             var depart = _MarketServices.EditMarket(MarketVM);
             return depart;
+        }
+        #endregion
+
+        #region Put: api/Market/NewUpdateMarket
+        [HttpPost]
+        [Route("NewUpdateMarket")]
+        public IResponseDTO NewUpdateMarket([FromForm]MarketImageVM MarketVM)
+        {
+            ResponseDTO res;
+            try
+            {
+                if (MarketVM.Image == null)
+                {
+                    var logoUrl = UploadHelper.SaveFile(MarketVM.Image, "logo");
+                    MarketVM.MarketLogo = logoUrl;
+                }
+                return _MarketServices.EditMarket(new MarketVM()
+                {
+                    CityId = MarketVM.CityId,
+                    MarketAddress = MarketVM.MarketAddress,
+                    MarketEmail = MarketVM.MarketEmail,
+                    MarketInfo = MarketVM.MarketInfo,
+                    MarketLatlng = MarketVM.MarketLatlng,
+                    MarketName = MarketVM.MarketName,
+                    MarketPassword = MarketVM.MarketPassword,
+                    MarketPhone = MarketVM.MarketPhone,
+                    Plateform = MarketVM.Plateform,
+                    Token = MarketVM.Token,
+                    MarketLogo = MarketVM.MarketLogo,
+                });
+            }
+            catch (Exception ex)
+            {
+                res = new ResponseDTO()
+                {
+                    IsPassed = false,
+                    Message = "Error in UploadMarketLog " + ex.Message,
+                    Data = null,
+                };
+            }
+            return res;
         }
         #endregion
 
