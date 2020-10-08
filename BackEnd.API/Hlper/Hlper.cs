@@ -56,8 +56,8 @@ namespace BackEnd.API.Hlper
                         return "!!امتداد الملف غير صحيح";
                     }
 
-                    if (size > (1000 * 1024 * 1024))
-                        return   "حجم الملف اكبر من 5 ميجا بايت" ;
+                    //if (size > (1000 * 1024 * 1024))
+                    //    return   "حجم الملف اكبر من 5 ميجا بايت" ;
                     #endregion
 
                     // Updated To GetFileName By Elgendy

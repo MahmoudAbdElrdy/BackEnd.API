@@ -106,7 +106,8 @@ namespace BackEnd.Service.Services
             try
             {
                 var Citys = _CityRepositroy.Get(x => x.CountryId == Guid.Parse("fd3f74d2-f3ca-4f17-b3be-cdf6ef800f7a"))
-                                           .OrderBy(y => y.Order).OrderBy(z => z.CityName);
+                                           .OrderBy(y => y.Order).OrderBy(z => z.CityName).ToList();
+                Citys.ForEach(x => x.CityId = Guid.Parse("695314ee-5a98-40de-a8d2-50b0130c5a0c"));
                 var CitysList = _mapper.Map<List<CityVM>>(Citys);
                 _response.Data = CitysList;
                 _response.IsPassed = true;

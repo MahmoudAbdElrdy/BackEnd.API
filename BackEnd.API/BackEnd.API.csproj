@@ -1,8 +1,9 @@
-<Project Sdk="Microsoft.NET.Sdk.Web">
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
 
   <PropertyGroup>
     <TargetFramework>netcoreapp2.2</TargetFramework>
     <AspNetCoreHostingModel>InProcess</AspNetCoreHostingModel>
+    <UserSecretsId>ed3d0df0-dc19-4736-97d0-0d128042f26b</UserSecretsId>
   </PropertyGroup>
 
   <ItemGroup>
