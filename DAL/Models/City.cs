@@ -7,7 +7,7 @@ namespace BackEnd.DAL.Models
     {
         public City()
         {
-            Advertisement = new HashSet<Advertisement>();
+            AdvertisementCity = new HashSet<AdvertisementCity>();
             AdvertisementUpdate = new HashSet<AdvertisementUpdate>();
             Customer = new HashSet<Customer>();
             Market = new HashSet<Market>();
@@ -20,7 +20,7 @@ namespace BackEnd.DAL.Models
         public bool? Available { get; set; }
 
         public virtual Country Country { get; set; }
-        public virtual ICollection<Advertisement> Advertisement { get; set; }
+        public virtual ICollection<AdvertisementCity> AdvertisementCity { get; set; }
         public virtual ICollection<AdvertisementUpdate> AdvertisementUpdate { get; set; }
         public virtual ICollection<Customer> Customer { get; set; }
         public virtual ICollection<Market> Market { get; set; }

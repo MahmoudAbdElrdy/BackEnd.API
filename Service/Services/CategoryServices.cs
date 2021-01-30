@@ -133,12 +133,12 @@ namespace BackEnd.Service.Services
         {
             try
             {
-                var Categorys = _CategoryRepositroy.Get(includeProperties: "Advertisement").ToList();
+                var Categorys = _CategoryRepositroy.Get(includeProperties: "AdvertisementCategory").ToList();
                 var ads = _AdvertisementRepositroy.Get(x => x.Special == true && x.Available == true , includeProperties: "Market");
                 List<CategoryVM> CategorysList = new List<CategoryVM>();// _mapper.Map<List<CategoryVM>>(Categorys);
                 foreach (var c in Categorys)
                 {
-                    if (c.Advertisement != null && c.Advertisement.Count > 0)
+                    if (c.AdvertisementCategory != null && c.AdvertisementCategory.Count > 0)
                     {
                         CategorysList.Add(_mapper.Map<CategoryVM>(c));
                     }

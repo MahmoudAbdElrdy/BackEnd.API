@@ -7,13 +7,15 @@ namespace BackEnd.DAL.Models
     {
         public Advertisement()
         {
+            AdvertisementAttach = new HashSet<AdvertisementAttach>();
+            AdvertisementCategory = new HashSet<AdvertisementCategory>();
+            AdvertisementCity = new HashSet<AdvertisementCity>();
             AdvertisementOpen = new HashSet<AdvertisementOpen>();
             AdvertisementUpdate = new HashSet<AdvertisementUpdate>();
             AdvertisementView = new HashSet<AdvertisementView>();
         }
 
         public Guid AdsId { get; set; }
-        public Guid CityId { get; set; }
         public int? AdsType { get; set; }
         public string AdsText { get; set; }
         public string AdsImage { get; set; }
@@ -24,12 +26,13 @@ namespace BackEnd.DAL.Models
         public bool? Special { get; set; }
         public bool? WaitingUpdate { get; set; }
         public DateTime? CreationDate { get; set; }
-        public Guid CategoryId { get; set; }
         public Guid? MarketId { get; set; }
+        public string AdsName { get; set; }
 
-        public virtual Category Category { get; set; }
-        public virtual City City { get; set; }
         public virtual Market Market { get; set; }
+        public virtual ICollection<AdvertisementAttach> AdvertisementAttach { get; set; }
+        public virtual ICollection<AdvertisementCategory> AdvertisementCategory { get; set; }
+        public virtual ICollection<AdvertisementCity> AdvertisementCity { get; set; }
         public virtual ICollection<AdvertisementOpen> AdvertisementOpen { get; set; }
         public virtual ICollection<AdvertisementUpdate> AdvertisementUpdate { get; set; }
         public virtual ICollection<AdvertisementView> AdvertisementView { get; set; }

@@ -6,7 +6,7 @@ namespace BackEnd.Service.Models
 {
    public class CountryVM
     {
-        public string CountryName { get; set; }
+        public string CountryName { get; set; } = "";
         public Guid CountryId { get; set; } = Guid.NewGuid();
         public int Order { get; set; }
         public DateTime CreationDate { get; set; } = DateTime.UtcNow.AddHours(3);

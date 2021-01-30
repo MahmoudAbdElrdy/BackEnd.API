@@ -226,6 +226,11 @@ namespace BackEnd.API.Controllers
                     Plateform = MarketVM.Plateform,
                     Token = MarketVM.Token,
                     MarketLogo = MarketVM.MarketLogo,
+                    FacebookUrl = MarketVM.FacebookUrl,
+                    InstagramUrl = MarketVM.InstagramUrl,
+                    SnapchatUrl = MarketVM.SnapchatUrl,
+                    TwitterUrl = MarketVM.TwitterUrl,
+                    WebSitUrl = MarketVM.WebSitUrl,
                 });
             }
             catch (Exception ex)
@@ -375,8 +380,8 @@ namespace BackEnd.API.Controllers
             return depart;
         }
         #endregion
-        //IResponseDTO GetAllMarketContorlPanel()
-        #region Get: api/Market/GetAllMarket
+
+        #region Get: api/Market/GetAllMarketContorlPanel
         [HttpGet]
         [Route("GetAllMarketContorlPanel")]
         public IResponseDTO GetAllMarketContorlPanel()

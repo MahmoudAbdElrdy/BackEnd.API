@@ -9,15 +9,18 @@ namespace BackEnd.Service.IServices
 {
    public interface IServicesAdvertisement
     {
-        IResponseDTO PostAdvertisement(AdvertisementVM model);
+        IResponseDTO PostAdvertisement(AdvertisementIncloudVM model);
+        IResponseDTO PostAdvertisementAttach(AdvertisementAttachVM model);
         IResponseDTO GetAllAdvertisement();
-        IResponseDTO GetNewAdvertisement(int page, Guid cityId, Guid CustomerId);
+        IResponseDTO GetNewAdvertisement(int page, Guid CustomerId);
         IResponseDTO EditAdvertisement(AdvertisementVM model);
         IResponseDTO DeleteAdvertisement(AdvertisementVM model);
         IResponseDTO GetByIDAdvertisement(object id);
+        IResponseDTO GetAdvertisementDetails(Guid id, Guid CustomerId);
         IResponseDTO GetAdvertisementByCityId(int page, Guid cityId, Guid CustomerId);
         IResponseDTO GetAdvertisementByMarketId(int page, Guid marketId, Guid? CustomerId);
         IResponseDTO GetAdvertisementByCategory(int page, Guid categoryId, Guid cityId, Guid CustomerId);
+        IResponseDTO GetAdvertisementByCategoryForAllCity(int page, Guid categoryId, Guid CustomerId);
         IResponseDTO GetAllAdvertisementSTP();
     }
 }

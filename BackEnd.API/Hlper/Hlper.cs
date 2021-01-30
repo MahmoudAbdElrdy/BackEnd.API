@@ -41,24 +41,24 @@ namespace BackEnd.API.Hlper
                     //var fileName = ContentDispositionHeaderValue.Parse(file.ContentDisposition).FileName.Trim('"');
                     var _imgname = FristName + DateTime.Now.Ticks;
                     // check valid extension
-                    #region  check size
+                    //#region  check size
 
                     string extension = Path.GetExtension(file.FileName);
                     
-                    //extension= extension.Substring(1, extension.Length-1);
-                    var size = file.Length;
-                    if (!_extentions.Contains(extension.ToUpper()))
-                    {
-                        temp.Add("dbPath", "");
-                        temp.Add("_ext", "");
-                        temp.Add("stat", "File extension is not valid.");
-                        //return new {path="",extention="",state= "File extension is not valid." };
-                        return "!!امتداد الملف غير صحيح";
-                    }
+                    ////extension= extension.Substring(1, extension.Length-1);
+                    //var size = file.Length;
+                    //if (!_extentions.Contains(extension.ToUpper()))
+                    //{
+                    //    temp.Add("dbPath", "");
+                    //    temp.Add("_ext", "");
+                    //    temp.Add("stat", "File extension is not valid.");
+                    //    //return new {path="",extention="",state= "File extension is not valid." };
+                    //    return "!!امتداد الملف غير صحيح";
+                    //}
 
-                    //if (size > (1000 * 1024 * 1024))
-                    //    return   "حجم الملف اكبر من 5 ميجا بايت" ;
-                    #endregion
+                    ////if (size > (1000 * 1024 * 1024))
+                    ////    return   "حجم الملف اكبر من 5 ميجا بايت" ;
+                    //#endregion
 
                     // Updated To GetFileName By Elgendy
                     var _ext = Path.GetFileNameWithoutExtension(file.FileName);
@@ -72,7 +72,7 @@ namespace BackEnd.API.Hlper
                         file.CopyTo(stream);
                     }
                     //string dbPath = "http://localhost:52023/UploadFiles/" + _imgname + extension;
-                        string dbPath = "http://lookandgo-001-site1.dtempurl.com/UploadFiles/" +  _imgname+extension;
+                    string dbPath = "http://lookandgo-001-site1.dtempurl.com/UploadFiles/" + _imgname + extension;
                     temp.Add("dbPath", dbPath);
                     temp.Add("_ext", _ext);
                     temp.Add("stat", "done");
@@ -98,7 +98,7 @@ namespace BackEnd.API.Hlper
                 temp.Add("stat", "Internal server error" + ex.ToString());
                 //return new { path = "", extention = "", state = "Internal server error" + ex.ToString() };
 
-                return "خطا في السيرفر";
+                return $"خطا في السيرفر : {ex.Message}";
             }
         }
 

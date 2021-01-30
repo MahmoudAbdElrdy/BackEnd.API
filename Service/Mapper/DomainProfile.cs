@@ -35,6 +35,10 @@ namespace BackEnd.Service.Mapper
             CreateMap<AdvertisementViewVM, AdvertisementView>().ReverseMap();
             CreateMap<AdvertisementVM2, Advertisement>().ReverseMap();
             CreateMap<AdvertisementVM, Advertisement>().ReverseMap();
+            CreateMap<AdvertisementIncloudVM, Advertisement>().ReverseMap();
+            CreateMap<AdvertisementCityIncloudVM, AdvertisementCity>().ReverseMap();
+            CreateMap<AdvertisementCategoryVM, AdvertisementCategory>().ReverseMap();
+            CreateMap<AdvertisementAttachVM, AdvertisementAttach>().ReverseMap();
             CreateMap<CategoryVM, Category>().ReverseMap();
             CreateMap<CityVM, City>().ReverseMap();
             CreateMap<ContactUsVM, ContactUs>().ReverseMap();
@@ -49,8 +53,8 @@ namespace BackEnd.Service.Mapper
             CreateMap<View_City, CityVM>();
             CreateMap<View_Advertisement, AdvertisementVM>();
             CreateMap<CityVM, View_City>().ForSourceMember(t => t.CountryName, opt => opt.DoNotValidate());
-            CreateMap<AdvertisementVM, View_Advertisement>().ForSourceMember(t => t.CityName, opt => opt.DoNotValidate());
-            CreateMap<AdvertisementVM, View_Advertisement>().ForSourceMember(t => t.CategoryName, opt => opt.DoNotValidate());
+            CreateMap<AdvertisementVM, View_Advertisement>();
+            CreateMap<AdvertisementVM, View_Advertisement>();
             CreateMap<AdvertisementVM, View_Advertisement>().ForSourceMember(t => t.MarketName, opt => opt.DoNotValidate());
                
 

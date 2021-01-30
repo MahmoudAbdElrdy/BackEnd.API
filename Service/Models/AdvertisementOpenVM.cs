@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace BackEnd.Service.Models
 {
-    public partial class AdvertisementOpenVM
+    public class AdvertisementOpenVM
     {
         public Guid AdsopenId { get; set; } = Guid.NewGuid();
         public Guid CustomerId { get; set; }

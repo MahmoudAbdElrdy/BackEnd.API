@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace BackEnd.Service.Models
 {
-    public partial class MarketFollowVM
+    public class MarketFollowVM
     {
         public Guid MarketCustomerId { get; set; } = Guid.NewGuid();
         public Guid MarketId { get; set; }
@@ -11,7 +11,7 @@ namespace BackEnd.Service.Models
         public bool Follow { get; set; }
         public DateTime? CreationDate { get; set; } = DateTime.UtcNow.AddHours(3);
 
-        //public virtual CustomerVM Customer { get; set; }
-        //public virtual MarketVM Market { get; set; }
+        //public CustomerVM Customer { get; set; }
+        //public MarketVM Market { get; set; }
     }
 }

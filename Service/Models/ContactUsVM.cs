@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace BackEnd.Service.Models
 {
-    public partial class ContactUsVM
+    public class ContactUsVM
     {
         public Guid ContactUsId { get; set; } = Guid.NewGuid();
         public string Name { get; set; } = "";
@@ -16,6 +16,6 @@ namespace BackEnd.Service.Models
         public Guid CustomerId { get; set; }
         public string Message { get; set; } = "";
 
-        //public virtual CustomerVM Customer { get; set; }
+        //public CustomerVM Customer { get; set; }
     }
 }

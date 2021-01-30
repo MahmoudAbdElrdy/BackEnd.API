@@ -18,6 +18,9 @@ namespace BackEnd.DAL.Models
         public virtual DbSet<AboutUs> AboutUs { get; set; }
         public virtual DbSet<AdminUsers> AdminUsers { get; set; }
         public virtual DbSet<Advertisement> Advertisement { get; set; }
+        public virtual DbSet<AdvertisementAttach> AdvertisementAttach { get; set; }
+        public virtual DbSet<AdvertisementCategory> AdvertisementCategory { get; set; }
+        public virtual DbSet<AdvertisementCity> AdvertisementCity { get; set; }
         public virtual DbSet<AdvertisementOpen> AdvertisementOpen { get; set; }
         public virtual DbSet<AdvertisementUpdate> AdvertisementUpdate { get; set; }
         public virtual DbSet<AdvertisementView> AdvertisementView { get; set; }
@@ -90,6 +93,8 @@ namespace BackEnd.DAL.Models
 
                 entity.Property(e => e.AdsImage).HasDefaultValueSql("('')");
 
+                entity.Property(e => e.AdsName).HasDefaultValueSql("('')");
+
                 entity.Property(e => e.AdsText).HasDefaultValueSql("('')");
 
                 entity.Property(e => e.AdsType).HasDefaultValueSql("((0))");
@@ -110,22 +115,95 @@ namespace BackEnd.DAL.Models
 
                 entity.Property(e => e.WaitingUpdate).HasDefaultValueSql("((0))");
 
-                entity.HasOne(d => d.Category)
-                    .WithMany(p => p.Advertisement)
-                    .HasForeignKey(d => d.CategoryId)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK_advertisement_category");
-
-                entity.HasOne(d => d.City)
-                    .WithMany(p => p.Advertisement)
-                    .HasForeignKey(d => d.CityId)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK_advertisement_city");
-
                 entity.HasOne(d => d.Market)
                     .WithMany(p => p.Advertisement)
                     .HasForeignKey(d => d.MarketId)
                     .HasConstraintName("FK_advertisement_Market");
+            });
+
+            modelBuilder.Entity<AdvertisementAttach>(entity =>
+            {
+                entity.HasKey(e => e.AdsAttachId);
+
+                entity.Property(e => e.AdsAttachId).ValueGeneratedNever();
+
+                entity.Property(e => e.AttachUrl)
+                    .IsRequired()
+                    .HasDefaultValueSql("('')");
+
+                entity.Property(e => e.Available)
+                    .IsRequired()
+                    .HasDefaultValueSql("((1))");
+
+                entity.Property(e => e.CreationDate).HasColumnType("datetime");
+
+                entity.Property(e => e.Notes)
+                    .IsRequired()
+                    .HasDefaultValueSql("('')");
+
+                entity.HasOne(d => d.Ads)
+                    .WithMany(p => p.AdvertisementAttach)
+                    .HasForeignKey(d => d.AdsId)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("FK_AdvertisementAttach_Advertisement");
+            });
+
+            modelBuilder.Entity<AdvertisementCategory>(entity =>
+            {
+                entity.HasKey(e => e.AdsCategoryId);
+
+                entity.Property(e => e.AdsCategoryId).ValueGeneratedNever();
+
+                entity.Property(e => e.Available)
+                    .IsRequired()
+                    .HasDefaultValueSql("((1))");
+
+                entity.Property(e => e.CreationDate).HasColumnType("datetime");
+
+                entity.Property(e => e.Notes)
+                    .IsRequired()
+                    .HasDefaultValueSql("('')");
+
+                entity.HasOne(d => d.Ads)
+                    .WithMany(p => p.AdvertisementCategory)
+                    .HasForeignKey(d => d.AdsId)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("FK_AdvertisementCategory_Advertisement");
+
+                entity.HasOne(d => d.Category)
+                    .WithMany(p => p.AdvertisementCategory)
+                    .HasForeignKey(d => d.CategoryId)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("FK_AdvertisementCategory_Category");
+            });
+
+            modelBuilder.Entity<AdvertisementCity>(entity =>
+            {
+                entity.HasKey(e => e.AdsCityId);
+
+                entity.Property(e => e.AdsCityId).ValueGeneratedNever();
+
+                entity.Property(e => e.Available)
+                    .IsRequired()
+                    .HasDefaultValueSql("((1))");
+
+                entity.Property(e => e.CreationDate).HasColumnType("datetime");
+
+                entity.Property(e => e.Notes)
+                    .IsRequired()
+                    .HasDefaultValueSql("('')");
+
+                entity.HasOne(d => d.Ads)
+                    .WithMany(p => p.AdvertisementCity)
+                    .HasForeignKey(d => d.AdsId)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("FK_AdvertisementCity_Advertisement");
+
+                entity.HasOne(d => d.City)
+                    .WithMany(p => p.AdvertisementCity)
+                    .HasForeignKey(d => d.CityId)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("FK_AdvertisementCity_City");
             });
 
             modelBuilder.Entity<AdvertisementOpen>(entity =>
@@ -383,6 +461,14 @@ namespace BackEnd.DAL.Models
                     .HasColumnType("datetime")
                     .HasDefaultValueSql("(dateadd(hour,(3),getutcdate()))");
 
+                entity.Property(e => e.FacebookUrl)
+                    .IsRequired()
+                    .HasDefaultValueSql("('')");
+
+                entity.Property(e => e.InstagramUrl)
+                    .IsRequired()
+                    .HasDefaultValueSql("('')");
+
                 entity.Property(e => e.MarketAddress).HasDefaultValueSql("('')");
 
                 entity.Property(e => e.MarketEmail)
@@ -411,7 +497,19 @@ namespace BackEnd.DAL.Models
                     .HasMaxLength(50)
                     .HasDefaultValueSql("('')");
 
+                entity.Property(e => e.SnapchatUrl)
+                    .IsRequired()
+                    .HasDefaultValueSql("('')");
+
                 entity.Property(e => e.Token).HasDefaultValueSql("('')");
+
+                entity.Property(e => e.TwitterUrl)
+                    .IsRequired()
+                    .HasDefaultValueSql("('')");
+
+                entity.Property(e => e.WebSitUrl)
+                    .IsRequired()
+                    .HasDefaultValueSql("('')");
 
                 entity.HasOne(d => d.City)
                     .WithMany(p => p.Market)

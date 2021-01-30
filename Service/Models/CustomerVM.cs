@@ -3,17 +3,17 @@ using System.Collections.Generic;
 
 namespace BackEnd.Service.Models
 {
-    public partial class CustomerVM
+    public class CustomerVM
     {
         public Guid CustomerId { get; set; } = Guid.NewGuid();
         public bool? Plateform { get; set; }
-        public string Token { get; set; }
+        public string Token { get; set; } = "";
         public Guid? CityId { get; set; }
         public DateTime? CreationDate { get; set; } = DateTime.UtcNow.AddHours(3);
 
-        //public virtual CityVM City { get; set; }
-        //public virtual ICollection<AdvertisementViewVM> AdvertisementView { get; set; }
-        //public virtual ICollection<CustomerLoginVM> CustomerLogin { get; set; }
-        //public virtual ICollection<MarketFollowVM> MarketFollow { get; set; }
+        //public CityVM City { get; set; }
+        //public ICollection<AdvertisementViewVM> AdvertisementView { get; set; }
+        //public ICollection<CustomerLoginVM> CustomerLogin { get; set; }
+        //public ICollection<MarketFollowVM> MarketFollow { get; set; }
     }
 }

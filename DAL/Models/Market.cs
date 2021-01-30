@@ -26,6 +26,11 @@ namespace BackEnd.DAL.Models
         public DateTime? CreationDate { get; set; }
         public bool Available { get; set; }
         public string MarketLatlng { get; set; }
+        public string InstagramUrl { get; set; }
+        public string SnapchatUrl { get; set; }
+        public string WebSitUrl { get; set; }
+        public string FacebookUrl { get; set; }
+        public string TwitterUrl { get; set; }
 
         public virtual City City { get; set; }
         public virtual ICollection<Advertisement> Advertisement { get; set; }

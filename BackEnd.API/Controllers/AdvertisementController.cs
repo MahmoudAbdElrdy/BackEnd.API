@@ -25,47 +25,84 @@ namespace BackEnd.API.Controllers
         #region Post: api/Advertisement/SaveAdvertisement
         [HttpPost]
         [Route("SaveAdvertisement")]
-        public IResponseDTO postAdvertisement(AdvertisementVM AdvertisementVM)
+        public IResponseDTO postAdvertisement(AdvertisementIncloudVM AdvertisementVM)
         {
             var depart = _AdvertisementServices.PostAdvertisement(AdvertisementVM);
             return depart;
         }
         #endregion
 
-        #region Post: api/Advertisement/NewSaveAdvertisement
+        //#region Post: api/Advertisement/NewSaveAdvertisement
+        //[HttpPost]
+        //[Route("NewSaveAdvertisement")]
+        //public IResponseDTO NewSaveAdvertisement([FromForm]AdvertisementImageVM AdvertisementVM)
+        //{
+        //    ResponseDTO res;
+        //    try
+        //    {
+        //        if (AdvertisementVM.Image != null)
+        //        {
+        //            var logoUrl = UploadHelper.SaveFile(AdvertisementVM.Image, "AdsImage");
+        //            AdvertisementVM.AdsImage = logoUrl;
+        //        }
+        //        if (AdvertisementVM.Video != null)
+        //        {
+        //            var VideoUrl = UploadHelper.SaveFile(AdvertisementVM.Video, "AdsVideo");
+        //            AdvertisementVM.AdsVideo = VideoUrl;
+        //        }
+        //        return _AdvertisementServices.PostAdvertisement(new AdvertisementIncloudVM()
+        //        {
+        //            AdsId = Guid.NewGuid(),
+        //            AdsText = AdvertisementVM.AdsText,
+        //            AdsImage = AdvertisementVM.AdsImage,
+        //            AdsType = AdvertisementVM.AdsType,
+        //            AdsVideo = AdvertisementVM.AdsVideo,
+        //            Available = AdvertisementVM.Available,
+        //            CategoryId = AdvertisementVM.CategoryId,
+        //            CityId = AdvertisementVM.CityId,
+        //            CreationDate = AdvertisementVM.CreationDate,
+        //            MarketId = AdvertisementVM.MarketId,
+        //            WaitingUpdate = AdvertisementVM.WaitingUpdate,
+        //            EndDate = AdvertisementVM.EndDate,
+        //            Special = AdvertisementVM.Special,
+        //            StartDate = AdvertisementVM.StartDate,
+        //        });
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        res = new ResponseDTO()
+        //        {
+        //            IsPassed = false,
+        //            Message = "Error in UploadMarketLog " + ex.Message,
+        //            Data = null,
+        //        };
+        //    }
+        //    return res;
+        //}
+        //#endregion
+
+        #region Post: api/Advertisement/NewSaveAdvertisementAttach
         [HttpPost]
-        [Route("NewSaveAdvertisement")]
-        public IResponseDTO NewSaveAdvertisement([FromForm]AdvertisementImageVM AdvertisementVM)
+        [Route("NewSaveAdvertisementAttach")]
+        public IResponseDTO NewSaveAdvertisementAttach([FromForm]AdvertisementAttachFileVM AdvertisementVM)
         {
             ResponseDTO res;
             try
             {
-                if (AdvertisementVM.Image != null)
+                if (AdvertisementVM.File != null)
                 {
-                    var logoUrl = UploadHelper.SaveFile(AdvertisementVM.Image, "AdsImage");
-                    AdvertisementVM.AdsImage = logoUrl;
+                    var logoUrl = UploadHelper.SaveFile(AdvertisementVM.File, "AdsFile");
+                    AdvertisementVM.AttachUrl = logoUrl;
                 }
-                if (AdvertisementVM.Video != null)
+                return _AdvertisementServices.PostAdvertisementAttach(new AdvertisementAttachVM()
                 {
-                    var VideoUrl = UploadHelper.SaveFile(AdvertisementVM.Video, "AdsVideo");
-                    AdvertisementVM.AdsVideo = VideoUrl;
-                }
-                return _AdvertisementServices.PostAdvertisement(new AdvertisementVM()
-                {
-                    AdsId = Guid.NewGuid(),
-                    AdsText = AdvertisementVM.AdsText,
-                    AdsImage = AdvertisementVM.AdsImage,
-                    AdsType = AdvertisementVM.AdsType,
-                    AdsVideo = AdvertisementVM.AdsVideo,
-                    Available = AdvertisementVM.Available,
-                    CategoryId = AdvertisementVM.CategoryId,
-                    CityId = AdvertisementVM.CityId,
+                    AdsAttachId = Guid.NewGuid(),
+                    AdsId = AdvertisementVM.AdsId,
+                    AttachUrl = AdvertisementVM.AttachUrl,
                     CreationDate = AdvertisementVM.CreationDate,
-                    MarketId = AdvertisementVM.MarketId,
-                    WaitingUpdate = AdvertisementVM.WaitingUpdate,
-                    EndDate = AdvertisementVM.EndDate,
-                    Special = AdvertisementVM.Special,
-                    StartDate = AdvertisementVM.StartDate,
+                    AttachType = AdvertisementVM.AttachType,
+                    Notes = AdvertisementVM.Notes,
+                    Available = AdvertisementVM.Available
                 });
             }
             catch (Exception ex)
@@ -104,9 +141,9 @@ namespace BackEnd.API.Controllers
         #region Get: api/Advertisement/GetNewAdvertisement
         [HttpGet]
         [Route("GetNewAdvertisement")]
-        public IResponseDTO GetNewAdvertisement(int page,Guid CustomerId, Guid cityId)
+        public IResponseDTO GetNewAdvertisement(int page,Guid CustomerId)
         {
-            var depart = _AdvertisementServices.GetNewAdvertisement(page, cityId, CustomerId);
+            var depart = _AdvertisementServices.GetNewAdvertisement(page, CustomerId);
             return depart;
         }
         #endregion
@@ -117,6 +154,16 @@ namespace BackEnd.API.Controllers
         public IResponseDTO GetById(Guid ?id)
         {
             var depart = _AdvertisementServices.GetByIDAdvertisement(id);
+            return depart;
+        }
+        #endregion
+
+        #region Get: api/Advertisement/GetAdvertisementDetails
+        [HttpGet]
+        [Route("GetAdvertisementDetails")]
+        public IResponseDTO GetAdvertisementDetails(Guid id, Guid CustomerId)
+        {
+            var depart = _AdvertisementServices.GetAdvertisementDetails(id, CustomerId);
             return depart;
         }
         #endregion
@@ -147,6 +194,16 @@ namespace BackEnd.API.Controllers
         public IResponseDTO GetAdvertisementByCategory(int page, Guid categoryId, Guid cityId , Guid CustomerId)
         {
             var depart = _AdvertisementServices.GetAdvertisementByCategory(page, categoryId, cityId, CustomerId);
+            return depart;
+        }
+        #endregion
+
+        #region Get: api/Advertisement/GetAdvertisementByCategoryForAllCity
+        [HttpGet]
+        [Route("GetAdvertisementByCategoryForAllCity")]
+        public IResponseDTO GetAdvertisementByCategoryForAllCity(int page, Guid categoryId , Guid CustomerId)
+        {
+            var depart = _AdvertisementServices.GetAdvertisementByCategoryForAllCity(page, categoryId, CustomerId);
             return depart;
         }
         #endregion

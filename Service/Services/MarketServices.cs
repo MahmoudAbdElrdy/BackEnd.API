@@ -210,10 +210,8 @@ namespace BackEnd.Service.Services
         }
         public IResponseDTO PostMarket(MarketVM model)
         {
-
             try
             {
-
                 var res = _MarketRepositroy.Get(x => x.MarketEmail == model.MarketEmail);
                 if (res != null) 
                 {
@@ -247,10 +245,7 @@ namespace BackEnd.Service.Services
                 _response.IsPassed = false;
                 _response.Message = "Error " + ex.Message;
             }
-
-
             return _response;
-
         }
         public IResponseDTO GetAllMarketContorlPanel()
         {

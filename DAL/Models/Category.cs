@@ -7,7 +7,7 @@ namespace BackEnd.DAL.Models
     {
         public Category()
         {
-            Advertisement = new HashSet<Advertisement>();
+            AdvertisementCategory = new HashSet<AdvertisementCategory>();
         }
 
         public Guid CategoryId { get; set; }
@@ -17,6 +17,6 @@ namespace BackEnd.DAL.Models
         public DateTime? CreationDate { get; set; }
         public int Order { get; set; }
 
-        public virtual ICollection<Advertisement> Advertisement { get; set; }
+        public virtual ICollection<AdvertisementCategory> AdvertisementCategory { get; set; }
     }
 }

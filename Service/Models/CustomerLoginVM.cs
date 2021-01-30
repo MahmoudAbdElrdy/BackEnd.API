@@ -3,12 +3,12 @@ using System.Collections.Generic;
 
 namespace BackEnd.Service.Models
 {
-    public partial class CustomerLoginVM
+    public class CustomerLoginVM
     {
         public Guid LoginId { get; set; } = Guid.NewGuid();
         public Guid CustomerId { get; set; }
         public DateTime? LoginDate { get; set; } = DateTime.UtcNow.AddHours(3);
 
-        //public virtual CustomerVM Customer { get; set; }
+        //public CustomerVM Customer { get; set; }
     }
 }
