@@ -487,7 +487,7 @@ namespace BackEnd.Service.Services
             {
                 var DbAdvertisement = _mapper.Map<AdvertisementAttach>(model);
 
-                var Advertisement = _mapper.Map<AdvertisementIncloudVM>(_AdvertisementAttachRepositroy.Add(DbAdvertisement));
+                var Advertisement = _mapper.Map<AdvertisementAttachVM>(_AdvertisementAttachRepositroy.Add(DbAdvertisement));
 
                 int save = _unitOfWork.Commit();
 
