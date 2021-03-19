@@ -121,7 +121,7 @@ namespace BackEnd.API.Controllers
         #region Put: api/Advertisement/UpdateAdvertisement
         [HttpPut]
         [Route("UpdateAdvertisement")]
-        public IResponseDTO UpdateAdvertisement(AdvertisementVM AdvertisementVM)
+        public IResponseDTO UpdateAdvertisement(AdvertisementIncloudVM AdvertisementVM)
         {
             var depart = _AdvertisementServices.EditAdvertisement(AdvertisementVM);
             return depart;
@@ -214,6 +214,16 @@ namespace BackEnd.API.Controllers
         public IResponseDTO RemoveAdvertisement(AdvertisementVM AdvertisementVM)
         {
             var depart = _AdvertisementServices.DeleteAdvertisement(AdvertisementVM);
+            return depart;
+        }
+        #endregion
+        
+        #region Delete: api/Advertisement/RemoveAdvertisementAttach
+        [HttpDelete]
+        [Route("RemoveAdvertisementAttach")]
+        public IResponseDTO RemoveAdvertisementAttach(AdvertisementAttachVM AdvertisementAttachVM)
+        {
+            var depart = _AdvertisementServices.DeleteAdvertisementAttach(AdvertisementAttachVM);
             return depart;
         }
         #endregion

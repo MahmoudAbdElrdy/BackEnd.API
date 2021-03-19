@@ -13,7 +13,8 @@ namespace BackEnd.Service.IServices
         IResponseDTO PostAdvertisementAttach(AdvertisementAttachVM model);
         IResponseDTO GetAllAdvertisement();
         IResponseDTO GetNewAdvertisement(int page, Guid CustomerId);
-        IResponseDTO EditAdvertisement(AdvertisementVM model);
+        IResponseDTO EditAdvertisement(AdvertisementIncloudVM model);
+        IResponseDTO DeleteAdvertisementAttach(AdvertisementAttachVM model);
         IResponseDTO DeleteAdvertisement(AdvertisementVM model);
         IResponseDTO GetByIDAdvertisement(object id);
         IResponseDTO GetAdvertisementDetails(Guid id, Guid CustomerId);

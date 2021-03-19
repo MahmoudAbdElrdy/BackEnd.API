@@ -87,14 +87,68 @@ namespace BackEnd.Service.Services
             }
             return _response;
         }
-        public IResponseDTO EditAdvertisement(AdvertisementVM model)
+        public IResponseDTO DeleteAdvertisementAttach(AdvertisementAttachVM model)
         {
             try
             {
+
+                var DbAdvertisementAttach = _mapper.Map<AdvertisementAttach>(model);
+                var entityEntry = _AdvertisementAttachRepositroy.Remove(DbAdvertisementAttach);
+
+
+                int save = _unitOfWork.Commit();
+
+                if (save == 200)
+                {
+                    _response.Data = null;
+                    _response.IsPassed = true;
+                    _response.Message = "Ok";
+                }
+                else
+                {
+                    _response.Data = null;
+                    _response.IsPassed = false;
+                    _response.Message = "Not saved";
+                }
+            }
+            catch (Exception ex)
+            {
+                _response.Data = null;
+                _response.IsPassed = false;
+                _response.Message = "Error " + ex.Message;
+            }
+            return _response;
+        }
+        public IResponseDTO EditAdvertisement(AdvertisementIncloudVM model)
+        {
+            try
+            {
+                var _AdvertisementCategory = model.AdvertisementCategory?.ToList();
+                var _AdvertisementCity = model.AdvertisementCity?.ToList();
+                model.AdvertisementCategory = null;
+                model.AdvertisementCity = null;
                 var DbAdvertisement = _mapper.Map<Advertisement>(model);
                 var entityEntry = _AdvertisementRepositroy.Update(DbAdvertisement);
-
-
+                var _ACategory = _AdvertisementCategoryRepositroy.Get(x => x.AdsId == model.AdsId).ToList();
+                if (_ACategory != null && _ACategory.Count > 0)
+                {
+                    _AdvertisementCategoryRepositroy.RemoveRange(_ACategory);
+                }
+                if (_AdvertisementCategory != null && _AdvertisementCategory.Count > 0) 
+                {
+                    _AdvertisementCategory.ForEach(x => x.AdsId = model.AdsId);
+                    _AdvertisementCategoryRepositroy.AddRange(_mapper.Map<List<AdvertisementCategory>>(_AdvertisementCategory));
+                }
+                var _ACity = _AdvertisementCityRepositroy.Get(x => x.AdsId == model.AdsId).ToList();
+                if (_ACity != null && _ACity.Count > 0)
+                {
+                    _AdvertisementCityRepositroy.RemoveRange(_ACity);
+                }
+                if (_AdvertisementCity != null && _AdvertisementCity.Count > 0)
+                {
+                    _AdvertisementCity.ForEach(x => x.AdsId = model.AdsId);
+                    _AdvertisementCityRepositroy.AddRange(_mapper.Map<List<AdvertisementCity>>(_AdvertisementCity));
+                }
                 int save = _unitOfWork.Commit();
 
                 if (save == 200)
