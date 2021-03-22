@@ -336,6 +336,11 @@ namespace BackEnd.API.Controllers
                     Plateform = MarketVM.Plateform,
                     Token = MarketVM.Token,
                     MarketLogo = MarketVM.MarketLogo,
+                    FacebookUrl = MarketVM.FacebookUrl,
+                    InstagramUrl = MarketVM.InstagramUrl,
+                    SnapchatUrl = MarketVM.SnapchatUrl,
+                    TwitterUrl = MarketVM.TwitterUrl,
+                    WebSitUrl = MarketVM.WebSitUrl,
                 });
             }
             catch (Exception ex)
