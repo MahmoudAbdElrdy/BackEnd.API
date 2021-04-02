@@ -11,10 +11,14 @@ namespace BackEnd.Service.IServices
     {
         IResponseDTO PostAdvertisement(AdvertisementIncloudVM model);
         IResponseDTO PostAdvertisementAttach(AdvertisementAttachVM model);
+        IResponseDTO PostAdvertisementCategory(AdvertisementCategoryVM model);
+        IResponseDTO PostAdvertisementCity(AdvertisementCityVM model);
         IResponseDTO GetAllAdvertisement();
         IResponseDTO GetNewAdvertisement(int page, Guid CustomerId);
         IResponseDTO EditAdvertisement(AdvertisementIncloudVM model);
+        IResponseDTO DeleteAdvertisementCity(AdvertisementCityVM model);
         IResponseDTO DeleteAdvertisementAttach(AdvertisementAttachVM model);
+        IResponseDTO DeleteAdvertisementCategory(AdvertisementCategoryVM model);
         IResponseDTO DeleteAdvertisement(AdvertisementVM model);
         IResponseDTO GetByIDAdvertisement(object id);
         IResponseDTO GetAdvertisementDetails(Guid id, Guid CustomerId);

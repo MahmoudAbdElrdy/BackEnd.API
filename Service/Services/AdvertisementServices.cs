@@ -118,6 +118,70 @@ namespace BackEnd.Service.Services
                 _response.Message = "Error " + ex.Message;
             }
             return _response;
+        }       
+        public IResponseDTO DeleteAdvertisementCity(AdvertisementCityVM model)
+        {
+            try
+            {
+
+                var DbAdvertisementAttach = _mapper.Map<AdvertisementCity>(model);
+                var entityEntry = _AdvertisementCityRepositroy.Remove(DbAdvertisementAttach);
+
+
+                int save = _unitOfWork.Commit();
+
+                if (save == 200)
+                {
+                    _response.Data = null;
+                    _response.IsPassed = true;
+                    _response.Message = "Ok";
+                }
+                else
+                {
+                    _response.Data = null;
+                    _response.IsPassed = false;
+                    _response.Message = "Not saved";
+                }
+            }
+            catch (Exception ex)
+            {
+                _response.Data = null;
+                _response.IsPassed = false;
+                _response.Message = "Error " + ex.Message;
+            }
+            return _response;
+        }
+        public IResponseDTO DeleteAdvertisementCategory(AdvertisementCategoryVM model)
+        {
+            try
+            {
+
+                var DbAdvertisementAttach = _mapper.Map<AdvertisementCategory>(model);
+                var entityEntry = _AdvertisementCategoryRepositroy.Remove(DbAdvertisementAttach);
+
+
+                int save = _unitOfWork.Commit();
+
+                if (save == 200)
+                {
+                    _response.Data = null;
+                    _response.IsPassed = true;
+                    _response.Message = "Ok";
+                }
+                else
+                {
+                    _response.Data = null;
+                    _response.IsPassed = false;
+                    _response.Message = "Not saved";
+                }
+            }
+            catch (Exception ex)
+            {
+                _response.Data = null;
+                _response.IsPassed = false;
+                _response.Message = "Error " + ex.Message;
+            }
+            return _response;
         }
         public IResponseDTO EditAdvertisement(AdvertisementIncloudVM model)
         {
@@ -542,6 +606,78 @@ namespace BackEnd.Service.Services
                 var DbAdvertisement = _mapper.Map<AdvertisementAttach>(model);
 
                 var Advertisement = _mapper.Map<AdvertisementAttachVM>(_AdvertisementAttachRepositroy.Add(DbAdvertisement));
+
+                int save = _unitOfWork.Commit();
+
+                if (save == 200)
+                {
+                    _response.Data = Advertisement;
+                    _response.IsPassed = true;
+                    _response.Message = "Ok";
+                }
+                else
+                {
+                    _response.Data = null;
+                    _response.IsPassed = false;
+                    _response.Message = "Not saved";
+                }
+
+            }
+            catch (Exception ex)
+            {
+                _response.Data = null;
+                _response.IsPassed = false;
+                _response.Message = "Error " + ex.Message;
+            }
+
+
+            return _response;
+
+        }
+        public IResponseDTO PostAdvertisementCategory(AdvertisementCategoryVM model)
+        {
+
+            try
+            {
+                var DbAdvertisement = _mapper.Map<AdvertisementCategory>(model);
+
+                var Advertisement = _mapper.Map<AdvertisementCategoryVM>(_AdvertisementCategoryRepositroy.Add(DbAdvertisement));
+
+                int save = _unitOfWork.Commit();
+
+                if (save == 200)
+                {
+                    _response.Data = Advertisement;
+                    _response.IsPassed = true;
+                    _response.Message = "Ok";
+                }
+                else
+                {
+                    _response.Data = null;
+                    _response.IsPassed = false;
+                    _response.Message = "Not saved";
+                }
+
+            }
+            catch (Exception ex)
+            {
+                _response.Data = null;
+                _response.IsPassed = false;
+                _response.Message = "Error " + ex.Message;
+            }
+
+
+            return _response;
+
+        }
+        public IResponseDTO PostAdvertisementCity(AdvertisementCityVM model)
+        {
+
+            try
+            {
+                var DbAdvertisement = _mapper.Map<AdvertisementCity>(model);
+
+                var Advertisement = _mapper.Map<AdvertisementCityVM>(_AdvertisementCityRepositroy.Add(DbAdvertisement));
 
                 int save = _unitOfWork.Commit();
 

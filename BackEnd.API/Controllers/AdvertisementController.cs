@@ -268,5 +268,45 @@ namespace BackEnd.API.Controllers
             return depart;
         }
         #endregion
+
+        #region Post: api/Advertisement/SaveAdvertisementCategory
+        [HttpPost]
+        [Route("SaveAdvertisementCategory")]
+        public IResponseDTO postCategory(AdvertisementCategoryVM AdvertisementCategoryVM)
+        {
+            var depart = _AdvertisementServices.PostAdvertisementCategory(AdvertisementCategoryVM);
+            return depart;
+        }
+        #endregion
+
+        #region Post: api/Advertisement/SaveAdvertisementCity
+        [HttpPost]
+        [Route("SaveAdvertisementCity")]
+        public IResponseDTO postCity(AdvertisementCityVM AdvertisementCityVM)
+        {
+            var depart = _AdvertisementServices.PostAdvertisementCity(AdvertisementCityVM);
+            return depart;
+        }
+        #endregion
+
+        #region Delete: api/Advertisement/RemoveAdvertisementCity
+        [HttpDelete]
+        [Route("RemoveAdvertisementCity")]
+        public IResponseDTO RemoveAdvertisementCity(AdvertisementCityVM AdvertisementCityVM)
+        {
+            var depart = _AdvertisementServices.DeleteAdvertisementCity(AdvertisementCityVM);
+            return depart;
+        }
+        #endregion
+        
+        #region Delete: api/Advertisement/RemoveAdvertisementCategory
+        [HttpDelete]
+        [Route("RemoveAdvertisementCategory")]
+        public IResponseDTO RemoveAdvertisementCategory(AdvertisementCategoryVM AdvertisementCategoryVM)
+        {
+            var depart = _AdvertisementServices.DeleteAdvertisementCategory(AdvertisementCategoryVM);
+            return depart;
+        }
+        #endregion
     }
 }
