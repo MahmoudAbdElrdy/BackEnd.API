@@ -56,6 +56,7 @@ namespace BackEnd.Service.Mapper
             CreateMap<AdvertisementVM, View_Advertisement>();
             CreateMap<AdvertisementVM, View_Advertisement>();
             CreateMap<AdvertisementVM, View_Advertisement>().ForSourceMember(t => t.MarketName, opt => opt.DoNotValidate());
+            CreateMap<AdvertisementCity, AdvertisementCityVM>().ReverseMap();
                
 
 

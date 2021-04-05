@@ -13,6 +13,6 @@ namespace BackEnd.Service.Models
         public string Notes { get; set; } = "";
 
         //public AdvertisementVM Ads { get; set; }
-        //public CategoryVM Category { get; set; }
+        public CategoryVM Category { get; set; }
     }
 }

@@ -537,7 +537,7 @@ namespace BackEnd.Service.Services
             try
             {
                 var Advertisements = _AdvertisementRepositroy.Get(x=>x.AdsId == id,
-                    includeProperties: "Market,AdvertisementCity,AdvertisementCity.City,AdvertisementCategory,AdvertisementAttach").FirstOrDefault();
+                    includeProperties: "Market,AdvertisementCity,AdvertisementCity.City,AdvertisementCategory.Category,AdvertisementAttach").FirstOrDefault();
                 if(Advertisements!= null)
                 {
                     _AdvertisementOpenRepositroy.Add(new AdvertisementOpen()
