@@ -89,6 +89,7 @@ namespace BackEnd.API.Controllers
             ResponseDTO res;
             try
             {
+                
                 if (AdvertisementVM.File != null)
                 {
                     var logoUrl = UploadHelper.SaveFile(AdvertisementVM.File, "AdsFile");

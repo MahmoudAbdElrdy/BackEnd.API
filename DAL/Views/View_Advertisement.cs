@@ -7,7 +7,7 @@ namespace BackEnd.DAL.Views
    public class View_Advertisement
     {
         public Guid AdsId { get; set; } = Guid.NewGuid();
-       
+        public string AdsName { get; set; }
         public int? AdsType { get; set; }
         public string AdsText { get; set; }
         public string AdsImage { get; set; }
