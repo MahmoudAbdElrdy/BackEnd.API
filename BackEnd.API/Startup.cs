@@ -81,7 +81,7 @@ namespace BackEnd.API
     //        });
             services.AddSwaggerGen(c =>
             {
-                c.SwaggerDoc("v1", new Info { Title = "Loogo", Version = "v1" });
+                c.SwaggerDoc("v1", new Microsoft.OpenApi.Models.OpenApiInfo { Title = "Loogo", Version = "v1" });
                 // Swagger 2.+ support
   //              c.AddSecurityDefinition("Bearer", new ApiKeyScheme
   //              {
@@ -192,7 +192,7 @@ namespace BackEnd.API
             app.UseSwaggerUI(c =>
             {
                 c.SwaggerEndpoint("/swagger/v1/swagger.json", " Auditor V1");
-                c.DocExpansion(DocExpansion.None);
+                c.DocExpansion(Swashbuckle.AspNetCore.SwaggerUI.DocExpansion.None);
             });
             app.UseStaticFiles();
             app.UseStaticFiles(new StaticFileOptions()
