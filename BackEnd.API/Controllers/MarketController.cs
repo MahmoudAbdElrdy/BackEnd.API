@@ -310,7 +310,7 @@ namespace BackEnd.API.Controllers
         }
         #endregion
 
-        #region Put: api/Market/NewUpdateMarket
+        #region Post: api/Market/NewUpdateMarket
         [HttpPost]
         [Route("NewUpdateMarket")]
         public IResponseDTO NewUpdateMarket([FromForm]MarketImageVM MarketVM)
@@ -332,13 +332,13 @@ namespace BackEnd.API.Controllers
                     MarketAddress = MarketVM.MarketAddress,
                     MarketEmail = MarketVM.MarketEmail,
                     MarketInfo = MarketVM.MarketInfo,
-                    MarketLatlng = MarketVM.MarketLatlng,
+                    MarketLatlng = string.IsNullOrEmpty(MarketVM.MarketLatlng) ? "" : MarketVM.MarketLatlng,
                     MarketName = MarketVM.MarketName,
                     MarketPassword = MarketVM.MarketPassword,
-                    MarketPhone = MarketVM.MarketPhone,
+                    MarketPhone = string.IsNullOrEmpty(MarketVM.MarketPhone) ? "" : MarketVM.MarketPhone,
                     Plateform = MarketVM.Plateform,
                     Token = MarketVM.Token,
-                    MarketLogo = MarketVM.MarketLogo,
+                    MarketLogo =  MarketVM.MarketLogo,
                     FacebookUrl = MarketVM.FacebookUrl,
                     InstagramUrl = MarketVM.InstagramUrl,
                     SnapchatUrl = MarketVM.SnapchatUrl,
