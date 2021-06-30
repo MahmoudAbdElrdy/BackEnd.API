@@ -269,6 +269,11 @@ namespace BackEnd.Service.Services
                                   Available = entity.Available,
                                   CityId = entity.CityId,
                                   CityName = entity.City.CityName,
+                                  InstagramUrl = entity.InstagramUrl,
+                                  FacebookUrl = entity.FacebookUrl,
+                                  TwitterUrl = entity.TwitterUrl,
+                                  WebSitUrl = entity.WebSitUrl,
+                                  SnapchatUrl = entity.SnapchatUrl, 
                                 
                             };
 

@@ -6,7 +6,7 @@ namespace BackEnd.Service.Models
     public class AdvertisementVM
     {
         public Guid AdsId { get; set; } = Guid.NewGuid();
-
+        public string AdsName { get; set; }
         public int? AdsType { get; set; }
         public string AdsText { get; set; } = "";
         public string AdsImage { get; set; } = "";
@@ -23,7 +23,7 @@ namespace BackEnd.Service.Models
         public int CountCustomerOpen { get; set; }
         public int CountCustomerView { get; set; }
         public Guid MarketId { get; set; }
-        public string AdsName { get; set; } = "";
+      
 
         //public MarketVM Market { get; set; }
         //public CityVM City { get; set; }
