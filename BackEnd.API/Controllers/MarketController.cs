@@ -325,6 +325,9 @@ namespace BackEnd.API.Controllers
                 }
                 return _MarketServices.EditMarket(new MarketVM()
                 {
+                    MarketId = MarketVM.MarketId,
+                    Available = MarketVM.Available,
+                    CreationDate = MarketVM.CreationDate,
                     CityId = MarketVM.CityId,
                     MarketAddress = MarketVM.MarketAddress,
                     MarketEmail = MarketVM.MarketEmail,

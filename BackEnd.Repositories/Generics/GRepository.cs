@@ -221,7 +221,7 @@ public class GRepository<T> : IGRepository<T>
             {
                 query = query.Where(filter);
             }
-            if (NoTrack != "")
+            //if (NoTrack != "")
             {
                 query = query.AsNoTracking();
             }

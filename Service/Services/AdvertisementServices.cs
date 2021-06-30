@@ -244,16 +244,16 @@ namespace BackEnd.Service.Services
             {
                 var paging = new DTO.Pageing();
                 paging.pageNumber = page;
-                var Advertisements = _AdvertisementRepositroy.Get(x => x.Available == true,
-                                                             includeProperties: "Market,AdvertisementCity,AdvertisementCategory")
-                                                             .Skip(paging.skip).Take(paging.pageSize);
+                var date = DateTime.Now.Date;
+                var Advertisements = _AdvertisementRepositroy.Get(x => x.Available == true
+                                    && x.StartDate <= date.AddDays(1) && x.EndDate >= date.AddDays(-1)
+                                    && x.AdvertisementCategory.Any(y => y.CategoryId == categoryId)
+                                    && x.AdvertisementCity.Any(y => y.CityId == cityId),
+                                    includeProperties: "Market,AdvertisementCity,AdvertisementCategory")
+                                    .Skip(paging.skip).Take(paging.pageSize);
                 var AdvertisementsList = new List<AdvertisementVM2>();
                 foreach (var add in Advertisements)
                 {
-                    var Category = add.AdvertisementCategory.FirstOrDefault(x => x.CategoryId == categoryId);
-                    if (Category == null) continue;
-                    var City = add.AdvertisementCity.FirstOrDefault(x => x.CityId == cityId);
-                    if (City == null) continue;
                     _AdvertisementViewRepositroy.Add(new AdvertisementView()
                     {
                         AdsViewId = Guid.NewGuid(),
@@ -283,14 +283,15 @@ namespace BackEnd.Service.Services
             {
                 var paging = new DTO.Pageing();
                 paging.pageNumber = page;
-                var Advertisements = _AdvertisementRepositroy.Get(x => x.Available == true,
-                                                             includeProperties: "Market,AdvertisementCategory")
-                                                             .Skip(paging.skip).Take(paging.pageSize);
+                var date = DateTime.Now.Date;
+                var Advertisements = _AdvertisementRepositroy.Get(x => x.Available == true
+                                    && x.StartDate <= date.AddDays(1) && x.EndDate >= date.AddDays(-1)
+                                    && x.AdvertisementCategory.Any(y=> y.CategoryId == categoryId),
+                                        includeProperties: "Market,AdvertisementCategory")
+                                        .Skip(paging.skip).Take(paging.pageSize);
                 var AdvertisementsList = new List<AdvertisementVM2>();
                 foreach (var add in Advertisements)
                 {
-                    var Category = add.AdvertisementCategory.FirstOrDefault(x => x.CategoryId == categoryId);
-                    if (Category == null) continue;
                     _AdvertisementViewRepositroy.Add(new AdvertisementView()
                     {
                         AdsViewId = Guid.NewGuid(),
@@ -354,14 +355,15 @@ namespace BackEnd.Service.Services
             {
                 var paging = new DTO.Pageing();
                 paging.pageNumber = page;
-                var Advertisements = _AdvertisementRepositroy.Get(x => x.Available == true,
+                var date = DateTime.Now.Date;
+                var Advertisements = _AdvertisementRepositroy.Get(x => x.Available == true
+                                     && x.StartDate <= date.AddDays(1) && x.EndDate >= date.AddDays(-1)
+                                     && x.AdvertisementCity.Any(y => y.CityId == cityId),
                                                              includeProperties: "Market,AdvertisementCity")
                                                              .Skip(paging.skip).Take(paging.pageSize);
                 var AdvertisementsList = new List<AdvertisementVM2>();
                 foreach (var add in Advertisements)
                 {
-                    var City = add.AdvertisementCity.FirstOrDefault(x => x.CityId == cityId);
-                    if (City == null) continue;
                     _AdvertisementViewRepositroy.Add(new AdvertisementView()
                     {
                         AdsViewId = Guid.NewGuid(),
@@ -390,6 +392,14 @@ namespace BackEnd.Service.Services
             try
             {
                 var Advertisements = _AdvertisementRepositroy.Get(includeProperties: "Market,AdvertisementCity,AdvertisementCity.City,AdvertisementCategory,AdvertisementAttach").OrderByDescending(x => x.CreationDate);
+                
+                //foreach(var model in Advertisements)
+                //{
+                //    model.Available = true;
+                //    var DbAdvertisement = _mapper.Map<Advertisement>(model);
+                //    var entityEntry = _AdvertisementRepositroy.Update(DbAdvertisement);
+                //}
+                //int save = _unitOfWork.Commit();
                 var AdvertisementsList = _mapper.Map<List<AdvertisementIncloudVM>>(Advertisements);
                 _response.Data = AdvertisementsList;
                 _response.IsPassed = true;
@@ -484,7 +494,10 @@ namespace BackEnd.Service.Services
             {
                 var paging = new DTO.Pageing();
                 paging.pageNumber = page;
-                var Advertisements = _AdvertisementRepositroy.Get(x => x.Available == true , includeProperties: "Market")
+                var date = DateTime.Now.Date;
+                var Advertisements = _AdvertisementRepositroy.Get(x => x.Available == true 
+                                     && x.StartDate <= date.AddDays(1) && x.EndDate >= date.AddDays(-1)
+                                    , includeProperties: "Market")
                                                              .OrderBy(x => x.StartDate)
                                                              .Skip(paging.skip).Take(paging.pageSize);
                 foreach (var add in Advertisements)
@@ -567,6 +580,7 @@ namespace BackEnd.Service.Services
 
             try
             {
+                model.Available = true;
                 var DbAdvertisement = _mapper.Map<Advertisement>(model);
 
                 var Advertisement = _mapper.Map<AdvertisementIncloudVM>(_AdvertisementRepositroy.Add(DbAdvertisement));
@@ -603,6 +617,7 @@ namespace BackEnd.Service.Services
 
             try
             {
+                model.Available = true;
                 var DbAdvertisement = _mapper.Map<AdvertisementAttach>(model);
 
                 var Advertisement = _mapper.Map<AdvertisementAttachVM>(_AdvertisementAttachRepositroy.Add(DbAdvertisement));
@@ -639,6 +654,7 @@ namespace BackEnd.Service.Services
 
             try
             {
+                model.Available = true;
                 var DbAdvertisement = _mapper.Map<AdvertisementCategory>(model);
 
                 var Advertisement = _mapper.Map<AdvertisementCategoryVM>(_AdvertisementCategoryRepositroy.Add(DbAdvertisement));
@@ -675,6 +691,7 @@ namespace BackEnd.Service.Services
 
             try
             {
+                model.Available = true;
                 var DbAdvertisement = _mapper.Map<AdvertisementCity>(model);
 
                 var Advertisement = _mapper.Map<AdvertisementCityVM>(_AdvertisementCityRepositroy.Add(DbAdvertisement));
