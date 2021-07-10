@@ -461,14 +461,6 @@ namespace BackEnd.DAL.Models
                     .HasColumnType("datetime")
                     .HasDefaultValueSql("(dateadd(hour,(3),getutcdate()))");
 
-                entity.Property(e => e.FacebookUrl)
-                    .IsRequired()
-                    .HasDefaultValueSql("('')");
-
-                entity.Property(e => e.InstagramUrl)
-                    .IsRequired()
-                    .HasDefaultValueSql("('')");
-
                 entity.Property(e => e.MarketAddress).HasDefaultValueSql("('')");
 
                 entity.Property(e => e.MarketEmail)
@@ -497,25 +489,12 @@ namespace BackEnd.DAL.Models
                     .HasMaxLength(50)
                     .HasDefaultValueSql("('')");
 
-                entity.Property(e => e.SnapchatUrl)
-                    .IsRequired()
-                    .HasDefaultValueSql("('')");
-
                 entity.Property(e => e.Token).HasDefaultValueSql("('')");
-
-                entity.Property(e => e.TwitterUrl)
-                    .IsRequired()
-                    .HasDefaultValueSql("('')");
-
-                entity.Property(e => e.WebSitUrl)
-                    .IsRequired()
-                    .HasDefaultValueSql("('')");
 
                 entity.HasOne(d => d.City)
                     .WithMany(p => p.Market)
                     .HasForeignKey(d => d.CityId)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK_market_city");
+                    .HasConstraintName("FK_Market_City");
             });
 
             modelBuilder.Entity<MarketFollow>(entity =>

@@ -21,7 +21,6 @@ namespace BackEnd.DAL.Models
         public string MarketPassword { get; set; }
         public string MarketInfo { get; set; }
         public bool Plateform { get; set; }
-        public Guid CityId { get; set; }
         public string Token { get; set; }
         public DateTime? CreationDate { get; set; }
         public bool Available { get; set; }
@@ -31,6 +30,7 @@ namespace BackEnd.DAL.Models
         public string WebSitUrl { get; set; }
         public string FacebookUrl { get; set; }
         public string TwitterUrl { get; set; }
+        public Guid? CityId { get; set; }
 
         public virtual City City { get; set; }
         public virtual ICollection<Advertisement> Advertisement { get; set; }

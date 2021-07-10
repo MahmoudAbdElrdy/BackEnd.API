@@ -218,10 +218,11 @@ namespace BackEnd.Service.Services
                     _response.Data = null;
                     _response.IsPassed = false;
                     _response.Message = "This email already exists";
+                    return _response;
                 }
                 var DbMarket = _mapper.Map<Market>(model);
 
-                var Market = _mapper.Map<MarketVM>(_MarketRepositroy.Add(DbMarket));
+                _MarketRepositroy.Add(DbMarket);
 
                 int save = _unitOfWork.Commit();
 
@@ -268,7 +269,7 @@ namespace BackEnd.Service.Services
                                   Token = entity.Token,
                                   Available = entity.Available,
                                   CityId = entity.CityId,
-                                  CityName = entity.City.CityName,
+                                  CityName = entity.City?.CityName,
                                   InstagramUrl = entity.InstagramUrl,
                                   FacebookUrl = entity.FacebookUrl,
                                   TwitterUrl = entity.TwitterUrl,
