@@ -212,7 +212,7 @@ namespace BackEnd.Service.Services
         {
             try
             {
-                var res = _MarketRepositroy.Get(x => x.MarketEmail == model.MarketEmail);
+                var res = _MarketRepositroy.Get(x => x.MarketEmail == model.MarketEmail).FirstOrDefault();
                 if (res != null) 
                 {
                     _response.Data = null;
