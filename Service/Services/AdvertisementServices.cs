@@ -495,7 +495,7 @@ namespace BackEnd.Service.Services
                 var paging = new DTO.Pageing();
                 paging.pageNumber = page;
                 var date = DateTime.Now.Date;
-                var Advertisements = _AdvertisementRepositroy.Get(x => x.Available == true 
+                var Advertisements = _AdvertisementRepositroy.Get(x => x.Available == true && x.Special == true
                                      && x.StartDate <= date.AddDays(1) && x.EndDate >= date.AddDays(-1)
                                     , includeProperties: "Market")
                                                              .OrderBy(x => x.StartDate)
